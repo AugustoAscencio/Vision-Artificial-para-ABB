@@ -1,0 +1,61 @@
+# ═══════════════════════════════════════════════════════════════
+# Configuración del Sistema de Visión Artificial — ABB Pick & Place
+# ═══════════════════════════════════════════════════════════════
+
+camara:
+  indice: 0
+  resolucion: [1280, 720]
+  fps_objetivo: 30
+
+robot:
+  ip: "172.18.9.27"
+  puerto: 8000
+  reconexion_automatica: true
+  intervalo_envio_ms: 200
+  timeout_conexion_s: 5
+
+yolo:
+  modelo: "yolov8n.pt"
+  confianza: 0.5
+  iou: 0.45
+  dispositivo: "auto"   # "auto", "cpu", "cuda"
+
+aruco:
+  diccionario: "DICT_4X4_50"
+  tamano_marcador_mm: 50.0
+  # Posiciones reales (mm) de cada marcador ArUco respecto al origen del robot
+  # Estos valores DEBEN medirse con precisión en la instalación real
+  puntos_mundo:
+    - id: 0
+      x_mm: 0.0
+      y_mm: 0.0
+    - id: 1
+      x_mm: 300.0
+      y_mm: 0.0
+    - id: 2
+      x_mm: 300.0
+      y_mm: 200.0
+    - id: 3
+      x_mm: 0.0
+      y_mm: 200.0
+
+preprocesamiento:
+  corregir_distorsion: true
+  mejorar_contraste: false
+  reducir_ruido: false
+
+# Tabla de alturas estimadas por tipo de objeto (mm)
+alturas_objetos:
+  caja_pequena: 30.0
+  caja_mediana: 50.0
+  caja_grande: 80.0
+  desconocido: 20.0
+
+modo_simulacion: false
+envio_automatico: false
+
+logging:
+  nivel: "INFO"
+  archivo: "logs/vision_abb.log"
+  max_bytes: 5242880    # 5 MB
+  backups: 3
