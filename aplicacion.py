@@ -16,6 +16,7 @@ from capa_logs import configurar_logging, obtener_logger, obtener_manejador_ui
 from capa_configuracion import Ajustes, cargar_ajustes, guardar_ajustes
 from capa_adquisicion import ServicioCamara, enumerar_camaras
 from capa_procesamiento import CalibradorCamara, Preprocesador
+from capa_procesamiento.overlays import MotorOverlays
 from capa_geometria import DetectorAruco, CalculadorHomografia, TransformadorCoordenadas
 from capa_ia import DetectorYOLO, GestorModelos, AnalizadorColor
 from capa_comunicacion import ClienteTCP, ProtocoloABB, SimuladorRobot
@@ -51,6 +52,7 @@ class HiloProcesamiento(QThread):
         transformador: TransformadorCoordenadas,
         detector_yolo: DetectorYOLO,
         analizador_color: AnalizadorColor,
+        motor_overlays: MotorOverlays,
         parent=None,
     ):
         super().__init__(parent)
@@ -60,6 +62,7 @@ class HiloProcesamiento(QThread):
         self._transformador = transformador
         self._detector_yolo = detector_yolo
         self._analizador_color = analizador_color
+        self._motor_overlays = motor_overlays
         self._frame_pendiente: Optional[np.ndarray] = None
         self._procesando = False
         self._ejecutando = False
@@ -131,6 +134,14 @@ class HiloProcesamiento(QThread):
         # Dibujar detecciones YOLO
         if detecciones:
             frame_vis = self._detector_yolo.dibujar_detecciones(frame_vis, detecciones)
+
+        # Overlays AR (crosshair, zona calibrada, rejilla)
+        if self._motor_overlays.mostrar_rejilla and self._homografia.esta_calibrada:
+            frame_vis = self._motor_overlays.dibujar_zona_calibrada(frame_vis, marcadores)
+            frame_vis = self._motor_overlays.dibujar_rejilla(frame_vis, self._homografia)
+
+        if self._motor_overlays.mostrar_crosshair:
+            frame_vis = self._motor_overlays.dibujar_crosshair(frame_vis)
 
         fps = 1.0 / max(time.perf_counter() - inicio, 0.001)
 
@@ -225,7 +236,10 @@ class Aplicacion(QObject):
         if self._ajustes.modo_simulacion:
             self._simulador = SimuladorRobot("127.0.0.1", self._ajustes.robot_puerto)
             self._simulador.iniciar()
-            logger.info("Modo simulación activado — simulador ABB corriendo")
+            logger.info("Modo simulacion activado -- simulador ABB corriendo")
+
+        # ── Motor de overlays AR ──
+        self._motor_overlays = MotorOverlays()
 
         # ── Pipeline de procesamiento ──
         self._hilo_procesamiento = HiloProcesamiento(
@@ -235,6 +249,7 @@ class Aplicacion(QObject):
             transformador=self._transformador,
             detector_yolo=self._detector_yolo,
             analizador_color=self._analizador_color,
+            motor_overlays=self._motor_overlays,
         )
 
         # ── Interfaz gráfica ──
@@ -276,18 +291,22 @@ class Aplicacion(QObject):
         # ── UI → Acciones ──
         v = self._ventana
 
-        # Control de cámara
+        # Control de camara
         v.panel_control.iniciar_camara.connect(self._al_iniciar_camara)
         v.panel_control.detener_camara.connect(self._al_detener_camara)
         v.panel_control.confianza_cambiada.connect(self._al_cambiar_confianza)
         v.panel_control.preprocesamiento_cambiado.connect(self._al_cambiar_preprocesamiento)
         v.panel_control.envio_automatico_cambiado.connect(self._al_cambiar_envio_automatico)
 
-        # Conexión TCP
+        # Overlays AR
+        v.panel_control.crosshair_cambiado.connect(self._al_cambiar_crosshair)
+        v.panel_control.rejilla_cambiada.connect(self._al_cambiar_rejilla)
+
+        # Conexion TCP
         v.panel_conexion.solicitar_conexion.connect(self._al_conectar_tcp)
         v.panel_conexion.solicitar_desconexion.connect(self._al_desconectar_tcp)
 
-        # Calibración
+        # Calibracion
         v.panel_calibracion.solicitar_calibracion.connect(self._al_calibrar_aruco)
         v.panel_calibracion.cargar_calibracion.connect(self._al_cargar_calibracion)
         v.panel_calibracion.guardar_calibracion.connect(self._al_guardar_calibracion)
@@ -296,11 +315,11 @@ class Aplicacion(QObject):
         v.selector_modelo.modelo_seleccionado.connect(self._al_cambiar_modelo)
         v.selector_modelo.recargar_modelos.connect(self._al_recargar_modelos)
 
-        # Detección → Envío
+        # Deteccion -> Envio
         v.panel_deteccion.enviar_seleccionado.connect(self._al_enviar_seleccionado)
         v.panel_deteccion.enviar_todos.connect(self._al_enviar_todos)
 
-        # ── Logs → UI ──
+        # ── Logs -> UI ──
         self._manejador_ui.log_emitido.connect(v.panel_logs.agregar_log)
 
     # ═══════════════════════════════════════════════════════
@@ -381,7 +400,7 @@ class Aplicacion(QObject):
 
     @pyqtSlot(object)
     def _al_resultado_procesamiento(self, resultado: ResultadoFrame):
-        """Resultado completo del pipeline → actualizar UI."""
+        """Resultado completo del pipeline -> actualizar UI."""
         self._ultimo_resultado = resultado
 
         # Actualizar estado HUD antes de enviar el frame
@@ -390,7 +409,7 @@ class Aplicacion(QObject):
             calibrada=self._calculador_homografia.esta_calibrada
         )
 
-        # Actualizar vista de cámara con frame procesado
+        # Actualizar vista de camara con frame procesado
         self._ventana.vista_camara.actualizar_frame(resultado.frame_procesado)
 
         # Actualizar conteo de marcadores ArUco
@@ -401,12 +420,15 @@ class Aplicacion(QObject):
         # Actualizar barra de estado
         self._ventana.barra_estado.actualizar_objetos(len(resultado.detecciones))
 
+        # Actualizar panel debug
+        self._ventana.panel_debug.actualizar(resultado)
+
     @pyqtSlot(object)
     def _al_detecciones_listas(self, detecciones: list):
-        """Detecciones listas → actualizar tabla y envío automático."""
+        """Detecciones listas -> actualizar tabla y envio automatico."""
         self._ventana.panel_deteccion.actualizar_detecciones(detecciones)
 
-        # Envío automático al robot
+        # Envio automatico al robot
         if self._envio_automatico and self._cliente_tcp.esta_conectado:
             validas = [d for d in detecciones if d.centroide_mm is not None and not d.fuera_de_rango]
             if validas:
@@ -435,11 +457,13 @@ class Aplicacion(QObject):
 
     @pyqtSlot(str)
     def _al_mensaje_enviado(self, mensaje: str):
-        self._ventana.panel_conexion.actualizar_ultimo_mensaje(f"→ {mensaje}")
+        self._ventana.panel_conexion.actualizar_ultimo_mensaje(f"-> {mensaje}")
+        self._ventana.panel_debug.actualizar_tcp_enviado(mensaje)
 
     @pyqtSlot(str)
     def _al_mensaje_recibido(self, mensaje: str):
-        self._ventana.panel_conexion.actualizar_ultimo_mensaje(f"← {mensaje}")
+        self._ventana.panel_conexion.actualizar_ultimo_mensaje(f"<- {mensaje}")
+        self._ventana.panel_debug.actualizar_tcp_recibido(mensaje)
         respuesta = self._protocolo.parsear_respuesta(mensaje)
         logger.info(f"Respuesta robot: {respuesta}")
 
@@ -499,13 +523,15 @@ class Aplicacion(QObject):
 
     @pyqtSlot(str)
     def _al_cambiar_modelo(self, ruta: str):
-        logger.info(f"Cambiando modelo YOLO a: {ruta}")
+        logger.info(f"Cambiando modelo a: {ruta}")
         exito = self._detector_yolo.cambiar_modelo(ruta)
         if exito:
-            self._ventana.selector_modelo.actualizar_modelo_activo(
-                self._detector_yolo.nombre_modelo
-            )
-            self._ventana.barra_estado.actualizar_modelo(self._detector_yolo.nombre_modelo)
+            nombre = self._detector_yolo.nombre_modelo
+            self._ventana.selector_modelo.actualizar_modelo_activo(nombre)
+            self._ventana.barra_estado.actualizar_modelo(nombre)
+            # Persistir seleccion en ajustes
+            self._ajustes.yolo_modelo = ruta
+            logger.info(f"Modelo activo: {nombre}")
 
     @pyqtSlot()
     def _al_recargar_modelos(self):
@@ -526,7 +552,17 @@ class Aplicacion(QObject):
     @pyqtSlot(bool)
     def _al_cambiar_envio_automatico(self, activo: bool):
         self._envio_automatico = activo
-        logger.info(f"Envío automático: {'ACTIVADO' if activo else 'DESACTIVADO'}")
+        logger.info(f"Envio automatico: {'ACTIVADO' if activo else 'DESACTIVADO'}")
+
+    @pyqtSlot(bool)
+    def _al_cambiar_crosshair(self, activo: bool):
+        self._motor_overlays.mostrar_crosshair = activo
+        logger.debug(f"Crosshair: {'ACTIVADO' if activo else 'DESACTIVADO'}")
+
+    @pyqtSlot(bool)
+    def _al_cambiar_rejilla(self, activo: bool):
+        self._motor_overlays.mostrar_rejilla = activo
+        logger.debug(f"Rejilla AR: {'ACTIVADO' if activo else 'DESACTIVADO'}")
 
     # ═══════════════════════════════════════════════════════
     # Handlers — Envío manual
@@ -570,7 +606,7 @@ class Aplicacion(QObject):
         """Cierre limpio de todos los recursos."""
         logger.info("Cerrando sistema...")
 
-        # Detener cámara
+        # Detener camara
         self._servicio_camara.detener_captura()
         self._servicio_camara.wait(3000)
 
@@ -586,9 +622,16 @@ class Aplicacion(QObject):
         if self._simulador:
             self._simulador.detener()
 
-        # Guardar configuración
+        # Guardar configuracion
         self._ajustes.robot_ip = self._ventana.panel_conexion.ip
         self._ajustes.robot_puerto = self._ventana.panel_conexion.puerto
         guardar_ajustes(self._ajustes)
+
+        # Remover ManejadorUI del logger para evitar error atexit
+        import logging
+        logger_raiz = logging.getLogger("vision_abb")
+        if self._manejador_ui in logger_raiz.handlers:
+            logger_raiz.removeHandler(self._manejador_ui)
+            self._manejador_ui._cerrado = True
 
         logger.info("Sistema cerrado correctamente")

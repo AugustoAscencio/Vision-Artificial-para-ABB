@@ -143,7 +143,7 @@ class ComandoRobot:
             y_mm=round(deteccion.centroide_mm[1], 1),
             z_mm=round(deteccion.altura_estimada_mm, 1),
             color=deteccion.color_dominante,
-            tipo=deteccion.tamano_clase,
+            tipo=deteccion.etiqueta,
             confianza=round(deteccion.confianza, 2),
         )
 

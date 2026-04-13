@@ -8,7 +8,7 @@ camara:
   fps_objetivo: 30
 
 robot:
-  ip: "172.18.9.27"
+  ip: "172.18.16.194"
   puerto: 8000
   reconexion_automatica: true
   intervalo_envio_ms: 200
@@ -27,17 +27,17 @@ aruco:
   # Estos valores DEBEN medirse con precisión en la instalación real
   puntos_mundo:
     - id: 0
-      x_mm: 0.0
-      y_mm: 0.0
+      x_mm: 447.30
+      y_mm: 250.00
     - id: 1
-      x_mm: 300.0
-      y_mm: 0.0
+      x_mm: 947.37
+      y_mm: 250.00
     - id: 2
-      x_mm: 300.0
-      y_mm: 200.0
+      x_mm: 947.37
+      y_mm: -250.00
     - id: 3
-      x_mm: 0.0
-      y_mm: 200.0
+      x_mm: 447.37
+      y_mm: -250.00
 
 preprocesamiento:
   corregir_distorsion: true
@@ -49,6 +49,7 @@ alturas_objetos:
   caja_pequena: 30.0
   caja_mediana: 50.0
   caja_grande: 80.0
+  cls_los: 80.0
   desconocido: 20.0
 
 modo_simulacion: false

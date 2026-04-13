@@ -188,7 +188,7 @@ class DetectorYOLO:
         frame: np.ndarray,
         detecciones: list[DeteccionObjeto],
     ) -> np.ndarray:
-        """Dibuja bounding boxes y etiquetas sobre el frame."""
+        """Dibuja bounding boxes profesionales con etiquetas completas sobre el frame."""
         import cv2
 
         frame_vis = frame.copy()
@@ -197,41 +197,62 @@ class DetectorYOLO:
             x1, y1, x2, y2 = det.bbox
             color_bbox = det.color_rgb[::-1]  # RGB → BGR
 
-            # Bounding box
+            # Bounding box semi-transparente
+            overlay = frame_vis.copy()
+            cv2.rectangle(overlay, (x1, y1), (x2, y2), color_bbox, -1)
+            cv2.addWeighted(overlay, 0.15, frame_vis, 0.85, 0, frame_vis)
+
+            # Borde del bounding box
             cv2.rectangle(frame_vis, (x1, y1), (x2, y2), color_bbox, 2)
 
-            # Etiqueta con fondo
-            texto = f"{det.etiqueta} {det.confianza:.0%}"
-            (tw, th), _ = cv2.getTextSize(texto, cv2.FONT_HERSHEY_SIMPLEX, 0.55, 1)
-            cv2.rectangle(frame_vis, (x1, y1 - th - 8), (x1 + tw + 4, y1), color_bbox, -1)
+            # ── Etiqueta superior: Clase + Confianza ──
+            texto_clase = f"{det.etiqueta} {det.confianza:.0%}"
+            (tw, th), _ = cv2.getTextSize(texto_clase, cv2.FONT_HERSHEY_SIMPLEX, 0.55, 1)
+            cv2.rectangle(frame_vis, (x1, y1 - th - 10), (x1 + tw + 8, y1), color_bbox, -1)
             cv2.putText(
-                frame_vis, texto,
-                (x1 + 2, y1 - 4),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 255, 255), 1,
+                frame_vis, texto_clase,
+                (x1 + 4, y1 - 5),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 255, 255), 1, cv2.LINE_AA,
             )
 
-            # Centroide
+            # ── Centroide con cruz ──
             cx, cy = det.centroide_px
             cv2.drawMarker(
                 frame_vis, (cx, cy),
-                (0, 255, 255), cv2.MARKER_CROSS, 15, 2
+                (0, 255, 255), cv2.MARKER_CROSS, 18, 2, cv2.LINE_AA,
             )
 
-            # Coordenadas mundo si existen
+            # ── Etiqueta inferior: Color + Coordenadas ──
+            partes_info = []
+            if det.color_dominante != "desconocido":
+                partes_info.append(f"C:{det.color_dominante}")
             if det.centroide_mm is not None:
-                texto_mm = f"({det.centroide_mm[0]:.0f}, {det.centroide_mm[1]:.0f}) mm"
+                partes_info.append(f"({det.centroide_mm[0]:.0f}, {det.centroide_mm[1]:.0f}) mm")
+            if det.altura_estimada_mm > 0:
+                partes_info.append(f"Z:{det.altura_estimada_mm:.0f}")
+
+            if partes_info:
+                texto_info = " | ".join(partes_info)
+                (tw2, th2), _ = cv2.getTextSize(texto_info, cv2.FONT_HERSHEY_SIMPLEX, 0.42, 1)
+                # Fondo semi-transparente para la info
+                overlay2 = frame_vis.copy()
+                cv2.rectangle(overlay2, (x1, y2), (x1 + tw2 + 8, y2 + th2 + 10), (0, 0, 0), -1)
+                cv2.addWeighted(overlay2, 0.6, frame_vis, 0.4, 0, frame_vis)
                 cv2.putText(
-                    frame_vis, texto_mm,
-                    (cx + 10, cy + 5),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 200), 1,
+                    frame_vis, texto_info,
+                    (x1 + 4, y2 + th2 + 5),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.42, (200, 255, 200), 1, cv2.LINE_AA,
                 )
 
-            # Color dominante
-            if det.color_dominante != "desconocido":
+            # Marcar fuera de rango con X roja
+            if det.fuera_de_rango:
+                cv2.line(frame_vis, (x1, y1), (x2, y2), (0, 0, 255), 2, cv2.LINE_AA)
+                cv2.line(frame_vis, (x2, y1), (x1, y2), (0, 0, 255), 2, cv2.LINE_AA)
                 cv2.putText(
-                    frame_vis, det.color_dominante,
-                    (x1, y2 + 18),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, color_bbox, 1,
+                    frame_vis, "FUERA DE RANGO",
+                    (x1, y1 - th - 20),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 1, cv2.LINE_AA,
                 )
 
         return frame_vis
+

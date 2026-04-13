@@ -29,6 +29,8 @@ class PanelControl(QGroupBox):
     confianza_cambiada = pyqtSignal(float)
     preprocesamiento_cambiado = pyqtSignal(bool, bool, bool)
     envio_automatico_cambiado = pyqtSignal(bool)
+    crosshair_cambiado = pyqtSignal(bool)
+    rejilla_cambiada = pyqtSignal(bool)
 
     def __init__(self, parent=None):
         super().__init__("🎮  Control", parent)
@@ -96,12 +98,29 @@ class PanelControl(QGroupBox):
         layout.addWidget(self._chk_ruido)
 
         # ── Envío automático ──
-        self._chk_envio_auto = QCheckBox("📡 Envío automático al robot")
+        self._chk_envio_auto = QCheckBox("Envio automatico al robot")
         self._chk_envio_auto.setStyleSheet(f"color: {Colores.NARANJA}; font-weight: bold; margin-top: 6px;")
         self._chk_envio_auto.stateChanged.connect(
             lambda state: self.envio_automatico_cambiado.emit(state == Qt.CheckState.Checked.value)
         )
         layout.addWidget(self._chk_envio_auto)
+
+        # ── Visualización AR ──
+        lbl_vis = QLabel("Visualizacion:")
+        lbl_vis.setStyleSheet(f"color: {Colores.AZUL_ACENTO}; font-weight: bold; margin-top: 6px;")
+        layout.addWidget(lbl_vis)
+
+        self._chk_crosshair = QCheckBox("Mostrar crosshair (referencia)")
+        self._chk_crosshair.stateChanged.connect(
+            lambda state: self.crosshair_cambiado.emit(state == Qt.CheckState.Checked.value)
+        )
+        layout.addWidget(self._chk_crosshair)
+
+        self._chk_rejilla = QCheckBox("Mostrar rejilla AR (zona calibrada)")
+        self._chk_rejilla.stateChanged.connect(
+            lambda state: self.rejilla_cambiada.emit(state == Qt.CheckState.Checked.value)
+        )
+        layout.addWidget(self._chk_rejilla)
 
     def _al_iniciar_camara(self):
         indice = self._combo_camara.currentData()

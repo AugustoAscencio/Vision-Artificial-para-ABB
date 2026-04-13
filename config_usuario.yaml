@@ -5,13 +5,13 @@ camara:
   - 720
   fps_objetivo: 30
 robot:
-  ip: 172.18.9.27
+  ip: 172.18.16.194
   puerto: 8000
   reconexion_automatica: true
   intervalo_envio_ms: 200
   timeout_conexion_s: 5
 yolo:
-  modelo: yolov8n.pt
+  modelo: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
   confianza: 0.5
   iou: 0.45
   dispositivo: auto

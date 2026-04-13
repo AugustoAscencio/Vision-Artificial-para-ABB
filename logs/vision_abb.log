@@ -160,3 +160,409 @@
 2026-04-12 15:00:58 | INFO     | vision_abb.camara         | Recurso de cámara liberado
 2026-04-12 15:00:58 | INFO     | vision_abb.camara         | Cámara detenida
 2026-04-12 15:00:58 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-12 16:10:30 | INFO     | vision_abb                | ============================================================
+2026-04-12 16:10:30 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-12 16:10:30 | INFO     | vision_abb                | ============================================================
+2026-04-12 16:10:30 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-12 16:10:30 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-12 16:10:30 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-12 16:10:30 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-12 16:10:30 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-12 16:10:30 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-12 16:10:31 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: yolov8n.pt → dispositivo: cpu
+2026-04-12 16:10:31 | INFO     | vision_abb.yolo           | Modelo 'yolov8n.pt' cargado exitosamente
+2026-04-12 16:10:35 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 1
+2026-04-12 16:10:35 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-12 16:10:50 | INFO     | vision_abb.aplicacion     | Cambiando modelo YOLO a: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-12 16:10:50 | INFO     | vision_abb.yolo           | Cambiando modelo: yolov8n.pt → C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-12 16:10:50 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt → dispositivo: cpu
+2026-04-12 16:10:50 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-12 16:10:53 | INFO     | vision_abb.aplicacion     | Cambiando modelo YOLO a: yolov8n.pt
+2026-04-12 16:10:53 | INFO     | vision_abb.yolo           | Cambiando modelo: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt → yolov8n.pt
+2026-04-12 16:10:53 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: yolov8n.pt → dispositivo: cpu
+2026-04-12 16:10:53 | INFO     | vision_abb.yolo           | Modelo 'yolov8n.pt' cargado exitosamente
+2026-04-12 16:10:59 | INFO     | vision_abb.aplicacion     | Cambiando modelo YOLO a: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-12 16:10:59 | INFO     | vision_abb.yolo           | Cambiando modelo: yolov8n.pt → C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-12 16:10:59 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt → dispositivo: cpu
+2026-04-12 16:10:59 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-12 16:11:14 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-12 16:11:14 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-12 16:11:15 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-12 16:11:17 | INFO     | vision_abb.aplicacion     | Envío automático: ACTIVADO
+2026-04-12 16:12:14 | WARNING  | vision_abb.aplicacion     | No hay objetos válidos para enviar
+2026-04-12 16:12:38 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-12 16:12:39 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-12 16:12:39 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-12 16:12:39 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 08:09:52 | INFO     | vision_abb                | ============================================================
+2026-04-13 08:09:52 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 08:09:52 | INFO     | vision_abb                | ============================================================
+2026-04-13 08:09:52 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 08:09:52 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 08:09:52 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 08:09:52 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 08:09:52 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 08:09:52 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 08:09:54 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: yolov8n.pt → dispositivo: cpu
+2026-04-13 08:09:54 | INFO     | vision_abb.yolo           | Modelo 'yolov8n.pt' cargado exitosamente
+2026-04-13 08:10:02 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 1
+2026-04-13 08:10:02 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 08:10:12 | INFO     | vision_abb.aplicacion     | Cambiando modelo YOLO a: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 08:10:13 | INFO     | vision_abb.yolo           | Cambiando modelo: yolov8n.pt → C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 08:10:13 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt → dispositivo: cpu
+2026-04-13 08:10:13 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 08:10:25 | INFO     | vision_abb.aplicacion     | Envío automático: ACTIVADO
+2026-04-13 08:10:27 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 08:10:27 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 08:10:28 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 08:11:49 | INFO     | vision_abb.aplicacion     | Deteniendo cámara...
+2026-04-13 08:11:49 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 08:11:49 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 08:11:55 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 08:11:55 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 08:11:57 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 08:12:00 | INFO     | vision_abb.aplicacion     | Deteniendo cámara...
+2026-04-13 08:12:00 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 08:12:00 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 08:12:15 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 08:12:15 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 08:18:13 | INFO     | vision_abb                | ============================================================
+2026-04-13 08:18:13 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 08:18:13 | INFO     | vision_abb                | ============================================================
+2026-04-13 08:18:13 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 08:18:13 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 08:18:13 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 08:18:13 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 08:18:13 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 08:18:13 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 08:18:14 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: yolov8n.pt → dispositivo: cpu
+2026-04-13 08:18:14 | INFO     | vision_abb.yolo           | Modelo 'yolov8n.pt' cargado exitosamente
+2026-04-13 08:18:26 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 1
+2026-04-13 08:18:26 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 08:18:38 | INFO     | vision_abb.aplicacion     | Cambiando modelo YOLO a: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 08:18:38 | INFO     | vision_abb.yolo           | Cambiando modelo: yolov8n.pt → C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 08:18:38 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt → dispositivo: cpu
+2026-04-13 08:18:38 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 08:18:48 | INFO     | vision_abb.aplicacion     | Envío automático: ACTIVADO
+2026-04-13 08:18:52 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 08:18:52 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 08:18:53 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 08:21:38 | INFO     | vision_abb.aplicacion     | Deteniendo cámara...
+2026-04-13 08:21:39 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 08:21:39 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 08:21:42 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 08:21:42 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 08:21:44 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 08:23:43 | INFO     | vision_abb.aplicacion     | Deteniendo cámara...
+2026-04-13 08:23:44 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 08:23:44 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 08:55:12 | INFO     | vision_abb                | ============================================================
+2026-04-13 08:55:12 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 08:55:12 | INFO     | vision_abb                | ============================================================
+2026-04-13 08:55:12 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 08:55:12 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 08:55:12 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 08:55:12 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 08:55:12 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 08:55:12 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 08:55:13 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: yolov8n.pt → dispositivo: cpu
+2026-04-13 08:55:13 | INFO     | vision_abb.yolo           | Modelo 'yolov8n.pt' cargado exitosamente
+2026-04-13 08:55:17 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 1
+2026-04-13 08:55:17 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 08:55:30 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 08:55:34 | WARNING  | vision_abb.aplicacion     | No hay frame disponible — inicia la cámara primero
+2026-04-13 08:55:50 | INFO     | vision_abb.aplicacion     | Cambiando modelo YOLO a: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 08:55:50 | INFO     | vision_abb.yolo           | Cambiando modelo: yolov8n.pt → C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 08:55:50 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt → dispositivo: cpu
+2026-04-13 08:55:50 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 08:55:57 | INFO     | vision_abb.aplicacion     | Envío automático: ACTIVADO
+2026-04-13 08:56:00 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 08:56:00 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 08:56:02 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 08:56:48 | INFO     | vision_abb.aplicacion     | Deteniendo cámara...
+2026-04-13 08:56:49 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 08:56:49 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 09:03:32 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 09:03:32 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 09:03:34 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 09:03:39 | INFO     | vision_abb.aplicacion     | Conectando a 172.18.16.194:8000...
+2026-04-13 09:03:39 | INFO     | vision_abb.tcp            | Hilo TCP iniciado — destino: 172.18.16.194:8000
+2026-04-13 09:03:39 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:03:41 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:03:41 | INFO     | vision_abb.tcp            | Reintentando en 1s...
+2026-04-13 09:03:41 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:03:42 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:03:44 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:03:44 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:03:44 | INFO     | vision_abb.tcp            | Reintentando en 2s...
+2026-04-13 09:03:46 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:03:48 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:03:48 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:03:48 | INFO     | vision_abb.tcp            | Reintentando en 4s...
+2026-04-13 09:03:52 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:03:54 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:03:54 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:03:54 | INFO     | vision_abb.tcp            | Reintentando en 8s...
+2026-04-13 09:04:02 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:04:04 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:04:04 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:04:04 | INFO     | vision_abb.tcp            | Reintentando en 16s...
+2026-04-13 09:04:20 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:04:22 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:04:22 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:04:22 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:04:52 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:04:54 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:04:54 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:04:54 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:05:25 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:05:27 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:05:27 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:05:27 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:05:57 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:05:59 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:05:59 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:05:59 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:06:29 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:06:31 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:06:31 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:06:31 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:07:02 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:07:04 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:07:04 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:07:04 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:07:34 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:07:36 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:07:36 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:07:36 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:07:56 | INFO     | vision_abb.aplicacion     | Conectando a 172.18.16.194:8000...
+2026-04-13 09:07:56 | WARNING  | vision_abb.tcp            | El hilo TCP ya está corriendo
+2026-04-13 09:08:06 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:08:08 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:08:08 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:08:08 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:08:38 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:08:40 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:08:40 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:08:40 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:09:11 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:09:13 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:09:13 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:09:13 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:09:43 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:09:45 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:09:45 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:09:45 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:10:15 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:10:17 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:10:17 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:10:17 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:10:47 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:10:49 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:10:49 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:10:49 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:11:19 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:11:22 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:11:22 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:11:22 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:11:52 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:11:54 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:11:54 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:11:54 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:12:24 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:12:26 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:12:26 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-13 09:12:26 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-13 09:12:39 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 09:12:39 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 09:12:39 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 09:12:40 | INFO     | vision_abb.tcp            | Hilo TCP terminado
+2026-04-13 09:12:40 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 09:21:01 | INFO     | vision_abb                | ============================================================
+2026-04-13 09:21:01 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 09:21:01 | INFO     | vision_abb                | ============================================================
+2026-04-13 09:21:01 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 09:21:01 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 09:21:01 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 09:21:01 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 09:21:01 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 09:21:01 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 09:21:02 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: yolov8n.pt → dispositivo: cpu
+2026-04-13 09:21:03 | INFO     | vision_abb.yolo           | Modelo 'yolov8n.pt' cargado exitosamente
+2026-04-13 09:21:10 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 1
+2026-04-13 09:21:10 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 09:21:31 | INFO     | vision_abb.aplicacion     | Cambiando modelo YOLO a: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 09:21:31 | INFO     | vision_abb.yolo           | Cambiando modelo: yolov8n.pt → C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 09:21:31 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt → dispositivo: cpu
+2026-04-13 09:21:31 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 09:21:37 | INFO     | vision_abb.aplicacion     | Envío automático: ACTIVADO
+2026-04-13 09:21:39 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 09:21:39 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 09:21:41 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 09:21:46 | INFO     | vision_abb.aplicacion     | Conectando a 172.18.16.194:8000...
+2026-04-13 09:21:46 | INFO     | vision_abb.tcp            | Hilo TCP iniciado — destino: 172.18.16.194:8000
+2026-04-13 09:21:46 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:21:48 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.16.194:8000
+2026-04-13 09:22:53 | WARNING  | vision_abb.aplicacion     | No hay objetos válidos para enviar
+2026-04-13 09:23:12 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-13 09:23:12 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:23:15 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.16.194:8000
+2026-04-13 09:23:38 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 09:23:46 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 09:23:46 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 09:23:46 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 09:23:46 | INFO     | vision_abb.tcp            | Hilo TCP terminado
+2026-04-13 09:23:47 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 09:27:57 | INFO     | vision_abb                | ============================================================
+2026-04-13 09:27:57 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 09:27:57 | INFO     | vision_abb                | ============================================================
+2026-04-13 09:27:57 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 09:27:57 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 09:27:57 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 09:27:57 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 09:27:57 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 09:27:57 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 09:27:57 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: yolov8n.pt → dispositivo: cpu
+2026-04-13 09:27:57 | INFO     | vision_abb.yolo           | Modelo 'yolov8n.pt' cargado exitosamente
+2026-04-13 09:28:02 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-13 09:28:02 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 09:28:08 | INFO     | vision_abb.aplicacion     | Iniciando cámara 1...
+2026-04-13 09:28:08 | INFO     | vision_abb.camara         | Iniciando cámara [índice=1, resolución=(1280, 720)]
+2026-04-13 09:28:10 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 09:28:44 | INFO     | vision_abb.homografia     | Homografía calculada — 4 marcadores, error RMS: 0.00 px
+2026-04-13 09:28:44 | INFO     | vision_abb.aplicacion     | Calibración ArUco exitosa
+2026-04-13 09:28:55 | INFO     | vision_abb.aplicacion     | Conectando a 172.18.16.194:8000...
+2026-04-13 09:28:55 | INFO     | vision_abb.tcp            | Hilo TCP iniciado — destino: 172.18.16.194:8000
+2026-04-13 09:28:55 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 09:28:57 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.16.194:8000
+2026-04-13 09:29:01 | WARNING  | vision_abb.aplicacion     | No hay objetos válidos para enviar
+2026-04-13 09:29:13 | WARNING  | vision_abb.camara         | Frame fallido (reintento 1/5)
+2026-04-13 09:29:19 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 09:29:20 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 09:29:20 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 09:29:20 | INFO     | vision_abb.tcp            | Hilo TCP terminado
+2026-04-13 09:29:20 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 10:16:47 | INFO     | vision_abb                | ============================================================
+2026-04-13 10:16:47 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 10:16:47 | INFO     | vision_abb                | ============================================================
+2026-04-13 10:16:47 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 10:16:47 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 10:16:47 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 10:16:47 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 10:16:47 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 10:16:47 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 10:16:48 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: yolov8n.pt → dispositivo: cpu
+2026-04-13 10:16:48 | INFO     | vision_abb.yolo           | Modelo 'yolov8n.pt' cargado exitosamente
+2026-04-13 10:17:01 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 1
+2026-04-13 10:17:01 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 10:17:16 | INFO     | vision_abb.aplicacion     | Cambiando modelo YOLO a: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 10:17:16 | INFO     | vision_abb.yolo           | Cambiando modelo: yolov8n.pt → C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 10:17:16 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt → dispositivo: cpu
+2026-04-13 10:17:16 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 10:17:24 | INFO     | vision_abb.aplicacion     | Envío automático: ACTIVADO
+2026-04-13 10:17:25 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 10:17:26 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 10:17:27 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 10:18:05 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 10:18:05 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 10:18:05 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 10:18:05 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 10:26:30 | INFO     | vision_abb                | ============================================================
+2026-04-13 10:26:30 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 10:26:30 | INFO     | vision_abb                | ============================================================
+2026-04-13 10:26:30 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 10:26:30 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 10:26:30 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 10:26:30 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 10:26:30 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 10:26:30 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 10:26:30 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: yolov8n.pt → dispositivo: cpu
+2026-04-13 10:26:31 | INFO     | vision_abb.yolo           | Modelo 'yolov8n.pt' cargado exitosamente
+2026-04-13 10:26:36 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 1
+2026-04-13 10:26:37 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 10:26:40 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 10:26:40 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 10:26:42 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 10:27:37 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 10:27:37 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 10:27:37 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 10:27:37 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 10:58:45 | INFO     | vision_abb                | ============================================================
+2026-04-13 10:58:45 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 10:58:45 | INFO     | vision_abb                | ============================================================
+2026-04-13 10:58:45 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 10:58:45 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 10:58:45 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 10:58:45 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 10:58:45 | INFO     | vision_abb.modelos        | Directorio de modelos: C:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 10:58:45 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 10:58:45 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: yolov8n.pt → dispositivo: cpu
+2026-04-13 10:58:45 | INFO     | vision_abb.yolo           | Modelo 'yolov8n.pt' cargado exitosamente
+2026-04-13 10:59:23 | INFO     | vision_abb                | ============================================================
+2026-04-13 10:59:23 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 10:59:23 | INFO     | vision_abb                | ============================================================
+2026-04-13 10:59:23 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 10:59:23 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 10:59:23 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 10:59:23 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 10:59:23 | INFO     | vision_abb.modelos        | Directorio de modelos: C:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 10:59:23 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 10:59:24 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: yolov8n.pt → dispositivo: cpu
+2026-04-13 10:59:24 | INFO     | vision_abb.yolo           | Modelo 'yolov8n.pt' cargado exitosamente
+2026-04-13 10:59:27 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 1
+2026-04-13 10:59:27 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 11:00:03 | INFO     | vision_abb.aplicacion     | Cambiando modelo a: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 11:00:03 | INFO     | vision_abb.yolo           | Cambiando modelo: yolov8n.pt → C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 11:00:03 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt → dispositivo: cpu
+2026-04-13 11:00:03 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 11:00:03 | INFO     | vision_abb.aplicacion     | Modelo activo: best.pt
+2026-04-13 11:00:18 | INFO     | vision_abb.aplicacion     | Cambiando modelo a: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 11:00:18 | INFO     | vision_abb.yolo           | Cambiando modelo: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt → C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 11:00:18 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt → dispositivo: cpu
+2026-04-13 11:00:18 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 11:00:18 | INFO     | vision_abb.aplicacion     | Modelo activo: best.pt
+2026-04-13 11:00:34 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 11:00:34 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 11:00:36 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 11:00:57 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 11:00:57 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 11:00:57 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 11:00:57 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 11:05:56 | INFO     | vision_abb                | ============================================================
+2026-04-13 11:05:56 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 11:05:56 | INFO     | vision_abb                | ============================================================
+2026-04-13 11:05:56 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 11:05:56 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 11:05:56 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 11:05:56 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 11:05:56 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 11:05:56 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 11:05:57 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:\Users\Augusto Ascencio\Downloads\Vision Artificial\best.pt → dispositivo: cpu
+2026-04-13 11:05:57 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 11:06:05 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-13 11:06:05 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 11:06:22 | INFO     | vision_abb.aplicacion     | Cambiando modelo a: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 11:06:22 | INFO     | vision_abb.yolo           | Cambiando modelo: C:\Users\Augusto Ascencio\Downloads\Vision Artificial\best.pt → C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+2026-04-13 11:06:22 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt → dispositivo: cpu
+2026-04-13 11:06:22 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 11:06:22 | INFO     | vision_abb.aplicacion     | Modelo activo: best.pt
+2026-04-13 11:06:33 | INFO     | vision_abb.aplicacion     | Envio automatico: ACTIVADO
+2026-04-13 11:09:36 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 11:09:36 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 11:09:38 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 11:09:48 | INFO     | vision_abb.aplicacion     | Conectando a 172.18.16.194:8000...
+2026-04-13 11:09:48 | INFO     | vision_abb.tcp            | Hilo TCP iniciado — destino: 172.18.16.194:8000
+2026-04-13 11:09:48 | INFO     | vision_abb.tcp            | Conectando a 172.18.16.194:8000...
+2026-04-13 11:09:50 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.16.194:8000
+2026-04-13 11:10:17 | WARNING  | vision_abb.aplicacion     | Solo 3 marcadores detectados — se necesitan 4 mínimo
+2026-04-13 11:10:22 | INFO     | vision_abb.homografia     | Homografía calculada — 4 marcadores, error RMS: 0.00 px
+2026-04-13 11:10:22 | INFO     | vision_abb.aplicacion     | Calibración ArUco exitosa
+2026-04-13 11:10:27 | INFO     | vision_abb.homografia     | Homografía calculada — 4 marcadores, error RMS: 0.00 px
+2026-04-13 11:10:27 | INFO     | vision_abb.aplicacion     | Calibración ArUco exitosa
+2026-04-13 11:13:00 | INFO     | vision_abb.aplicacion     | Deteniendo cámara...
+2026-04-13 11:13:01 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 11:13:01 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 11:13:02 | INFO     | vision_abb.aplicacion     | Desconectando TCP...
+2026-04-13 11:13:03 | INFO     | vision_abb.tcp            | Hilo TCP terminado
+2026-04-13 11:13:04 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 11:13:04 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente

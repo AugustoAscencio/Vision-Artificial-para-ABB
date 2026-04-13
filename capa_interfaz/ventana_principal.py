@@ -1,6 +1,6 @@
 """
-Ventana principal del sistema de visión artificial ABB.
-Layout: Cámara compacta + datos prominentes + logs visibles.
+Ventana principal del sistema de vision artificial ABB.
+Layout: Camara compacta + datos prominentes + logs + debug panel.
 """
 
 from PyQt6.QtCore import Qt
@@ -17,28 +17,31 @@ from capa_interfaz.componentes.panel_calibracion import PanelCalibracion
 from capa_interfaz.componentes.panel_deteccion import PanelDeteccion
 from capa_interfaz.componentes.selector_modelo import SelectorModelo
 from capa_interfaz.componentes.panel_logs import PanelLogs
+from capa_interfaz.componentes.panel_debug import PanelDebug
 from capa_interfaz.componentes.barra_estado import BarraEstado
 
 
 class VentanaPrincipal(QMainWindow):
     """
-    Dashboard rediseñado — prioriza datos sobre vista de cámara.
+    Dashboard rediseñado — prioriza datos sobre vista de camara.
 
-    ┌──────────────┬──────────────────┬──────────────────┐
-    │  CONTROL     │  CÁMARA (compacta)│  DETECCIÓN       │
-    │  ──────────  │  máx 350px alto  │  (tabla grande)  │
-    │  Conexión    │                  │  X,Y,Z,Color     │
-    │  Calibración │──────────────────│                  │
-    │  Control     │  LOGS            │  Modelo YOLO     │
-    │              │  (expandible)    │                  │
-    ├──────────────┴──────────────────┴──────────────────┤
-    │               BARRA DE ESTADO                      │
-    └────────────────────────────────────────────────────┘
+    +---------------+------------------+------------------+
+    |  CONTROL      |  CAMARA (compacta)|  DETECCION       |
+    |  ----------   |  max 350px alto  |  (tabla grande)  |
+    |  Conexion     |                  |  X,Y,Z,Color     |
+    |  Calibracion  |------------------|                  |
+    |  Control      |  LOGS            |  Modelo IA       |
+    |  (crosshair)  |  (expandible)    |                  |
+    |  (rejilla)    |------------------|                  |
+    |               |  DEBUG (colapsa) |                  |
+    +---------------+------------------+------------------+
+    |               BARRA DE ESTADO                       |
+    +-----------------------------------------------------+
     """
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Visión Artificial ABB — Sistema Pick & Place")
+        self.setWindowTitle("Vision Artificial ABB -- Sistema Pick & Place")
         self.setMinimumSize(1280, 720)
         self.resize(1440, 820)
 
@@ -50,6 +53,7 @@ class VentanaPrincipal(QMainWindow):
         self.panel_deteccion = PanelDeteccion()
         self.selector_modelo = SelectorModelo()
         self.panel_logs = PanelLogs()
+        self.panel_debug = PanelDebug()
         self.barra_estado = BarraEstado()
 
         self._setup_ui()
@@ -63,9 +67,9 @@ class VentanaPrincipal(QMainWindow):
         layout_principal.setContentsMargins(8, 8, 8, 8)
         layout_principal.setSpacing(8)
 
-        # ══════════════════════════════════════════════════
-        # Columna Izquierda: Controles (fija, 260px)
-        # ══════════════════════════════════════════════════
+        # =============================================
+        # Columna Izquierda: Controles (fija, 300px)
+        # =============================================
         col_izq = QWidget()
         layout_izq = QVBoxLayout(col_izq)
         layout_izq.setContentsMargins(0, 0, 0, 0)
@@ -89,33 +93,44 @@ class VentanaPrincipal(QMainWindow):
         layout_izq.addWidget(scroll_izq)
         col_izq.setFixedWidth(300)
 
-        # ══════════════════════════════════════════════════
-        # Columna Central: Cámara (arriba, compacta) + Logs (abajo)
-        # ══════════════════════════════════════════════════
+        # =============================================
+        # Columna Central: Camara + Logs + Debug
+        # =============================================
         col_centro = QWidget()
         layout_centro = QVBoxLayout(col_centro)
         layout_centro.setContentsMargins(0, 0, 0, 0)
         layout_centro.setSpacing(6)
 
-        # Splitter vertical: Cámara arriba, Logs abajo
+        # Splitter vertical: Camara arriba, Logs + Debug abajo
         splitter_centro = QSplitter(Qt.Orientation.Vertical)
 
-        # Cámara — compacta, máximo 380px de alto
+        # Camara — compacta
         self.vista_camara.setMaximumHeight(380)
         splitter_centro.addWidget(self.vista_camara)
 
-        # Logs — expandibles debajo de la cámara
-        splitter_centro.addWidget(self.panel_logs)
+        # Contenedor inferior: Logs + Debug stacked
+        contenedor_inferior = QWidget()
+        layout_inferior = QVBoxLayout(contenedor_inferior)
+        layout_inferior.setContentsMargins(0, 0, 0, 0)
+        layout_inferior.setSpacing(4)
 
-        # Proporciones: 40% cámara, 60% logs
+        # Logs
+        layout_inferior.addWidget(self.panel_logs, stretch=2)
+
+        # Debug panel (colapsable)
+        layout_inferior.addWidget(self.panel_debug, stretch=1)
+
+        splitter_centro.addWidget(contenedor_inferior)
+
+        # Proporciones: 35% camara, 65% logs+debug
         splitter_centro.setStretchFactor(0, 2)
         splitter_centro.setStretchFactor(1, 3)
 
         layout_centro.addWidget(splitter_centro)
 
-        # ══════════════════════════════════════════════════
+        # =============================================
         # Columna Derecha: Detecciones + Modelo (fija, 340px)
-        # ══════════════════════════════════════════════════
+        # =============================================
         col_der = QWidget()
         layout_der = QVBoxLayout(col_der)
         layout_der.setContentsMargins(0, 0, 0, 0)
@@ -131,7 +146,7 @@ class VentanaPrincipal(QMainWindow):
         layout_contenido_der.setContentsMargins(4, 0, 0, 0)
         layout_contenido_der.setSpacing(6)
 
-        # Panel de detección ocupa la mayor parte
+        # Panel de deteccion ocupa la mayor parte
         layout_contenido_der.addWidget(self.panel_deteccion, stretch=3)
         layout_contenido_der.addWidget(self.selector_modelo, stretch=0)
 
@@ -139,9 +154,9 @@ class VentanaPrincipal(QMainWindow):
         layout_der.addWidget(scroll_der)
         col_der.setFixedWidth(340)
 
-        # ══════════════════════════════════════════════════
+        # =============================================
         # Armar layout horizontal
-        # ══════════════════════════════════════════════════
+        # =============================================
         splitter_h = QSplitter(Qt.Orientation.Horizontal)
         splitter_h.addWidget(col_izq)
         splitter_h.addWidget(col_centro)
