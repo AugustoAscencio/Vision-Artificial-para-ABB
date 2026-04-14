@@ -255,6 +255,7 @@ class Aplicacion(QObject):
         # ── Interfaz gráfica ──
         self._ventana = VentanaPrincipal()
         self._envio_automatico = self._ajustes.envio_automatico
+        self._modo_simulador_ui = False
         self._ultimo_resultado: Optional[ResultadoFrame] = None
 
         # ── Conectar señales ──
@@ -298,6 +299,10 @@ class Aplicacion(QObject):
         v.panel_control.preprocesamiento_cambiado.connect(self._al_cambiar_preprocesamiento)
         v.panel_control.envio_automatico_cambiado.connect(self._al_cambiar_envio_automatico)
         v.panel_control.imagen_cargada.connect(self._al_cargar_imagen)
+        v.panel_control.simulador_cambiado.connect(self._al_cambiar_modo_simulador)
+
+        # Simulación virtual
+        v.vista_2d.frame_virtual_generado.connect(self._al_recibir_frame_virtual)
 
         # Overlays AR
         v.panel_control.crosshair_cambiado.connect(self._al_cambiar_crosshair)
@@ -383,7 +388,8 @@ class Aplicacion(QObject):
     @pyqtSlot(object)
     def _al_recibir_frame(self, frame: np.ndarray):
         """Frame nuevo de la cámara → enviarlo al pipeline de procesamiento."""
-        self._hilo_procesamiento.recibir_frame(frame)
+        if not self._modo_simulador_ui:
+            self._hilo_procesamiento.recibir_frame(frame)
 
     @pyqtSlot(float)
     def _al_fps_camara(self, fps: float):
@@ -433,8 +439,8 @@ class Aplicacion(QObject):
 
     @pyqtSlot(str)
     def _al_cargar_imagen(self, ruta: str):
-        """Carga una imagen manual, la procesa y actualiza la Vista 2D."""
-        logger.info(f"Cargando imagen manual: {ruta}")
+        """Carga una imagen manual, establece la Vista 2D para interactuar y activa modo simulador."""
+        logger.info(f"Cargando imagen manual base: {ruta}")
         try:
             # Leer imagen
             img_bgr = cv2.imread(ruta)
@@ -442,14 +448,32 @@ class Aplicacion(QObject):
                 logger.error("No se pudo leer la imagen")
                 return
 
-            # Procesar síncronamente (no bloquea mucho porque es una sola imagen)
+            self._ventana.panel_control._chk_simulador.setChecked(True)
             self._ventana.vista_2d.establecer_imagen_fondo(img_bgr)
-            resultado = self._hilo_procesamiento._procesar_frame(img_bgr)
-            self._al_resultado_procesamiento(resultado)
-            self._al_detecciones_listas(resultado.detecciones)
+            # El establecer_imagen_fondo dispara _emitir_frame_virtual automáticamente y recae en _al_recibir_frame_virtual
 
         except Exception as e:
             logger.error(f"Error procesando imagen: {e}", exc_info=True)
+
+    @pyqtSlot(object)
+    def _al_recibir_frame_virtual(self, frame_virtual: np.ndarray):
+        """Cámara simulada desde la Vista 2D -> Alimenta el hilo procesador."""
+        if self._modo_simulador_ui:
+            self._hilo_procesamiento.recibir_frame(frame_virtual)
+
+    @pyqtSlot(bool)
+    def _al_cambiar_modo_simulador(self, activo: bool):
+        self._modo_simulador_ui = activo
+        logger.info(f"Modo Simulador {'ACTIVADO' if activo else 'DESACTIVADO'}")
+        
+        # Si se desactiva y el hilo está corriendo sin cámara, tal vez queramos reiniciar stats
+        if activo:
+            # Forzar pipeline asíncrono si no está on
+            if not self._hilo_procesamiento._ejecutando:
+                self._hilo_procesamiento.iniciar()
+        else:
+            if not self._servicio_camara.esta_activa:
+                self._hilo_procesamiento.detener()
 
     @pyqtSlot(object)
     def _al_detecciones_listas(self, detecciones: list):

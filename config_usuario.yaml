@@ -11,7 +11,7 @@ robot:
   intervalo_envio_ms: 200
   timeout_conexion_s: 5
 yolo:
-  modelo: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/best.pt
+  modelo: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\best.pt
   confianza: 0.5
   iou: 0.45
   dispositivo: auto
@@ -20,17 +20,17 @@ aruco:
   tamano_marcador_mm: 50.0
   puntos_mundo:
   - id: 0
-    x_mm: 0.0
-    y_mm: 0.0
+    x_mm: 447.3
+    y_mm: 250.0
   - id: 1
-    x_mm: 300.0
-    y_mm: 0.0
+    x_mm: 947.37
+    y_mm: 250.0
   - id: 2
-    x_mm: 300.0
-    y_mm: 200.0
+    x_mm: 947.37
+    y_mm: -250.0
   - id: 3
-    x_mm: 0.0
-    y_mm: 200.0
+    x_mm: 447.37
+    y_mm: -250.0
 preprocesamiento:
   corregir_distorsion: true
   mejorar_contraste: false

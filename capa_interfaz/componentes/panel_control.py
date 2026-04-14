@@ -32,6 +32,7 @@ class PanelControl(QGroupBox):
     crosshair_cambiado = pyqtSignal(bool)
     rejilla_cambiada = pyqtSignal(bool)
     imagen_cargada = pyqtSignal(str)   # Ruta de imagen → YOLO → Vista 2D
+    simulador_cambiado = pyqtSignal(bool) # Modo simulador on/off
 
     def __init__(self, parent=None):
         super().__init__("🎮  Control", parent)
@@ -135,6 +136,14 @@ class PanelControl(QGroupBox):
         )
         self._btn_cargar_imagen.clicked.connect(self._al_cargar_imagen)
         layout.addWidget(self._btn_cargar_imagen)
+
+        self._chk_simulador = QCheckBox("Activar MODO SIMULADOR")
+        self._chk_simulador.setStyleSheet(f"color: {Colores.NARANJA}; font-weight: bold;")
+        self._chk_simulador.setToolTip("Ignora la webcam y usa la imagen de la Vista 2D como cámara.")
+        self._chk_simulador.stateChanged.connect(
+            lambda state: self.simulador_cambiado.emit(state == Qt.CheckState.Checked.value)
+        )
+        layout.addWidget(self._chk_simulador)
 
     def _al_cargar_imagen(self):
         from PyQt6.QtWidgets import QFileDialog

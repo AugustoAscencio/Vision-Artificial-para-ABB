@@ -202,6 +202,7 @@ class Vista2D(QWidget):
     """
 
     objeto_seleccionado = pyqtSignal(int)
+    frame_virtual_generado = pyqtSignal(object)  # Emite np.ndarray (frame virtual)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -213,9 +214,13 @@ class Vista2D(QWidget):
         self._marcadores_detectados: list[MarcadorAruco] = []
         self._detecciones: list[DeteccionObjeto] = []
 
-        # Imagen de fondo
+        # Imagen de fondo y simulación
         self._imagen_fondo: Optional[QImage] = None
         self._imagen_fondo_cv: Optional[np.ndarray] = None
+        self._escala_imagen = 1.0
+        self._offset_imagen = QPointF(0.0, 0.0)
+        self._arrastrando_imagen = False
+        self._ultimo_pos_raton = QPointF()
 
         # Configuración visual
         self._mostrar_grid = True
@@ -299,15 +304,20 @@ class Vista2D(QWidget):
         La imagen se escala para ajustarse al área del espacio de trabajo.
         """
         self._imagen_fondo_cv = imagen_cv.copy()
+        # Resetear estado de simulación
+        self._escala_imagen = 1.0
+        self._offset_imagen = QPointF(0.0, 0.0)
+        
         # Convertir BGR → RGB para Qt
         rgb = cv2.cvtColor(imagen_cv, cv2.COLOR_BGR2RGB)
         h, w, ch = rgb.shape
         bytes_por_linea = ch * w
         self._imagen_fondo = QImage(
             rgb.data, w, h, bytes_por_linea, QImage.Format.Format_RGB888
-        ).copy()  # .copy() necesario porque rgb se destruirá
-        logger.info(f"Imagen de fondo establecida: {w}x{h}")
+        ).copy()
+        logger.info(f"Imagen base establecida para simulación: {w}x{h}")
         self.update()
+        self._emitir_frame_virtual()
 
     def obtener_imagen_fondo_cv(self) -> Optional[np.ndarray]:
         """Retorna la imagen de fondo en formato OpenCV (BGR)."""
@@ -461,11 +471,32 @@ class Vista2D(QWidget):
 
         rect_destino = QRectF(p_tl, p_br)
 
-        # Dibujar con transparencia
+        # Aplicar escala y offset interactivo a la imagen (centro en rect_destino)
+        centro_w = rect_destino.center().x()
+        centro_h = rect_destino.center().y()
+        
+        # Tamaño base de la porción dibujada de la imagen original
+        ancho_base = rect_destino.width() * self._escala_imagen
+        alto_base = rect_destino.height() * self._escala_imagen
+        
+        rect_dibujo = QRectF(
+            centro_w - ancho_base / 2 + self._offset_imagen.x(),
+            centro_h - alto_base / 2 + self._offset_imagen.y(),
+            ancho_base, alto_base
+        )
+
+        painter.save()
+        # Clipping para que no se dibuje fuera del espacio calibrado ArUco
+        ruta_clip = QPainterPath()
+        poligono = QPolygonF([self._mm_a_widget(p["x_mm"], p["y_mm"]) for p in sorted(self._puntos_mundo, key=lambda p: p["id"])])
+        if poligono.count() >= 3:
+            ruta_clip.addPolygon(poligono)
+            painter.setClipPath(ruta_clip)
+
         painter.setOpacity(0.4)
         pixmap = QPixmap.fromImage(self._imagen_fondo)
-        painter.drawPixmap(rect_destino.toRect(), pixmap)
-        painter.setOpacity(1.0)
+        painter.drawPixmap(rect_dibujo.toRect(), pixmap)
+        painter.restore()
 
     def _dibujar_grid(self, painter: QPainter):
         """Dibuja una grilla de referencia con etiquetas en mm."""
@@ -752,30 +783,61 @@ class Vista2D(QWidget):
     # Interacción
     # ═══════════════════════════════════════════════════════
 
-    def mousePressEvent(self, event):
-        """Detecta click sobre un objeto para seleccionarlo."""
-        if event.button() != Qt.MouseButton.LeftButton:
+    def wheelEvent(self, event):
+        """Hace zoom a la imagen de fondo."""
+        if self._imagen_fondo is None:
             return
 
-        pos = event.position()
-        for i, det in enumerate(self._detecciones):
-            if det.centroide_mm is None:
-                continue
-            centro = self._mm_a_widget(det.centroide_mm[0], det.centroide_mm[1])
-            dist = math.sqrt(
-                (pos.x() - centro.x()) ** 2 + (pos.y() - centro.y()) ** 2
-            )
-            if dist < 25:  # Radio de 25px para click
-                self.objeto_seleccionado.emit(i)
-                logger.debug(f"Vista2D: objeto {i} ({det.etiqueta}) seleccionado")
-                return
+        delta = event.angleDelta().y()
+        # Zoom de 10%
+        factor = 1.1 if delta > 0 else 0.9
+        
+        nueva_escala = self._escala_imagen * factor
+        # Limitar escala entre 0.1 y 10.0
+        if 0.1 <= nueva_escala <= 10.0:
+            self._escala_imagen = nueva_escala
+            self.update()
+            self._emitir_frame_virtual()
+
+    def mousePressEvent(self, event):
+        """Inicia arrastre si es clic derecho, o selección si es izquierdo."""
+        if event.button() == Qt.MouseButton.RightButton and self._imagen_fondo is not None:
+            self._arrastrando_imagen = True
+            self._ultimo_pos_raton = event.position()
+            self.setCursor(Qt.CursorShape.ClosedHandCursor)
+            return
+
+        if event.button() == Qt.MouseButton.LeftButton:
+            pos = event.position()
+            for i, det in enumerate(self._detecciones):
+                if det.centroide_mm is None:
+                    continue
+                centro = self._mm_a_widget(det.centroide_mm[0], det.centroide_mm[1])
+                dist = math.sqrt(
+                    (pos.x() - centro.x()) ** 2 + (pos.y() - centro.y()) ** 2
+                )
+                if dist < 25:  # Radio de 25px para click
+                    self.objeto_seleccionado.emit(i)
+                    logger.debug(f"Vista2D: objeto {i} ({det.etiqueta}) seleccionado")
+                    return
 
     def mouseMoveEvent(self, event):
-        """Muestra tooltip con coordenadas al mover el ratón."""
+        """Arrastra imagen simulada o muestra tooltips."""
         pos = event.position()
-        x_mm, y_mm = self._widget_a_mm(pos.x(), pos.y())
+        
+        # Arrastre de imagen simulada
+        if self._arrastrando_imagen:
+            dx = pos.x() - self._ultimo_pos_raton.x()
+            dy = pos.y() - self._ultimo_pos_raton.y()
+            self._offset_imagen.setX(self._offset_imagen.x() + dx)
+            self._offset_imagen.setY(self._offset_imagen.y() + dy)
+            self._ultimo_pos_raton = pos
+            self.update()
+            self._emitir_frame_virtual()
+            return
 
-        # Verificar hover sobre objeto
+        # Comportamiento normal de tooltip
+        x_mm, y_mm = self._widget_a_mm(pos.x(), pos.y())
         for i, det in enumerate(self._detecciones):
             if det.centroide_mm is None:
                 continue
@@ -795,3 +857,46 @@ class Vista2D(QWidget):
                 return
 
         self.setToolTip(f"({x_mm:.0f}, {y_mm:.0f}) mm")
+
+    def mouseReleaseEvent(self, event):
+        """Termina el arrastre."""
+        if event.button() == Qt.MouseButton.RightButton and self._arrastrando_imagen:
+            self._arrastrando_imagen = False
+            self.setCursor(Qt.CursorShape.ArrowCursor)
+
+    def _emitir_frame_virtual(self):
+        """Genera un nuevo frame 1280x720 de matriz OpenCV simulando la cámara virtual y lo emite."""
+        if self._imagen_fondo_cv is None or not self._puntos_mundo:
+            return
+
+        w_out, h_out = 1280, 720
+        h_orig, w_orig = self._imagen_fondo_cv.shape[:2]
+
+        # Centro base lógico
+        cx = w_orig / 2.0
+        cy = h_orig / 2.0
+
+        # Para que el paneo del ratón parezca congruente con la imagen vista, 
+        # offset en Px del widget se traduce a desplazamiento de la cámara en el frame original
+        # En la vida real, un paneo hacia la derecha significa cámara moviéndose izquierda o imagen desplazándose a derecha
+        # Invertimos el offset para desplazar el área de recorte sobre la imagen base
+        off_x_pix = -self._offset_imagen.x() / max(self._px_por_mm, 0.01) * (w_orig / max(self.width(), 1))
+        off_y_pix = -self._offset_imagen.y() / max(self._px_por_mm, 0.01) * (h_orig / max(self.height(), 1))
+
+        # Crear matriz de transformación afín (Traslación + Escala)
+        # La escala que la UI hace más grande (zoom in) debe extraer un recorte *menor* de la fuente, por ende factor inverso
+        escala_crop = 1.0 / max(self._escala_imagen, 0.001)
+
+        M = np.float32([
+            [escala_crop, 0, cx - cx*escala_crop + off_x_pix],
+            [0, escala_crop, cy - cy*escala_crop + off_y_pix]
+        ])
+
+        # Asegurarse que ocupe todo el fov virtual llenando bordes con negro
+        # WarpAffine a 1280x720 directamente
+        frame_virtual = cv2.warpAffine(
+            self._imagen_fondo_cv, M, (w_out, h_out),
+            flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=(0, 0, 0)
+        )
+
+        self.frame_virtual_generado.emit(frame_virtual)
