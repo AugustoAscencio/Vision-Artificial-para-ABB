@@ -860,11 +860,11 @@ class Vista2D(QWidget):
         Genera un frame 1280x720 que simula lo que vería una cámara cenital.
 
         Lógica:
-        - Con escala=1.0 y offset=(0,0), la imagen COMPLETA se ajusta a 1280x720
-          (como si la cámara viera toda la escena).
-        - Zoom in (escala > 1): se recorta una porción más pequeña del centro
-          y se amplía → YOLO ve los objetos más grandes.
-        - Pan (offset): desplaza el centro del recorte.
+        - Con escala=1.0 y offset=(0,0), la imagen COMPLETA se ajusta a 1280x720.
+        - Zoom/Pan: el usuario mueve la "cámara" sobre la escena.
+        - Los 4 marcadores ArUco se inyectan en las esquinas del frame,
+          en las posiciones correspondientes a sus coordenadas mundo reales.
+          OpenCV los detecta → calibración automática → coordenadas en mm.
         """
         if self._imagen_fondo_cv is None:
             return
@@ -872,35 +872,120 @@ class Vista2D(QWidget):
         w_out, h_out = 1280, 720
         h_orig, w_orig = self._imagen_fondo_cv.shape[:2]
 
-        # ── Paso 1: Escala base para que la imagen COMPLETA quepa en w_out×h_out ──
-        escala_base_x = w_out / w_orig
-        escala_base_y = h_out / h_orig
-        escala_base = min(escala_base_x, escala_base_y)
-
-        # ── Paso 2: Aplicar zoom del usuario ──
+        # ── Paso 1: Escala base (imagen completa cabe en 1280×720) ──
+        escala_base = min(w_out / w_orig, h_out / h_orig)
         escala_final = escala_base * self._escala_imagen
 
-        # ── Paso 3: Centrar la imagen en el frame de salida ──
-        offset_centrado_x = (w_out - w_orig * escala_final) / 2.0
-        offset_centrado_y = (h_out - h_orig * escala_final) / 2.0
-
-        # ── Paso 4: Traducir paneo del widget a paneo del frame de salida ──
+        # ── Paso 2: Centrar + paneo ──
+        offset_cx = (w_out - w_orig * escala_final) / 2.0
+        offset_cy = (h_out - h_orig * escala_final) / 2.0
         ratio_x = w_out / max(self.width(), 1)
         ratio_y = h_out / max(self.height(), 1)
         pan_x = self._offset_imagen.x() * ratio_x
         pan_y = self._offset_imagen.y() * ratio_y
 
-        # ── Paso 5: Construir la matriz afín ──
         M = np.float32([
-            [escala_final, 0, offset_centrado_x + pan_x],
-            [0, escala_final, offset_centrado_y + pan_y]
+            [escala_final, 0, offset_cx + pan_x],
+            [0, escala_final, offset_cy + pan_y]
         ])
 
         frame_virtual = cv2.warpAffine(
             self._imagen_fondo_cv, M, (w_out, h_out),
             flags=cv2.INTER_LINEAR,
             borderMode=cv2.BORDER_CONSTANT,
-            borderValue=(0, 0, 0),
+            borderValue=(20, 20, 20),
         )
 
+        # ── Paso 3: Inyectar ArUcos en las esquinas ──────────────────────
+        # Solo si hay puntos mundo configurados
+        if self._puntos_mundo:
+            self._inyectar_arucos_en_frame(frame_virtual, w_out, h_out)
+
         self.frame_virtual_generado.emit(frame_virtual)
+
+    def _inyectar_arucos_en_frame(
+        self, frame: np.ndarray, w: int, h: int
+    ) -> None:
+        """
+        Dibuja los 4 marcadores ArUco en el frame virtual.
+
+        Posicionamiento proporcional: cada marcador se coloca en el pixel
+        que corresponde a su coordenada mundo (x_mm, y_mm) escalada al
+        tamaño del frame. Esto garantiza que la homografía calculada por
+        OpenCV sea correcta: pixel ↔ mm reales.
+
+        El área de trabajo se centra en el frame con un margen del 10%.
+        """
+        try:
+            import cv2.aruco as aruco_mod
+
+            puntos_ord = sorted(self._puntos_mundo, key=lambda p: p["id"])
+            if len(puntos_ord) < 4:
+                return
+
+            # Rango del espacio de trabajo en mm
+            xs = [p["x_mm"] for p in puntos_ord]
+            ys = [p["y_mm"] for p in puntos_ord]
+            x_min, x_max = min(xs), max(xs)
+            y_min, y_max = min(ys), max(ys)
+            rango_x = max(x_max - x_min, 1.0)
+            rango_y = max(y_max - y_min, 1.0)
+
+            # Área de proyección en el frame (con margen del 12%)
+            margen_x = int(w * 0.12)
+            margen_y = int(h * 0.12)
+            area_w = w - 2 * margen_x
+            area_h = h - 2 * margen_y
+
+            tamano_marker = 70  # px
+            diccionario = aruco_mod.getPredefinedDictionary(aruco_mod.DICT_4X4_50)
+
+            for punto in puntos_ord[:4]:
+                marker_id = punto["id"]
+                if marker_id > 49:
+                    continue
+
+                # Coordenada normalizada del marcador dentro del workspace
+                norm_x = (punto["x_mm"] - x_min) / rango_x
+                # Y invertida: y_max está arriba en imagen (pixel 0 = top)
+                norm_y = 1.0 - (punto["y_mm"] - y_min) / rango_y
+
+                # Pixel centro del marcador en el frame
+                cx_px = int(margen_x + norm_x * area_w)
+                cy_px = int(margen_y + norm_y * area_h)
+
+                # Esquina superior-izquierda del marcador
+                x0 = max(0, cx_px - tamano_marker // 2)
+                y0 = max(0, cy_px - tamano_marker // 2)
+                x1 = min(w, x0 + tamano_marker)
+                y1 = min(h, y0 + tamano_marker)
+                tam_real = (x1 - x0, y1 - y0)
+
+                if tam_real[0] < 10 or tam_real[1] < 10:
+                    continue
+
+                # Generar imagen del marcador
+                img_marker = aruco_mod.generateImageMarker(
+                    diccionario, marker_id, tamano_marker
+                )
+                img_marker_bgr = cv2.cvtColor(img_marker, cv2.COLOR_GRAY2BGR)
+
+                # Recortar si el marker sobresale del frame
+                img_crop = img_marker_bgr[:tam_real[1], :tam_real[0]]
+                frame[y0:y1, x0:x1] = img_crop
+
+                # Etiqueta
+                texto = f"ID:{marker_id} ({punto['x_mm']:.0f},{punto['y_mm']:.0f})"
+                cv2.putText(
+                    frame, texto,
+                    (x0, max(12, y0 - 5)),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.38,
+                    (0, 230, 130), 1, cv2.LINE_AA,
+                )
+
+        except Exception as e:
+            logger.warning(f"No se pudieron inyectar ArUcos en frame virtual: {e}")
+
+
+
+
