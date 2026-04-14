@@ -31,6 +31,7 @@ class PanelControl(QGroupBox):
     envio_automatico_cambiado = pyqtSignal(bool)
     crosshair_cambiado = pyqtSignal(bool)
     rejilla_cambiada = pyqtSignal(bool)
+    imagen_cargada = pyqtSignal(str)   # Ruta de imagen → YOLO → Vista 2D
 
     def __init__(self, parent=None):
         super().__init__("🎮  Control", parent)
@@ -121,6 +122,30 @@ class PanelControl(QGroupBox):
             lambda state: self.rejilla_cambiada.emit(state == Qt.CheckState.Checked.value)
         )
         layout.addWidget(self._chk_rejilla)
+
+        # ── Vista 2D ──
+        lbl_2d = QLabel("Vista 2D cenital:")
+        lbl_2d.setStyleSheet(f"color: {Colores.MORADO}; font-weight: bold; margin-top: 6px;")
+        layout.addWidget(lbl_2d)
+
+        self._btn_cargar_imagen = QPushButton("📂 Cargar imagen → YOLO")
+        self._btn_cargar_imagen.setToolTip(
+            "Cargar una imagen para procesarla con YOLO\n"
+            "y mostrar las detecciones en la Vista 2D"
+        )
+        self._btn_cargar_imagen.clicked.connect(self._al_cargar_imagen)
+        layout.addWidget(self._btn_cargar_imagen)
+
+    def _al_cargar_imagen(self):
+        from PyQt6.QtWidgets import QFileDialog
+        ruta, _ = QFileDialog.getOpenFileName(
+            self,
+            "Seleccionar imagen para procesar",
+            "",
+            "Imágenes (*.png *.jpg *.jpeg *.bmp);;Todos los archivos (*.*)"
+        )
+        if ruta:
+            self.imagen_cargada.emit(ruta)
 
     def _al_iniciar_camara(self):
         indice = self._combo_camara.currentData()

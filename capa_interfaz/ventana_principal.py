@@ -1,6 +1,6 @@
 """
 Ventana principal del sistema de vision artificial ABB.
-Layout: Camara compacta + datos prominentes + logs + debug panel.
+Layout: Camara + Vista 2D cenital + datos + logs + debug.
 """
 
 from PyQt6.QtCore import Qt
@@ -11,6 +11,7 @@ from PyQt6.QtWidgets import (
 
 from capa_interfaz.tema import Colores
 from capa_interfaz.componentes.vista_camara import VistaCamara
+from capa_interfaz.componentes.vista_2d import Vista2D
 from capa_interfaz.componentes.panel_conexion import PanelConexion
 from capa_interfaz.componentes.panel_control import PanelControl
 from capa_interfaz.componentes.panel_calibracion import PanelCalibracion
@@ -23,17 +24,17 @@ from capa_interfaz.componentes.barra_estado import BarraEstado
 
 class VentanaPrincipal(QMainWindow):
     """
-    Dashboard rediseñado — prioriza datos sobre vista de camara.
+    Dashboard con cámara real + vista 2D cenital + datos.
 
     +---------------+------------------+------------------+
-    |  CONTROL      |  CAMARA (compacta)|  DETECCION       |
-    |  ----------   |  max 350px alto  |  (tabla grande)  |
-    |  Conexion     |                  |  X,Y,Z,Color     |
-    |  Calibracion  |------------------|                  |
-    |  Control      |  LOGS            |  Modelo IA       |
-    |  (crosshair)  |  (expandible)    |                  |
-    |  (rejilla)    |------------------|                  |
-    |               |  DEBUG (colapsa) |                  |
+    |  CONTROL      |  CÁMARA          |  DETECCIÓN       |
+    |  ----------   |  (feed real)     |  (tabla grande)  |
+    |  Conexión     |                  |  X,Y,Z,Color     |
+    |  Calibración  |  VISTA 2D        |                  |
+    |  Control      |  (cenital)       |  Modelo IA       |
+    |  (overlays)   |  ArUco + objetos |                  |
+    |               |------------------+                  |
+    |               |  LOGS + DEBUG    |                  |
     +---------------+------------------+------------------+
     |               BARRA DE ESTADO                       |
     +-----------------------------------------------------+
@@ -41,12 +42,13 @@ class VentanaPrincipal(QMainWindow):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Vision Artificial ABB -- Sistema Pick & Place")
+        self.setWindowTitle("Vision Artificial ABB — Sistema Pick & Place")
         self.setMinimumSize(1280, 720)
-        self.resize(1440, 820)
+        self.resize(1500, 880)
 
         # Crear componentes
         self.vista_camara = VistaCamara()
+        self.vista_2d = Vista2D()
         self.panel_conexion = PanelConexion()
         self.panel_control = PanelControl()
         self.panel_calibracion = PanelCalibracion()
@@ -94,37 +96,37 @@ class VentanaPrincipal(QMainWindow):
         col_izq.setFixedWidth(300)
 
         # =============================================
-        # Columna Central: Camara + Logs + Debug
+        # Columna Central: Cámara + Vista 2D + Logs
         # =============================================
         col_centro = QWidget()
         layout_centro = QVBoxLayout(col_centro)
         layout_centro.setContentsMargins(0, 0, 0, 0)
         layout_centro.setSpacing(6)
 
-        # Splitter vertical: Camara arriba, Logs + Debug abajo
+        # Splitter vertical: Cámara | Vista 2D | Logs + Debug
         splitter_centro = QSplitter(Qt.Orientation.Vertical)
 
-        # Camara — compacta
+        # Cámara — feed real
         self.vista_camara.setMaximumHeight(380)
         splitter_centro.addWidget(self.vista_camara)
 
-        # Contenedor inferior: Logs + Debug stacked
+        # Vista 2D cenital — segunda cámara virtual
+        self.vista_2d.setMinimumHeight(180)
+        splitter_centro.addWidget(self.vista_2d)
+
+        # Contenedor inferior: Logs + Debug
         contenedor_inferior = QWidget()
         layout_inferior = QVBoxLayout(contenedor_inferior)
         layout_inferior.setContentsMargins(0, 0, 0, 0)
         layout_inferior.setSpacing(4)
-
-        # Logs
         layout_inferior.addWidget(self.panel_logs, stretch=2)
-
-        # Debug panel (colapsable)
         layout_inferior.addWidget(self.panel_debug, stretch=1)
-
         splitter_centro.addWidget(contenedor_inferior)
 
-        # Proporciones: 35% camara, 65% logs+debug
+        # Proporciones: 30% cámara, 35% Vista 2D, 35% logs+debug
         splitter_centro.setStretchFactor(0, 2)
         splitter_centro.setStretchFactor(1, 3)
+        splitter_centro.setStretchFactor(2, 2)
 
         layout_centro.addWidget(splitter_centro)
 
@@ -146,7 +148,7 @@ class VentanaPrincipal(QMainWindow):
         layout_contenido_der.setContentsMargins(4, 0, 0, 0)
         layout_contenido_der.setSpacing(6)
 
-        # Panel de deteccion ocupa la mayor parte
+        # Panel de detección ocupa la mayor parte
         layout_contenido_der.addWidget(self.panel_deteccion, stretch=3)
         layout_contenido_der.addWidget(self.selector_modelo, stretch=0)
 

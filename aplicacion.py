@@ -297,6 +297,7 @@ class Aplicacion(QObject):
         v.panel_control.confianza_cambiada.connect(self._al_cambiar_confianza)
         v.panel_control.preprocesamiento_cambiado.connect(self._al_cambiar_preprocesamiento)
         v.panel_control.envio_automatico_cambiado.connect(self._al_cambiar_envio_automatico)
+        v.panel_control.imagen_cargada.connect(self._al_cargar_imagen)
 
         # Overlays AR
         v.panel_control.crosshair_cambiado.connect(self._al_cambiar_crosshair)
@@ -353,6 +354,9 @@ class Aplicacion(QObject):
         )
         v.barra_estado.actualizar_calibracion(self._calculador_homografia.esta_calibrada)
         v.barra_estado.actualizar_modelo(self._detector_yolo.nombre_modelo)
+        
+        # Iniciar Vista 2D con los puntos configurados
+        v.vista_2d.actualizar_puntos_mundo(self._ajustes.aruco_puntos_mundo)
 
     # ═══════════════════════════════════════════════════════
     # Handlers — Cámara
@@ -412,6 +416,10 @@ class Aplicacion(QObject):
         # Actualizar vista de camara con frame procesado
         self._ventana.vista_camara.actualizar_frame(resultado.frame_procesado)
 
+        # Actualizar Vista 2D
+        self._ventana.vista_2d.actualizar_marcadores(resultado.marcadores_aruco)
+        self._ventana.vista_2d.actualizar_detecciones(resultado.detecciones)
+
         # Actualizar conteo de marcadores ArUco
         self._ventana.panel_calibracion.actualizar_conteo_marcadores(
             len(resultado.marcadores_aruco)
@@ -422,6 +430,26 @@ class Aplicacion(QObject):
 
         # Actualizar panel debug
         self._ventana.panel_debug.actualizar(resultado)
+
+    @pyqtSlot(str)
+    def _al_cargar_imagen(self, ruta: str):
+        """Carga una imagen manual, la procesa y actualiza la Vista 2D."""
+        logger.info(f"Cargando imagen manual: {ruta}")
+        try:
+            # Leer imagen
+            img_bgr = cv2.imread(ruta)
+            if img_bgr is None:
+                logger.error("No se pudo leer la imagen")
+                return
+
+            # Procesar síncronamente (no bloquea mucho porque es una sola imagen)
+            self._ventana.vista_2d.establecer_imagen_fondo(img_bgr)
+            resultado = self._hilo_procesamiento._procesar_frame(img_bgr)
+            self._al_resultado_procesamiento(resultado)
+            self._al_detecciones_listas(resultado.detecciones)
+
+        except Exception as e:
+            logger.error(f"Error procesando imagen: {e}", exc_info=True)
 
     @pyqtSlot(object)
     def _al_detecciones_listas(self, detecciones: list):

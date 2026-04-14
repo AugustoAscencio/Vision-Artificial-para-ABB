@@ -118,11 +118,13 @@ class ComandoRobot:
         """
         Formatea el comando como cadena parseable por RAPID.
         Formato: "X:120.5,Y:85.3,Z:10.0,C:Rojo,T:Caja"
+        Si Z es desconocido (0.0), se envía como Z:NULL.
         """
+        z_str = f"{self.z_mm:.1f}" if self.z_mm > 0 else "NULL"
         return (
             f"X:{self.x_mm:.1f},"
             f"Y:{self.y_mm:.1f},"
-            f"Z:{self.z_mm:.1f},"
+            f"Z:{z_str},"
             f"C:{self.color},"
             f"T:{self.tipo}"
         )

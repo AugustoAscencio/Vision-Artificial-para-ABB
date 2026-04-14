@@ -566,3 +566,154 @@
 2026-04-13 11:13:03 | INFO     | vision_abb.tcp            | Hilo TCP terminado
 2026-04-13 11:13:04 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
 2026-04-13 11:13:04 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 14:19:13 | INFO     | vision_abb                | ============================================================
+2026-04-13 14:19:13 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 14:19:13 | INFO     | vision_abb                | ============================================================
+2026-04-13 14:19:13 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 14:19:13 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 14:19:13 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 14:19:13 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 14:19:13 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 14:19:13 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 14:19:35 | INFO     | vision_abb                | ============================================================
+2026-04-13 14:19:35 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 14:19:35 | INFO     | vision_abb                | ============================================================
+2026-04-13 14:19:35 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 14:19:35 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 14:19:35 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 14:19:35 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 14:19:35 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 14:19:35 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 14:19:36 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:\Users\Augusto Ascencio\Downloads\Vision Artificial\best.pt → dispositivo: cpu
+2026-04-13 14:19:36 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 14:19:50 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 1
+2026-04-13 14:19:50 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 14:34:07 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 14:34:07 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 14:34:29 | INFO     | vision_abb                | ============================================================
+2026-04-13 14:34:29 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 14:34:29 | INFO     | vision_abb                | ============================================================
+2026-04-13 14:34:29 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 14:34:29 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 14:34:29 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 14:34:29 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 14:34:29 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 14:34:29 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 14:34:30 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:\Users\Augusto Ascencio\Downloads\Vision Artificial\best.pt → dispositivo: cpu
+2026-04-13 14:34:30 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 14:34:35 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 1
+2026-04-13 14:34:35 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 14:34:43 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 14:34:43 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 14:34:45 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 14:34:51 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 14:34:51 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 14:34:51 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 14:34:51 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 14:41:28 | INFO     | vision_abb                | ============================================================
+2026-04-13 14:41:28 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 14:41:28 | INFO     | vision_abb                | ============================================================
+2026-04-13 14:41:28 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 14:41:28 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 14:41:28 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 14:41:28 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 14:41:28 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 14:41:28 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 14:41:28 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:\Users\Augusto Ascencio\Downloads\Vision Artificial\best.pt → dispositivo: cpu
+2026-04-13 14:41:28 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 14:41:35 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-13 14:41:35 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 14:41:40 | INFO     | vision_abb.aplicacion     | Iniciando cámara 1...
+2026-04-13 14:41:40 | INFO     | vision_abb.camara         | Iniciando cámara [índice=1, resolución=(1280, 720)]
+2026-04-13 14:41:41 | INFO     | vision_abb.camara         | Cámara abierta: 2560x1440
+2026-04-13 14:42:37 | INFO     | vision_abb.aplicacion     | Deteniendo cámara...
+2026-04-13 14:42:37 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 14:42:37 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 14:43:01 | INFO     | vision_abb.aplicacion     | Iniciando cámara 1...
+2026-04-13 14:43:01 | INFO     | vision_abb.camara         | Iniciando cámara [índice=1, resolución=(1280, 720)]
+2026-04-13 14:43:02 | INFO     | vision_abb.camara         | Cámara abierta: 2560x1440
+2026-04-13 14:45:09 | INFO     | vision_abb.aplicacion     | Deteniendo cámara...
+2026-04-13 14:45:09 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 14:45:09 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 14:52:30 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 14:52:30 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 14:53:13 | INFO     | vision_abb                | ============================================================
+2026-04-13 14:53:13 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 14:53:13 | INFO     | vision_abb                | ============================================================
+2026-04-13 14:53:13 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 14:53:13 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 14:53:13 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 14:53:13 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 14:53:13 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 14:53:13 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 14:53:14 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:\Users\Augusto Ascencio\Downloads\Vision Artificial\best.pt → dispositivo: cpu
+2026-04-13 14:53:14 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 14:53:18 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 1
+2026-04-13 14:53:18 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 14:53:58 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 14:53:58 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-13 14:54:09 | INFO     | vision_abb                | ============================================================
+2026-04-13 14:54:09 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-13 14:54:09 | INFO     | vision_abb                | ============================================================
+2026-04-13 14:54:09 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-13 14:54:09 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-13 14:54:09 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-13 14:54:09 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-13 14:54:09 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-13 14:54:09 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-13 14:54:10 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:\Users\Augusto Ascencio\Downloads\Vision Artificial\best.pt → dispositivo: cpu
+2026-04-13 14:54:10 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-13 14:54:14 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-13 14:54:14 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-13 14:54:18 | INFO     | vision_abb.aplicacion     | Iniciando cámara 1...
+2026-04-13 14:54:18 | INFO     | vision_abb.camara         | Iniciando cámara [índice=1, resolución=(1280, 720)]
+2026-04-13 14:54:19 | INFO     | vision_abb.camara         | Cámara abierta: 2560x1440
+2026-04-13 14:56:40 | INFO     | vision_abb.aplicacion     | Deteniendo cámara...
+2026-04-13 14:56:40 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 14:56:40 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 14:57:01 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-13 14:57:01 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-13 14:57:02 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-13 14:57:53 | INFO     | vision_abb.aplicacion     | Deteniendo cámara...
+2026-04-13 14:57:54 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 14:57:54 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 14:57:55 | INFO     | vision_abb.aplicacion     | Iniciando cámara 1...
+2026-04-13 14:57:56 | INFO     | vision_abb.camara         | Iniciando cámara [índice=1, resolución=(1280, 720)]
+2026-04-13 14:57:57 | INFO     | vision_abb.camara         | Cámara abierta: 2560x1440
+2026-04-13 14:58:58 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-13 14:58:58 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-13 14:58:58 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-13 14:58:59 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 09:28:58 | INFO     | vision_abb                | ============================================================
+2026-04-14 09:28:58 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 09:28:58 | INFO     | vision_abb                | ============================================================
+2026-04-14 09:28:58 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 09:28:58 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 09:28:58 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 09:28:58 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 09:28:58 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 09:28:58 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 09:28:58 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 09:28:59 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:\Users\Augusto Ascencio\Downloads\Vision Artificial\best.pt → dispositivo: cpu
+2026-04-14 09:28:59 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 09:28:59 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 09:29:10 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 09:29:10 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: horario, Área: 600.0 cm², Perímetro: 1000.0 mm
+2026-04-14 09:29:10 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 09:30:22 | INFO     | vision_abb.aplicacion     | Cargando imagen manual: C:/Users/Augusto Ascencio/Downloads/entrenamiento_box_v1/entrenamiento_box/results.png
+2026-04-14 09:30:22 | INFO     | vision_abb.vista_2d       | Imagen de fondo establecida: 2400x1200
+2026-04-14 09:30:37 | INFO     | vision_abb.aplicacion     | Envio automatico: ACTIVADO
+2026-04-14 09:30:43 | INFO     | vision_abb.aplicacion     | Iniciando cámara 0...
+2026-04-14 09:30:43 | INFO     | vision_abb.camara         | Iniciando cámara [índice=0, resolución=(1280, 720)]
+2026-04-14 09:30:44 | INFO     | vision_abb.camara         | Cámara abierta: 2560x1440
+2026-04-14 09:30:59 | INFO     | vision_abb.aplicacion     | Deteniendo cámara...
+2026-04-14 09:30:59 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-14 09:30:59 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-14 09:31:02 | INFO     | vision_abb.aplicacion     | Iniciando cámara 1...
+2026-04-14 09:31:03 | INFO     | vision_abb.camara         | Iniciando cámara [índice=1, resolución=(1280, 720)]
+2026-04-14 09:31:04 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-14 09:31:27 | INFO     | vision_abb.aplicacion     | Deteniendo cámara...
+2026-04-14 09:31:27 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-14 09:31:27 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-14 09:31:39 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 09:31:39 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
