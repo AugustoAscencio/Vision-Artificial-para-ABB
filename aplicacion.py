@@ -439,18 +439,39 @@ class Aplicacion(QObject):
 
     @pyqtSlot(str)
     def _al_cargar_imagen(self, ruta: str):
-        """Carga una imagen manual, establece la Vista 2D para interactuar y activa modo simulador."""
-        logger.info(f"Cargando imagen manual base: {ruta}")
+        """Carga una imagen manual, activa el simulador y la procesa."""
+        logger.info(f"Cargando imagen para simulador: {ruta}")
         try:
-            # Leer imagen
             img_bgr = cv2.imread(ruta)
             if img_bgr is None:
                 logger.error("No se pudo leer la imagen")
                 return
 
+            # 1. Activar modo simulador PRIMERO (sincrónico en mismo hilo)
+            self._modo_simulador_ui = True
             self._ventana.panel_control._chk_simulador.setChecked(True)
+
+            # 2. Asegurar que el hilo de procesamiento esté corriendo
+            if not self._hilo_procesamiento._ejecutando:
+                self._hilo_procesamiento.iniciar()
+
+            # 3. Establecer imagen (esto emite frame_virtual_generado)
             self._ventana.vista_2d.establecer_imagen_fondo(img_bgr)
-            # El establecer_imagen_fondo dispara _emitir_frame_virtual automáticamente y recae en _al_recibir_frame_virtual
+
+            # 4. Respaldo: procesar directamente si la señal no llegó a tiempo
+            #    Construir frame virtual = imagen completa escalada a 1280x720
+            h, w = img_bgr.shape[:2]
+            escala = min(1280 / w, 720 / h)
+            nuevo_w = int(w * escala)
+            nuevo_h = int(h * escala)
+            frame_redim = cv2.resize(img_bgr, (nuevo_w, nuevo_h), interpolation=cv2.INTER_LINEAR)
+            frame_virtual = np.zeros((720, 1280, 3), dtype=np.uint8)
+            y_off = (720 - nuevo_h) // 2
+            x_off = (1280 - nuevo_w) // 2
+            frame_virtual[y_off:y_off + nuevo_h, x_off:x_off + nuevo_w] = frame_redim
+            self._hilo_procesamiento.recibir_frame(frame_virtual)
+
+            logger.info(f"Imagen simulada cargada: {w}x{h} → frame virtual 1280x720")
 
         except Exception as e:
             logger.error(f"Error procesando imagen: {e}", exc_info=True)
@@ -482,10 +503,17 @@ class Aplicacion(QObject):
 
         # Envio automatico al robot
         if self._envio_automatico and self._cliente_tcp.esta_conectado:
-            validas = [d for d in detecciones if d.centroide_mm is not None and not d.fuera_de_rango]
-            if validas:
-                mensaje = self._protocolo.desde_detecciones(validas)
-                self._cliente_tcp.enviar(mensaje)
+            usar_px = self._modo_simulador_ui
+            comandos = []
+            for d in detecciones:
+                cmd = ComandoRobot.desde_deteccion(d, usar_pixeles=usar_px)
+                if cmd:
+                    comandos.append(cmd)
+            if comandos:
+                for cmd in comandos:
+                    mensaje = cmd.a_cadena()
+                    self._cliente_tcp.enviar(mensaje)
+                    logger.info(f"Auto-enviado: {mensaje}")
 
     # ═══════════════════════════════════════════════════════
     # Handlers — TCP
@@ -625,24 +653,33 @@ class Aplicacion(QObject):
         det = self._ventana.panel_deteccion.obtener_deteccion(indice)
         if det is None:
             return
-        cmd = ComandoRobot.desde_deteccion(det)
+        usar_px = self._modo_simulador_ui
+        cmd = ComandoRobot.desde_deteccion(det, usar_pixeles=usar_px)
         if cmd:
-            mensaje = self._protocolo.formatear_comando(cmd)
+            mensaje = cmd.a_cadena()
             self._cliente_tcp.enviar(mensaje)
-            logger.info(f"Enviado seleccionado: {mensaje.strip()}")
+            prefijo = "[SIM] " if usar_px and det.centroide_mm is None else ""
+            logger.info(f"{prefijo}Enviado seleccionado: {mensaje}")
         else:
-            logger.warning("No se puede enviar — sin coordenadas mundo")
+            logger.warning("No se puede enviar — sin coordenadas disponibles")
 
     @pyqtSlot()
     def _al_enviar_todos(self):
         if self._ultimo_resultado is None:
             return
+        usar_px = self._modo_simulador_ui
         detecciones = self._ultimo_resultado.detecciones
-        validas = [d for d in detecciones if d.centroide_mm is not None and not d.fuera_de_rango]
-        if validas:
-            mensaje = self._protocolo.desde_detecciones(validas)
-            self._cliente_tcp.enviar(mensaje)
-            logger.info(f"Enviados {len(validas)} objetos al robot")
+        comandos = []
+        for d in detecciones:
+            cmd = ComandoRobot.desde_deteccion(d, usar_pixeles=usar_px)
+            if cmd:
+                comandos.append(cmd)
+        if comandos:
+            for cmd in comandos:
+                mensaje = cmd.a_cadena()
+                self._cliente_tcp.enviar(mensaje)
+            prefijo = "[SIM] " if usar_px else ""
+            logger.info(f"{prefijo}Enviados {len(comandos)} objetos al robot")
         else:
             logger.warning("No hay objetos válidos para enviar")
 

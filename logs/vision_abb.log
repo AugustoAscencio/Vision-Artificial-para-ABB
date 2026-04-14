@@ -821,3 +821,67 @@
 2026-04-14 10:33:19 | INFO     | vision_abb.camara         | Cámara detenida
 2026-04-14 10:33:21 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
 2026-04-14 10:33:21 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 11:16:13 | INFO     | vision_abb                | ============================================================
+2026-04-14 11:16:13 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 11:16:13 | INFO     | vision_abb                | ============================================================
+2026-04-14 11:16:13 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 11:16:13 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 11:16:13 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 11:16:13 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 11:16:13 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 11:16:13 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 11:16:13 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 11:16:14 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\best.pt → dispositivo: cpu
+2026-04-14 11:16:16 | ERROR    | vision_abb.yolo           | Error al cargar modelo YOLO 'c:\Users\Augusto Ascencio\Downloads\Vision Artificial\best.pt': [Errno 2] No such file or directory: 'c:\\Users\\Augusto Ascencio\\Downloads\\Vision Artificial\\best.pt'
+2026-04-14 11:16:16 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 11:16:24 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 11:16:24 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2500.2 cm², Perímetro: 2000.1 mm
+2026-04-14 11:16:24 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 11:16:30 | INFO     | vision_abb.aplicacion     | Cambiando modelo a: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/modelos/best.pt
+2026-04-14 11:16:30 | INFO     | vision_abb.yolo           | Cambiando modelo: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\best.pt → C:/Users/Augusto Ascencio/Downloads/Vision Artificial/modelos/best.pt
+2026-04-14 11:16:30 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/modelos/best.pt → dispositivo: cpu
+2026-04-14 11:16:30 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 11:16:30 | INFO     | vision_abb.aplicacion     | Modelo activo: best.pt
+2026-04-14 11:16:32 | INFO     | vision_abb.aplicacion     | Cambiando modelo a: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt
+2026-04-14 11:16:32 | INFO     | vision_abb.yolo           | Cambiando modelo: C:/Users/Augusto Ascencio/Downloads/Vision Artificial/modelos/best.pt → c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt
+2026-04-14 11:16:32 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 11:16:33 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 11:16:33 | INFO     | vision_abb.aplicacion     | Modelo activo: best.pt
+2026-04-14 11:16:41 | INFO     | vision_abb.aplicacion     | Modo Simulador ACTIVADO
+2026-04-14 11:16:48 | INFO     | vision_abb.aplicacion     | Envio automatico: ACTIVADO
+2026-04-14 11:16:58 | WARNING  | vision_abb.aplicacion     | No hay frame disponible — inicia la cámara primero
+2026-04-14 11:17:08 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/Screenshot 2026-04-14 102930.png
+2026-04-14 11:17:08 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 487x272
+2026-04-14 11:17:08 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
+2026-04-14 11:22:12 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 11:22:12 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 11:28:12 | INFO     | vision_abb                | ============================================================
+2026-04-14 11:28:12 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 11:28:12 | INFO     | vision_abb                | ============================================================
+2026-04-14 11:28:12 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 11:28:12 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 11:28:12 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 11:28:12 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 11:28:12 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 11:28:12 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 11:28:12 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 11:28:12 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 11:28:12 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 11:28:12 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 11:28:15 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 11:28:15 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2500.2 cm², Perímetro: 2000.1 mm
+2026-04-14 11:28:15 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 11:28:19 | WARNING  | vision_abb.aplicacion     | No hay frame disponible — inicia la cámara primero
+2026-04-14 11:28:26 | INFO     | vision_abb.aplicacion     | Cambiando modelo a: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt
+2026-04-14 11:28:26 | INFO     | vision_abb.yolo           | Cambiando modelo: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt
+2026-04-14 11:28:26 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 11:28:26 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 11:28:26 | INFO     | vision_abb.aplicacion     | Modelo activo: best.pt
+2026-04-14 11:28:29 | INFO     | vision_abb.aplicacion     | Modo Simulador ACTIVADO
+2026-04-14 11:28:31 | WARNING  | vision_abb.aplicacion     | No hay frame disponible — inicia la cámara primero
+2026-04-14 11:28:46 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/Screenshot 2026-04-14 102930.png
+2026-04-14 11:28:46 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 487x272
+2026-04-14 11:28:46 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
+2026-04-14 11:29:09 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 11:29:12 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 11:29:12 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente

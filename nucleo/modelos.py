@@ -130,24 +130,44 @@ class ComandoRobot:
         )
 
     @staticmethod
-    def desde_deteccion(deteccion: DeteccionObjeto) -> Optional["ComandoRobot"]:
+    def desde_deteccion(
+        deteccion: DeteccionObjeto,
+        usar_pixeles: bool = False,
+    ) -> Optional["ComandoRobot"]:
         """
         Crea un ComandoRobot desde una DeteccionObjeto.
-        Retorna None si no hay coordenadas del mundo real.
-        """
-        if deteccion.centroide_mm is None:
-            return None
-        if deteccion.fuera_de_rango:
-            return None
 
-        return ComandoRobot(
-            x_mm=round(deteccion.centroide_mm[0], 1),
-            y_mm=round(deteccion.centroide_mm[1], 1),
-            z_mm=round(deteccion.altura_estimada_mm, 1),
-            color=deteccion.color_dominante,
-            tipo=deteccion.etiqueta,
-            confianza=round(deteccion.confianza, 2),
-        )
+        Args:
+            deteccion: Objeto detectado por YOLO.
+            usar_pixeles: Si True y no hay coordenadas mm, usa
+                         centroide_px como fallback (modo simulación).
+
+        Returns:
+            ComandoRobot o None si no hay coordenadas disponibles.
+        """
+        # Prioridad 1: coordenadas mundo real (mm)
+        if deteccion.centroide_mm is not None and not deteccion.fuera_de_rango:
+            return ComandoRobot(
+                x_mm=round(deteccion.centroide_mm[0], 1),
+                y_mm=round(deteccion.centroide_mm[1], 1),
+                z_mm=round(deteccion.altura_estimada_mm, 1),
+                color=deteccion.color_dominante,
+                tipo=deteccion.etiqueta,
+                confianza=round(deteccion.confianza, 2),
+            )
+
+        # Prioridad 2: coordenadas píxel (fallback para simulación)
+        if usar_pixeles and deteccion.centroide_px is not None:
+            return ComandoRobot(
+                x_mm=float(deteccion.centroide_px[0]),
+                y_mm=float(deteccion.centroide_px[1]),
+                z_mm=0.0,  # Z desconocido → se enviará como NULL
+                color=deteccion.color_dominante,
+                tipo=f"SIM:{deteccion.etiqueta}",
+                confianza=round(deteccion.confianza, 2),
+            )
+
+        return None
 
     def __str__(self) -> str:
         return self.a_cadena()

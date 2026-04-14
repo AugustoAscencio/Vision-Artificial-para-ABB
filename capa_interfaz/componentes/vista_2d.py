@@ -458,42 +458,33 @@ class Vista2D(QWidget):
         )
 
     def _dibujar_imagen_fondo(self, painter: QPainter):
-        """Dibuja la imagen de fondo escalada al área de trabajo."""
+        """Dibuja la imagen de fondo centrada en el espacio de trabajo ArUco."""
         if self._imagen_fondo is None or not self._puntos_mundo:
             return
 
-        # Calcular el rectángulo del área de trabajo
+        # Calcular el rectángulo del espacio de trabajo en coordenadas del widget
         xs = [p["x_mm"] for p in self._puntos_mundo]
         ys = [p["y_mm"] for p in self._puntos_mundo]
 
         p_tl = self._mm_a_widget(min(xs), max(ys))  # top-left
         p_br = self._mm_a_widget(max(xs), min(ys))  # bottom-right
+        rect_workspace = QRectF(p_tl, p_br)
 
-        rect_destino = QRectF(p_tl, p_br)
+        # La imagen se ajusta para LLENAR el espacio de trabajo completo
+        # Luego se aplica escala del usuario y offset del paneo
+        centro = rect_workspace.center()
+        ancho_dibujo = rect_workspace.width() * self._escala_imagen
+        alto_dibujo = rect_workspace.height() * self._escala_imagen
 
-        # Aplicar escala y offset interactivo a la imagen (centro en rect_destino)
-        centro_w = rect_destino.center().x()
-        centro_h = rect_destino.center().y()
-        
-        # Tamaño base de la porción dibujada de la imagen original
-        ancho_base = rect_destino.width() * self._escala_imagen
-        alto_base = rect_destino.height() * self._escala_imagen
-        
         rect_dibujo = QRectF(
-            centro_w - ancho_base / 2 + self._offset_imagen.x(),
-            centro_h - alto_base / 2 + self._offset_imagen.y(),
-            ancho_base, alto_base
+            centro.x() - ancho_dibujo / 2.0 + self._offset_imagen.x(),
+            centro.y() - alto_dibujo / 2.0 + self._offset_imagen.y(),
+            ancho_dibujo,
+            alto_dibujo,
         )
 
         painter.save()
-        # Clipping para que no se dibuje fuera del espacio calibrado ArUco
-        ruta_clip = QPainterPath()
-        poligono = QPolygonF([self._mm_a_widget(p["x_mm"], p["y_mm"]) for p in sorted(self._puntos_mundo, key=lambda p: p["id"])])
-        if poligono.count() >= 3:
-            ruta_clip.addPolygon(poligono)
-            painter.setClipPath(ruta_clip)
-
-        painter.setOpacity(0.4)
+        painter.setOpacity(0.7)
         pixmap = QPixmap.fromImage(self._imagen_fondo)
         painter.drawPixmap(rect_dibujo.toRect(), pixmap)
         painter.restore()
@@ -865,38 +856,51 @@ class Vista2D(QWidget):
             self.setCursor(Qt.CursorShape.ArrowCursor)
 
     def _emitir_frame_virtual(self):
-        """Genera un nuevo frame 1280x720 de matriz OpenCV simulando la cámara virtual y lo emite."""
-        if self._imagen_fondo_cv is None or not self._puntos_mundo:
+        """
+        Genera un frame 1280x720 que simula lo que vería una cámara cenital.
+
+        Lógica:
+        - Con escala=1.0 y offset=(0,0), la imagen COMPLETA se ajusta a 1280x720
+          (como si la cámara viera toda la escena).
+        - Zoom in (escala > 1): se recorta una porción más pequeña del centro
+          y se amplía → YOLO ve los objetos más grandes.
+        - Pan (offset): desplaza el centro del recorte.
+        """
+        if self._imagen_fondo_cv is None:
             return
 
         w_out, h_out = 1280, 720
         h_orig, w_orig = self._imagen_fondo_cv.shape[:2]
 
-        # Centro base lógico
-        cx = w_orig / 2.0
-        cy = h_orig / 2.0
+        # ── Paso 1: Escala base para que la imagen COMPLETA quepa en w_out×h_out ──
+        escala_base_x = w_out / w_orig
+        escala_base_y = h_out / h_orig
+        escala_base = min(escala_base_x, escala_base_y)
 
-        # Para que el paneo del ratón parezca congruente con la imagen vista, 
-        # offset en Px del widget se traduce a desplazamiento de la cámara en el frame original
-        # En la vida real, un paneo hacia la derecha significa cámara moviéndose izquierda o imagen desplazándose a derecha
-        # Invertimos el offset para desplazar el área de recorte sobre la imagen base
-        off_x_pix = -self._offset_imagen.x() / max(self._px_por_mm, 0.01) * (w_orig / max(self.width(), 1))
-        off_y_pix = -self._offset_imagen.y() / max(self._px_por_mm, 0.01) * (h_orig / max(self.height(), 1))
+        # ── Paso 2: Aplicar zoom del usuario ──
+        escala_final = escala_base * self._escala_imagen
 
-        # Crear matriz de transformación afín (Traslación + Escala)
-        # La escala que la UI hace más grande (zoom in) debe extraer un recorte *menor* de la fuente, por ende factor inverso
-        escala_crop = 1.0 / max(self._escala_imagen, 0.001)
+        # ── Paso 3: Centrar la imagen en el frame de salida ──
+        offset_centrado_x = (w_out - w_orig * escala_final) / 2.0
+        offset_centrado_y = (h_out - h_orig * escala_final) / 2.0
 
+        # ── Paso 4: Traducir paneo del widget a paneo del frame de salida ──
+        ratio_x = w_out / max(self.width(), 1)
+        ratio_y = h_out / max(self.height(), 1)
+        pan_x = self._offset_imagen.x() * ratio_x
+        pan_y = self._offset_imagen.y() * ratio_y
+
+        # ── Paso 5: Construir la matriz afín ──
         M = np.float32([
-            [escala_crop, 0, cx - cx*escala_crop + off_x_pix],
-            [0, escala_crop, cy - cy*escala_crop + off_y_pix]
+            [escala_final, 0, offset_centrado_x + pan_x],
+            [0, escala_final, offset_centrado_y + pan_y]
         ])
 
-        # Asegurarse que ocupe todo el fov virtual llenando bordes con negro
-        # WarpAffine a 1280x720 directamente
         frame_virtual = cv2.warpAffine(
             self._imagen_fondo_cv, M, (w_out, h_out),
-            flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=(0, 0, 0)
+            flags=cv2.INTER_LINEAR,
+            borderMode=cv2.BORDER_CONSTANT,
+            borderValue=(0, 0, 0),
         )
 
         self.frame_virtual_generado.emit(frame_virtual)
