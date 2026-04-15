@@ -6,6 +6,7 @@ from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtWidgets import (
     QGroupBox, QVBoxLayout, QHBoxLayout,
     QPushButton, QLabel, QComboBox, QSlider, QCheckBox,
+    QListWidget, QListWidgetItem, QFileDialog,
 )
 from PyQt6.QtCore import Qt
 
@@ -124,37 +125,117 @@ class PanelControl(QGroupBox):
         )
         layout.addWidget(self._chk_rejilla)
 
-        # ── Vista 2D ──
-        lbl_2d = QLabel("Vista 2D cenital:")
+        # ── Vista 2D — Galería de imágenes simuladas ──
+        lbl_2d = QLabel("🎬 Simulador — Galería de imágenes:")
         lbl_2d.setStyleSheet(f"color: {Colores.MORADO}; font-weight: bold; margin-top: 6px;")
         layout.addWidget(lbl_2d)
 
-        self._btn_cargar_imagen = QPushButton("📂 Cargar imagen → YOLO")
-        self._btn_cargar_imagen.setToolTip(
-            "Cargar una imagen para procesarla con YOLO\n"
-            "y mostrar las detecciones en la Vista 2D"
+        # Lista de imágenes cargadas
+        self._lista_imagenes = QListWidget()
+        self._lista_imagenes.setMaximumHeight(90)
+        self._lista_imagenes.setToolTip("Imágenes cargadas para simulación")
+        self._lista_imagenes.setStyleSheet(
+            f"background:{Colores.FONDO_INPUT}; border:1px solid {Colores.BORDE};"
+            f"border-radius:4px; font-size:11px;"
         )
-        self._btn_cargar_imagen.clicked.connect(self._al_cargar_imagen)
-        layout.addWidget(self._btn_cargar_imagen)
+        self._lista_imagenes.currentRowChanged.connect(self._al_seleccionar_imagen)
+        layout.addWidget(self._lista_imagenes)
+
+        # Botones de gestión de galería
+        fila_galeria = QHBoxLayout()
+        self._btn_agregar_img = QPushButton("➕")
+        self._btn_agregar_img.setToolTip("Agregar imagen a la galería")
+        self._btn_agregar_img.setFixedWidth(34)
+        self._btn_agregar_img.clicked.connect(self._al_agregar_imagen)
+
+        self._btn_quitar_img = QPushButton("➖")
+        self._btn_quitar_img.setToolTip("Quitar imagen seleccionada")
+        self._btn_quitar_img.setFixedWidth(34)
+        self._btn_quitar_img.clicked.connect(self._al_quitar_imagen)
+
+        self._btn_anterior = QPushButton("◄")
+        self._btn_anterior.setToolTip("Imagen anterior")
+        self._btn_anterior.setFixedWidth(34)
+        self._btn_anterior.clicked.connect(self._al_imagen_anterior)
+
+        self._btn_siguiente = QPushButton("►")
+        self._btn_siguiente.setToolTip("Imagen siguiente")
+        self._btn_siguiente.setFixedWidth(34)
+        self._btn_siguiente.clicked.connect(self._al_imagen_siguiente)
+
+        fila_galeria.addWidget(self._btn_agregar_img)
+        fila_galeria.addWidget(self._btn_quitar_img)
+        fila_galeria.addStretch()
+        fila_galeria.addWidget(self._btn_anterior)
+        fila_galeria.addWidget(self._btn_siguiente)
+        layout.addLayout(fila_galeria)
 
         self._chk_simulador = QCheckBox("Activar MODO SIMULADOR")
         self._chk_simulador.setStyleSheet(f"color: {Colores.NARANJA}; font-weight: bold;")
-        self._chk_simulador.setToolTip("Ignora la webcam y usa la imagen de la Vista 2D como cámara.")
+        self._chk_simulador.setToolTip("Ignora la webcam y usa la imagen de la galería como cámara.")
         self._chk_simulador.stateChanged.connect(
             lambda state: self.simulador_cambiado.emit(state == Qt.CheckState.Checked.value)
         )
         layout.addWidget(self._chk_simulador)
 
-    def _al_cargar_imagen(self):
-        from PyQt6.QtWidgets import QFileDialog
-        ruta, _ = QFileDialog.getOpenFileName(
+        # Almacenamiento interno de rutas
+        self._rutas_imagenes: list[str] = []
+
+    def _al_agregar_imagen(self):
+        """Abre diálogo para agregar una o varias imágenes a la galería."""
+        rutas, _ = QFileDialog.getOpenFileNames(
             self,
-            "Seleccionar imagen para procesar",
+            "Seleccionar imágenes para simulación",
             "",
-            "Imágenes (*.png *.jpg *.jpeg *.bmp);;Todos los archivos (*.*)"
+            "Imágenes (*.png *.jpg *.jpeg *.bmp *.webp);;Todos (*.*)"
         )
-        if ruta:
-            self.imagen_cargada.emit(ruta)
+        for ruta in rutas:
+            if ruta and ruta not in self._rutas_imagenes:
+                self._rutas_imagenes.append(ruta)
+                nombre = ruta.split("/")[-1].split("\\")[-1]
+                item = QListWidgetItem(f"🖼 {nombre}")
+                item.setToolTip(ruta)
+                self._lista_imagenes.addItem(item)
+        # Seleccionar la última agregada
+        if rutas and self._lista_imagenes.count() > 0:
+            self._lista_imagenes.setCurrentRow(self._lista_imagenes.count() - 1)
+
+    def _al_quitar_imagen(self):
+        """Elimina la imagen seleccionada de la galería."""
+        fila = self._lista_imagenes.currentRow()
+        if fila < 0:
+            return
+        self._lista_imagenes.takeItem(fila)
+        self._rutas_imagenes.pop(fila)
+        # Seleccionar la anterior si existe
+        nueva_fila = min(fila, self._lista_imagenes.count() - 1)
+        if nueva_fila >= 0:
+            self._lista_imagenes.setCurrentRow(nueva_fila)
+
+    def _al_seleccionar_imagen(self, fila: int):
+        """Emite la imagen seleccionada."""
+        if 0 <= fila < len(self._rutas_imagenes):
+            self.imagen_cargada.emit(self._rutas_imagenes[fila])
+
+    def _al_imagen_anterior(self):
+        """Navega a la imagen anterior en la galería."""
+        n = self._lista_imagenes.count()
+        if n == 0:
+            return
+        fila = self._lista_imagenes.currentRow()
+        self._lista_imagenes.setCurrentRow((fila - 1) % n)
+
+    def _al_imagen_siguiente(self):
+        """Navega a la imagen siguiente en la galería."""
+        n = self._lista_imagenes.count()
+        if n == 0:
+            return
+        fila = self._lista_imagenes.currentRow()
+        self._lista_imagenes.setCurrentRow((fila + 1) % n)
+
+    def _al_cargar_imagen(self):
+        """Compatibilidad — llama agregar imagen."""
+        self._al_agregar_imagen()
 
     def _al_iniciar_camara(self):
         indice = self._combo_camara.currentData()

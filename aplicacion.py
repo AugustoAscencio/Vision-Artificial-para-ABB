@@ -199,9 +199,20 @@ class Aplicacion(QObject):
         self._calculador_homografia = CalculadorHomografia()
         self._calculador_homografia.cargar()
 
+        # Calcular límites dinámicos desde los puntos ArUco (+100mm de margen)
+        xs = [p.x_mm for p in self._ajustes.aruco_puntos_mundo]
+        ys = [p.y_mm for p in self._ajustes.aruco_puntos_mundo]
+        limites = {
+            "x_min": min(xs) - 100.0 if xs else -50.0,
+            "x_max": max(xs) + 100.0 if xs else 400.0,
+            "y_min": min(ys) - 100.0 if ys else -50.0,
+            "y_max": max(ys) + 100.0 if ys else 300.0,
+        }
+
         self._transformador = TransformadorCoordenadas(
             calculador_homografia=self._calculador_homografia,
             alturas_por_tipo=self._ajustes.alturas_objetos,
+            limites_espacio_mm=limites,
         )
 
         # ── Capa IA ──
@@ -511,9 +522,9 @@ class Aplicacion(QObject):
                     comandos.append(cmd)
             if comandos:
                 for cmd in comandos:
-                    mensaje = cmd.a_cadena()
+                    mensaje = ProtocoloABB.formatear_comando(cmd)
                     self._cliente_tcp.enviar(mensaje)
-                    logger.info(f"Auto-enviado: {mensaje}")
+                    logger.info(f"Auto-enviado: {mensaje.strip()}")
 
     # ═══════════════════════════════════════════════════════
     # Handlers — TCP
@@ -654,12 +665,15 @@ class Aplicacion(QObject):
         if det is None:
             return
         usar_px = self._modo_simulador_ui
-        cmd = ComandoRobot.desde_deteccion(det, usar_pixeles=usar_px)
-        if cmd:
-            mensaje = cmd.a_cadena()
+        if det:
+            cmd = ComandoRobot.desde_deteccion(det, usar_pixeles=usar_px)
+            if not cmd:
+                return
+
+            mensaje = ProtocoloABB.formatear_comando(cmd)
             self._cliente_tcp.enviar(mensaje)
             prefijo = "[SIM] " if usar_px and det.centroide_mm is None else ""
-            logger.info(f"{prefijo}Enviado seleccionado: {mensaje}")
+            logger.info(f"{prefijo}Enviado seleccionado: {mensaje.strip()}")
         else:
             logger.warning("No se puede enviar — sin coordenadas disponibles")
 
@@ -676,7 +690,7 @@ class Aplicacion(QObject):
                 comandos.append(cmd)
         if comandos:
             for cmd in comandos:
-                mensaje = cmd.a_cadena()
+                mensaje = ProtocoloABB.formatear_comando(cmd)
                 self._cliente_tcp.enviar(mensaje)
             prefijo = "[SIM] " if usar_px else ""
             logger.info(f"{prefijo}Enviados {len(comandos)} objetos al robot")

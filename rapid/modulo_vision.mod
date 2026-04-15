@@ -22,6 +22,7 @@ MODULE ModuloVision
     ! ── Posiciones del robot ──
     CONST robtarget pos_reposo := [[400,0,300],[1,0,0,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
     CONST robtarget pos_dejar := [[400,200,100],[1,0,0,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget IDOC:=[[419.654,250,144.000029246],[0,0,1,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
     VAR robtarget pos_objeto;
     
     ! ── Herramienta ──
@@ -54,7 +55,7 @@ MODULE ModuloVision
                 SocketSend cliente \Str:="ACK\0A";
                 
                 ! Ejecutar pick and place
-                ! EjecutarPickPlace;
+                EjecutarPickPlace;
                 
                 ! Log
                 TPWrite "Objeto: X=" + NumToStr(coord_x,1) + " Y=" + NumToStr(coord_y,1) + " Z=" + NumToStr(coord_z,1) + " C=" + color_obj;
@@ -175,46 +176,38 @@ MODULE ModuloVision
     ! EJECUTAR PICK AND PLACE
     !═══════════════════════════════════════════════════════════
     PROC EjecutarPickPlace()
-        ! Construir posición destino
-        pos_objeto := pos_reposo;
-        pos_objeto.trans.x := coord_x;
-        pos_objeto.trans.y := coord_y;
-        pos_objeto.trans.z := coord_z + 50;  ! Aproximación por encima
+        VAR robtarget pos_objetivo;
+        VAR robtarget pos_segura;
+        
+        ! Construir posición destino (Mapear X y Y con Z constante)
+        pos_objetivo := IDOC;
+        pos_objetivo.trans.x := coord_x;
+        pos_objetivo.trans.y := coord_y;
+        
+        ! Posición segura por encima del objeto
+        pos_segura := pos_objetivo;
+        pos_segura.trans.z := pos_objetivo.trans.z + 100;
         
         ! 1. Ir a posición de reposo
         MoveJ pos_reposo, v500, z50, herramienta;
         
         ! 2. Aproximación al objeto (por encima)
-        MoveL pos_objeto, v200, z10, herramienta;
+        MoveJ pos_segura, v500, z10, herramienta;
         
-        ! 3. Bajar al objeto
-        pos_objeto.trans.z := coord_z;
-        MoveL pos_objeto, v100, fine, herramienta;
+        ! 3. Bajar directo mediante línea hacia abajo (Z constante)
+        MoveL pos_objetivo, v100, fine, herramienta;
         
         ! 4. Activar gripper (ajustar según tu herramienta)
         ! SetDO DO_Gripper, 1;
         WaitTime 0.5;
         
-        ! 5. Subir con el objeto
-        pos_objeto.trans.z := coord_z + 100;
-        MoveL pos_objeto, v200, z10, herramienta;
+        ! 5. Subir de vuelta con Z
+        MoveL pos_segura, v200, z10, herramienta;
         
-        ! 6. Ir a posición de dejar
-        MoveJ pos_dejar, v500, z50, herramienta;
-        
-        ! 7. Bajar y soltar
-        pos_objeto := pos_dejar;
-        pos_objeto.trans.z := 50;
-        MoveL pos_objeto, v100, fine, herramienta;
-        
-        ! SetDO DO_Gripper, 0;
-        WaitTime 0.5;
-        
-        ! 8. Subir y volver a reposo
-        MoveL pos_dejar, v200, z10, herramienta;
+        ! 6. Volver a posición inicial (reposo)
         MoveJ pos_reposo, v500, z50, herramienta;
         
-        TPWrite "Pick & Place completado.";
+        TPWrite "Pick & Place IDOC completado.";
     ENDPROC
     
     !═══════════════════════════════════════════════════════════

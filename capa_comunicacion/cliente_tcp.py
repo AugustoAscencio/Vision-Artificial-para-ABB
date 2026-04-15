@@ -49,6 +49,10 @@ class ClienteTCP(QThread):
         self._backoff_max = 30.0
         self._backoff_actual = 1.0
 
+        # Keepalive
+        self._ultimo_keepalive = 0.0
+        self._intervalo_keepalive = 15.0  # segundos
+
     # ───────────────────────────────────────────────────────
     # Propiedades
     # ───────────────────────────────────────────────────────
@@ -96,7 +100,7 @@ class ClienteTCP(QThread):
         self.start()
 
     def desconectar(self):
-        """Solicita desconexión limpia."""
+        """Solicita desconexión EXPLÍCITA del usuario — detiene reconexión automática."""
         self._ejecutando = False
         self._reconexion_auto = False
         self._cerrar_socket()
@@ -183,7 +187,7 @@ class ClienteTCP(QThread):
             return False
 
     def _procesar_comunicacion(self):
-        """Procesa envíos pendientes y recibe datos."""
+        """Procesa envíos pendientes, keepalive y recepción."""
         # Enviar datos de la cola
         while not self._cola_envio.empty() and self._conectado:
             try:
@@ -192,6 +196,18 @@ class ClienteTCP(QThread):
                     break
             except queue.Empty:
                 break
+
+        # Keepalive: detectar conexiones muertas periódicamente
+        ahora = time.monotonic()
+        if ahora - self._ultimo_keepalive > self._intervalo_keepalive:
+            self._ultimo_keepalive = ahora
+            try:
+                if self._socket:
+                    # SO_KEEPALIVE a nivel sistema + envío de 0 bytes para verificar
+                    self._socket.send(b"")
+            except Exception:
+                logger.warning("Keepalive falló — reconectando...")
+                self._conectado = False  # Trigger reconexión
 
         # Recibir datos
         if self._conectado:

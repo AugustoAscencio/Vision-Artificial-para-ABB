@@ -539,10 +539,16 @@ class Vista2D(QWidget):
         if len(self._puntos_mundo) < 3:
             return
 
-        # Ordenar por ID
-        puntos_ord = sorted(self._puntos_mundo, key=lambda p: p["id"])
+        # Ordenar puntos en sentido horario por ángulo desde el centroide
+        # IMPORTANTE: no ordenar por ID — el orden de IDs no garantiza un polígono convexo
+        cx_mm = sum(p["x_mm"] for p in self._puntos_mundo) / len(self._puntos_mundo)
+        cy_mm = sum(p["y_mm"] for p in self._puntos_mundo) / len(self._puntos_mundo)
+        puntos_ord = sorted(
+            self._puntos_mundo,
+            key=lambda p: math.atan2(p["y_mm"] - cy_mm, p["x_mm"] - cx_mm)
+        )
 
-        # Construir polígono Qt en orden de IDs
+        # Construir polígono Qt en orden angular (convexo)
         poligono = QPolygonF()
         for p in puntos_ord:
             poligono.append(self._mm_a_widget(p["x_mm"], p["y_mm"]))

@@ -928,3 +928,486 @@
 2026-04-14 13:21:06 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
 2026-04-14 13:21:06 | INFO     | vision_abb.tcp            | Hilo TCP terminado
 2026-04-14 13:21:06 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 13:26:44 | INFO     | vision_abb                | ============================================================
+2026-04-14 13:26:44 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 13:26:44 | INFO     | vision_abb                | ============================================================
+2026-04-14 13:26:44 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 13:26:44 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 13:26:44 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 13:26:44 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 13:26:44 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 13:26:44 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 13:26:44 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 13:26:44 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 13:26:44 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 13:26:44 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 13:26:51 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 13:26:51 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2500.2 cm², Perímetro: 2000.1 mm
+2026-04-14 13:26:51 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 13:27:07 | INFO     | vision_abb.aplicacion     | Modo Simulador ACTIVADO
+2026-04-14 13:27:15 | INFO     | vision_abb.aplicacion     | Cambiando modelo a: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt
+2026-04-14 13:27:15 | INFO     | vision_abb.yolo           | Cambiando modelo: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt
+2026-04-14 13:27:15 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 13:27:15 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 13:27:15 | INFO     | vision_abb.aplicacion     | Modelo activo: best.pt
+2026-04-14 13:27:24 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/Screenshot 2026-04-14 102930.png
+2026-04-14 13:27:24 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 487x272
+2026-04-14 13:27:24 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
+2026-04-14 13:27:32 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/ZKF5c7jDpJb3-MCtahDjuOS36qt6r23KJodfrYRWFwEtiXAXHrZg1_uCukrLenHAgJPYxWkb6JfePprgbeVUTRjnVUAQ4Q_s4470.webp
+2026-04-14 13:27:32 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 1920x1280
+2026-04-14 13:27:32 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 1920x1280 → frame virtual 1280x720
+2026-04-14 13:27:44 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/Screenshot 2026-04-14 102930.png
+2026-04-14 13:27:44 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 487x272
+2026-04-14 13:27:44 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
+2026-04-14 13:27:53 | INFO     | vision_abb.homografia     | Homografía calculada — 4 marcadores, error RMS: 0.00 px
+2026-04-14 13:27:53 | INFO     | vision_abb.aplicacion     | Calibración ArUco exitosa
+2026-04-14 13:47:17 | INFO     | vision_abb                | ============================================================
+2026-04-14 13:47:17 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 13:47:17 | INFO     | vision_abb                | ============================================================
+2026-04-14 13:47:17 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 13:47:17 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 13:47:17 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 13:47:17 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 13:47:17 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 13:47:17 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 13:47:17 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 13:47:17 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 13:47:18 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 13:47:18 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 13:47:30 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 13:47:30 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2500.2 cm², Perímetro: 2000.1 mm
+2026-04-14 13:47:30 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 13:47:38 | INFO     | vision_abb.aplicacion     | Modo Simulador ACTIVADO
+2026-04-14 13:47:46 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/Screenshot 2026-04-14 102930.png
+2026-04-14 13:47:46 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 487x272
+2026-04-14 13:47:46 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
+2026-04-14 13:47:52 | INFO     | vision_abb.homografia     | Homografía calculada — 4 marcadores, error RMS: 0.00 px
+2026-04-14 13:47:52 | INFO     | vision_abb.aplicacion     | Calibración ArUco exitosa
+2026-04-14 13:50:05 | INFO     | vision_abb.aplicacion     | Conectando a 192.168.1.13:8000...
+2026-04-14 13:50:05 | INFO     | vision_abb.tcp            | Hilo TCP iniciado — destino: 192.168.1.13:8000
+2026-04-14 13:50:05 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 13:50:07 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 13:50:12 | ERROR    | vision_abb.tcp            | Error al recibir: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+2026-04-14 13:50:12 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 13:50:14 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 13:50:21 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 13:54:01 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-14 13:54:01 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 13:54:04 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 13:54:06 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 5 objetos al robot
+2026-04-14 13:55:26 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 13:55:26 | INFO     | vision_abb.tcp            | Hilo TCP terminado
+2026-04-14 13:55:26 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 14:05:26 | INFO     | vision_abb                | ============================================================
+2026-04-14 14:05:26 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 14:05:26 | INFO     | vision_abb                | ============================================================
+2026-04-14 14:05:26 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 14:05:26 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 14:05:26 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 14:05:26 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 14:05:26 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 14:05:26 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 14:05:26 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 14:05:26 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 14:05:27 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 14:05:27 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 14:05:34 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 14:05:34 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2500.2 cm², Perímetro: 2000.1 mm
+2026-04-14 14:05:34 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 14:05:42 | INFO     | vision_abb.aplicacion     | Modo Simulador ACTIVADO
+2026-04-14 14:05:49 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/Screenshot 2026-04-14 102930.png
+2026-04-14 14:05:49 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 487x272
+2026-04-14 14:05:49 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
+2026-04-14 14:06:04 | INFO     | vision_abb.homografia     | Homografía calculada — 4 marcadores, error RMS: 0.00 px
+2026-04-14 14:06:04 | INFO     | vision_abb.aplicacion     | Calibración ArUco exitosa
+2026-04-14 14:06:16 | INFO     | vision_abb.aplicacion     | Conectando a 192.168.1.13:8000...
+2026-04-14 14:06:16 | INFO     | vision_abb.tcp            | Hilo TCP iniciado — destino: 192.168.1.13:8000
+2026-04-14 14:06:16 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:06:18 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 14:06:23 | ERROR    | vision_abb.tcp            | Error al recibir: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+2026-04-14 14:06:23 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:06:25 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:06:25 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:06:25 | INFO     | vision_abb.tcp            | Reintentando en 1s...
+2026-04-14 14:06:26 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:06:28 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:06:28 | INFO     | vision_abb.tcp            | Reintentando en 2s...
+2026-04-14 14:06:28 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:06:30 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:06:32 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:06:32 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:06:32 | INFO     | vision_abb.tcp            | Reintentando en 4s...
+2026-04-14 14:06:36 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:06:38 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:06:38 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:06:38 | INFO     | vision_abb.tcp            | Reintentando en 8s...
+2026-04-14 14:06:46 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:06:48 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:06:48 | INFO     | vision_abb.tcp            | Reintentando en 16s...
+2026-04-14 14:06:48 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:07:04 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:07:06 | INFO     | vision_abb.tcp            | Saludo del robot: ''
+2026-04-14 14:07:06 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 14:07:06 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'texto', 'raw': '', 'mensaje': ''}
+2026-04-14 14:07:14 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 14:07:14 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 14:08:46 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 14:08:46 | INFO     | vision_abb.tcp            | Hilo TCP terminado
+2026-04-14 14:08:46 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 14:38:18 | INFO     | vision_abb                | ============================================================
+2026-04-14 14:38:18 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 14:38:18 | INFO     | vision_abb                | ============================================================
+2026-04-14 14:38:18 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 14:38:18 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 14:38:18 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 14:38:18 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 14:38:18 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 14:38:18 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 14:38:18 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 14:38:18 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 14:38:18 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 14:38:18 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 14:38:22 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 14:38:22 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2500.2 cm², Perímetro: 2000.1 mm
+2026-04-14 14:38:22 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 14:38:28 | INFO     | vision_abb.aplicacion     | Modo Simulador ACTIVADO
+2026-04-14 14:38:32 | INFO     | vision_abb.aplicacion     | Cambiando modelo a: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt
+2026-04-14 14:38:32 | INFO     | vision_abb.yolo           | Cambiando modelo: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt
+2026-04-14 14:38:32 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 14:38:32 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 14:38:32 | INFO     | vision_abb.aplicacion     | Modelo activo: best.pt
+2026-04-14 14:38:39 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/Screenshot 2026-04-14 102930.png
+2026-04-14 14:38:39 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 487x272
+2026-04-14 14:38:39 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
+2026-04-14 14:38:57 | INFO     | vision_abb.homografia     | Homografía calculada — 4 marcadores, error RMS: 0.00 px
+2026-04-14 14:38:57 | INFO     | vision_abb.aplicacion     | Calibración ArUco exitosa
+2026-04-14 14:39:37 | INFO     | vision_abb.aplicacion     | Conectando a 192.168.1.13:8000...
+2026-04-14 14:39:37 | INFO     | vision_abb.tcp            | Hilo TCP iniciado — destino: 192.168.1.13:8000
+2026-04-14 14:39:37 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:39:39 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 14:39:46 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 14:41:44 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-14 14:41:44 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:41:46 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:41:46 | INFO     | vision_abb.tcp            | Reintentando en 1s...
+2026-04-14 14:41:46 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:41:47 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:41:49 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:41:49 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:41:49 | INFO     | vision_abb.tcp            | Reintentando en 2s...
+2026-04-14 14:41:51 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:41:53 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:41:53 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:41:53 | INFO     | vision_abb.tcp            | Reintentando en 4s...
+2026-04-14 14:41:57 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:41:59 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:41:59 | INFO     | vision_abb.tcp            | Reintentando en 8s...
+2026-04-14 14:41:59 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:42:07 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:42:09 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:42:09 | INFO     | vision_abb.tcp            | Reintentando en 16s...
+2026-04-14 14:42:09 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:42:25 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:42:27 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:42:27 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-14 14:42:27 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:42:57 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:42:59 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:42:59 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-14 14:42:59 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 14:43:25 | INFO     | vision_abb.aplicacion     | Conectando a 192.168.1.13:8000...
+2026-04-14 14:43:25 | WARNING  | vision_abb.tcp            | El hilo TCP ya está corriendo
+2026-04-14 14:43:29 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 14:43:32 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 14:43:36 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:30:22 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 15:30:22 | INFO     | vision_abb.tcp            | Hilo TCP terminado
+2026-04-14 15:30:22 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 15:33:11 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:33:11 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 15:33:11 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:33:11 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 15:33:11 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 15:33:11 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 15:33:11 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 15:33:11 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 15:33:11 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 15:33:11 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 15:33:12 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 15:33:12 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 15:33:12 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 15:33:24 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 15:33:24 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2500.2 cm², Perímetro: 2000.1 mm
+2026-04-14 15:33:24 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 15:33:31 | INFO     | vision_abb.aplicacion     | Modo Simulador ACTIVADO
+2026-04-14 15:33:38 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/Screenshot 2026-04-14 102930.png
+2026-04-14 15:33:38 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 487x272
+2026-04-14 15:33:38 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
+2026-04-14 15:33:51 | INFO     | vision_abb.homografia     | Homografía calculada — 4 marcadores, error RMS: 0.00 px
+2026-04-14 15:33:51 | INFO     | vision_abb.aplicacion     | Calibración ArUco exitosa
+2026-04-14 15:34:17 | INFO     | vision_abb.aplicacion     | Conectando a 192.168.1.13:8000...
+2026-04-14 15:34:17 | INFO     | vision_abb.tcp            | Hilo TCP iniciado — destino: 192.168.1.13:8000
+2026-04-14 15:34:17 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 15:34:19 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 15:34:25 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:34:25 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:41:12 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-14 15:41:12 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 15:41:15 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 15:41:27 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:41:27 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:41:40 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:41:40 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:41:53 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:41:53 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:42:16 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:42:16 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:42:57 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:42:57 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:43:10 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:43:10 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:43:28 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:43:28 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:44:14 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-14 15:44:14 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 15:44:16 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 15:44:18 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:44:18 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:44:42 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:44:42 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:45:00 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:45:00 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:45:12 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:45:12 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:45:54 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:45:54 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:46:06 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:46:07 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 15:46:41 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 15:46:41 | INFO     | vision_abb.tcp            | Hilo TCP terminado
+2026-04-14 15:46:41 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 15:49:33 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:49:33 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 15:49:33 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:49:33 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 15:49:33 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 15:49:33 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 15:49:33 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 15:49:33 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 15:49:33 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 15:49:33 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 15:49:34 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 15:49:34 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 15:49:34 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 15:49:42 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 15:49:42 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2500.2 cm², Perímetro: 2000.1 mm
+2026-04-14 15:49:42 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 15:52:45 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 15:52:45 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 15:53:00 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:53:00 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 15:53:00 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:53:00 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 15:53:00 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 15:53:00 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 15:53:00 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 15:53:00 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 15:53:00 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 15:53:00 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 15:53:00 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 15:53:00 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 15:53:00 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 15:53:04 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 15:53:04 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2500.2 cm², Perímetro: 2000.1 mm
+2026-04-14 15:53:04 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 15:55:22 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 15:55:22 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 15:55:34 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:55:34 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 15:55:34 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:55:34 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 15:55:34 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 15:55:34 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 15:55:34 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 15:55:34 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 15:55:34 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 15:55:34 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 15:55:34 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 15:55:34 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 15:55:34 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 15:55:37 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 15:55:37 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2500.2 cm², Perímetro: 2000.1 mm
+2026-04-14 15:55:37 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 15:55:57 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 15:55:57 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 15:56:23 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:56:23 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 15:56:23 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:56:23 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 15:56:23 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 15:56:23 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 15:56:23 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 15:56:23 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 15:56:23 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 15:56:23 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 15:56:23 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 15:56:23 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 15:56:23 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 15:56:26 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 15:56:26 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2500.2 cm², Perímetro: 2000.1 mm
+2026-04-14 15:56:26 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 15:56:46 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 15:56:46 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 15:57:05 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:57:05 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 15:57:05 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:57:05 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 15:57:05 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 15:57:05 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 15:57:05 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 15:57:05 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 15:57:05 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 15:57:05 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 15:57:05 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 15:57:05 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 15:57:05 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 15:57:08 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 15:57:08 | WARNING  | vision_abb.vista_2d       | Validación ArUco: Los marcadores no forman un cuadrilátero convexo — revisar posiciones o IDs
+2026-04-14 15:57:08 | WARNING  | vision_abb.vista_2d       | Validación ArUco: Proporción de lados extrema: 70.7:1
+2026-04-14 15:57:08 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 1250.0 cm², Perímetro: 1727.1 mm
+2026-04-14 15:57:08 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 15:57:23 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 15:57:23 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 15:58:11 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:58:11 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 15:58:11 | INFO     | vision_abb                | ============================================================
+2026-04-14 15:58:11 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 15:58:11 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 15:58:11 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 15:58:11 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 15:58:11 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 15:58:11 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 15:58:11 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 15:58:11 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 15:58:11 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 15:58:11 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 15:58:14 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 15:58:14 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2525.0 cm², Perímetro: 2010.1 mm
+2026-04-14 15:58:14 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 15:58:36 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/Screenshot 2026-04-14 102930.png
+2026-04-14 15:58:36 | INFO     | vision_abb.aplicacion     | Modo Simulador ACTIVADO
+2026-04-14 15:58:36 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 487x272
+2026-04-14 15:58:36 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
+2026-04-14 15:59:07 | INFO     | vision_abb.homografia     | Homografía calculada — 4 marcadores, error RMS: 0.00 px
+2026-04-14 15:59:07 | INFO     | vision_abb.aplicacion     | Calibración ArUco exitosa
+2026-04-14 15:59:39 | INFO     | vision_abb.aplicacion     | Conectando a 192.168.1.13:8000...
+2026-04-14 15:59:39 | INFO     | vision_abb.tcp            | Hilo TCP iniciado — destino: 192.168.1.13:8000
+2026-04-14 15:59:39 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 15:59:41 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 15:59:44 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 15:59:45 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:00:30 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:00:30 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:00:45 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:00:45 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:01:05 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:01:05 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:01:17 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:01:17 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:01:49 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:01:49 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:02:01 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:02:01 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:02:25 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:02:25 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:02:42 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:02:42 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:02:53 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:02:53 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:03:05 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:03:05 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:03:25 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:03:25 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:03:34 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:03:34 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:10:57 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 16:10:58 | INFO     | vision_abb.tcp            | Hilo TCP terminado
+2026-04-14 16:10:58 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-14 16:13:55 | INFO     | vision_abb                | ============================================================
+2026-04-14 16:13:55 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-14 16:13:55 | INFO     | vision_abb                | ============================================================
+2026-04-14 16:13:55 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-14 16:13:55 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-14 16:13:55 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-14 16:13:55 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-14 16:13:55 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-14 16:13:55 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-14 16:13:55 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-14 16:13:55 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-14 16:13:55 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-14 16:13:55 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-14 16:13:58 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-14 16:13:58 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 2525.0 cm², Perímetro: 2010.1 mm
+2026-04-14 16:13:58 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-14 16:14:03 | INFO     | vision_abb.aplicacion     | Modo Simulador ACTIVADO
+2026-04-14 16:14:07 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/Screenshot 2026-04-14 102930.png
+2026-04-14 16:14:07 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 487x272
+2026-04-14 16:14:07 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
+2026-04-14 16:14:22 | INFO     | vision_abb.homografia     | Homografía calculada — 4 marcadores, error RMS: 0.00 px
+2026-04-14 16:14:22 | INFO     | vision_abb.aplicacion     | Calibración ArUco exitosa
+2026-04-14 16:14:41 | INFO     | vision_abb.aplicacion     | Conectando a 192.168.1.13:8000...
+2026-04-14 16:14:41 | INFO     | vision_abb.tcp            | Hilo TCP iniciado — destino: 192.168.1.13:8000
+2026-04-14 16:14:41 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 16:14:43 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 16:14:52 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:14:52 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:18:29 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-14 16:18:29 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 16:18:31 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 16:18:33 | ERROR    | vision_abb.tcp            | Error al recibir: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+2026-04-14 16:18:33 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 16:18:35 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:18:35 | INFO     | vision_abb.tcp            | Reintentando en 1s...
+2026-04-14 16:18:35 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:18:36 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 16:18:38 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:18:38 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:18:38 | INFO     | vision_abb.tcp            | Reintentando en 2s...
+2026-04-14 16:18:40 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 16:18:42 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:18:42 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:18:42 | INFO     | vision_abb.tcp            | Reintentando en 4s...
+2026-04-14 16:18:46 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 16:18:48 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:18:48 | INFO     | vision_abb.tcp            | Reintentando en 8s...
+2026-04-14 16:18:48 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:18:56 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 16:18:58 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:18:58 | INFO     | vision_abb.tcp            | Reintentando en 16s...
+2026-04-14 16:18:58 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:19:14 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 16:19:16 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:19:16 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:19:16 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-14 16:19:46 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 16:19:48 | WARNING  | vision_abb.tcp            | Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:19:48 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-14 16:19:48 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+2026-04-14 16:19:55 | INFO     | vision_abb.aplicacion     | Conectando a 192.168.1.13:8000...
+2026-04-14 16:19:55 | WARNING  | vision_abb.tcp            | El hilo TCP ya está corriendo
+2026-04-14 16:19:58 | INFO     | vision_abb.aplicacion     | Conectando a 192.168.1.13:8000...
+2026-04-14 16:19:58 | WARNING  | vision_abb.tcp            | El hilo TCP ya está corriendo
+2026-04-14 16:20:02 | WARNING  | vision_abb.tcp            | No conectado — datos descartados
+2026-04-14 16:20:02 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:20:16 | WARNING  | vision_abb.tcp            | No conectado — datos descartados
+2026-04-14 16:20:16 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:20:19 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 16:20:21 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 16:20:31 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-14 16:20:31 | INFO     | vision_abb.tcp            | Conectando a 192.168.1.13:8000...
+2026-04-14 16:20:34 | INFO     | vision_abb.tcp            | Conectado exitosamente a 192.168.1.13:8000
+2026-04-14 16:20:46 | INFO     | vision_abb.aplicacion     | [SIM] Enviados 1 objetos al robot
+2026-04-14 16:20:46 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-14 16:21:07 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-14 16:21:07 | INFO     | vision_abb.tcp            | Hilo TCP terminado
+2026-04-14 16:21:07 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
