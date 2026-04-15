@@ -358,17 +358,12 @@ class Vista2D(QWidget):
         """
         Convierte coordenadas mundo (mm) a coordenadas del widget (px).
 
-        Mapeo físico del robot ABB:
-          - Eje X del robot va "hacia adelante" → se muestra como
-            eje HORIZONTAL en pantalla, INVERTIDO (X grande = izquierda).
-          - Eje Y del robot va "lateral" → se muestra como
-            eje VERTICAL en pantalla, DIRECTO (Y grande = abajo).
+        Mapeo estándar matemático:
+          - X crece hacia la derecha
+          - Y crece hacia arriba (invertido en píxeles)
 
-        Resultado en pantalla:
-            ID0 (947, 250)  = inferior-izquierda
-            ID1 (947,-250)  = superior-izquierda
-            ID2 (437,-250)  = superior-derecha
-            ID3 (447, 250)  = inferior-derecha
+        Este mapeo funciona correctamente con CUALQUIER set de
+        coordenadas ArUco — no depende de un layout específico.
         """
         w = self.width() - 2 * self._margen_px
         h = self.height() - 2 * self._margen_px
@@ -390,10 +385,9 @@ class Vista2D(QWidget):
         offset_x = self._margen_px + (w - ancho_real) / 2.0
         offset_y = self._margen_px + (h - alto_real) / 2.0
 
-        # X invertido: X grande (947) queda a la IZQUIERDA (px pequeño)
-        px = offset_x + (self._x_max - x_mm) * self._px_por_mm
-        # Y directo: Y grande (250) queda ABAJO (py grande)
-        py = offset_y + (y_mm - self._y_min) * self._px_por_mm
+        px = offset_x + (x_mm - self._x_min) * self._px_por_mm
+        # Y invertido (en pantalla Y crece hacia abajo, en mundo hacia arriba)
+        py = offset_y + (self._y_max - y_mm) * self._px_por_mm
 
         return QPointF(px, py)
 
@@ -410,9 +404,8 @@ class Vista2D(QWidget):
         offset_x = self._margen_px + (w - ancho_real) / 2.0
         offset_y = self._margen_px + (h - alto_real) / 2.0
 
-        # Inversas de _mm_a_widget
-        x_mm = self._x_max - (px - offset_x) / self._px_por_mm
-        y_mm = self._y_min + (py - offset_y) / self._px_por_mm
+        x_mm = self._x_min + (px - offset_x) / self._px_por_mm
+        y_mm = self._y_max - (py - offset_y) / self._px_por_mm
 
         return (x_mm, y_mm)
 
@@ -482,9 +475,9 @@ class Vista2D(QWidget):
         xs = [p["x_mm"] for p in self._puntos_mundo]
         ys = [p["y_mm"] for p in self._puntos_mundo]
 
-        # Obtener extremos del workspace en coords widget
-        p1 = self._mm_a_widget(min(xs), min(ys))
-        p2 = self._mm_a_widget(max(xs), max(ys))
+        # Rectángulo del workspace (robusto para cualquier orientación de ejes)
+        p1 = self._mm_a_widget(min(xs), max(ys))  # top-left en mapeo estándar
+        p2 = self._mm_a_widget(max(xs), min(ys))  # bottom-right
         rect_workspace = QRectF(
             min(p1.x(), p2.x()), min(p1.y(), p2.y()),
             abs(p2.x() - p1.x()), abs(p2.y() - p1.y()),
@@ -746,23 +739,23 @@ class Vista2D(QWidget):
                 painter.drawLine(rect.topRight(), rect.bottomLeft())
 
     def _dibujar_ejes(self, painter: QPainter):
-        """Dibuja etiquetas de ejes X e Y según el layout físico del robot."""
+        """Dibuja etiquetas de ejes X e Y."""
         fuente = QFont("Segoe UI", 9, QFont.Weight.Bold)
         painter.setFont(fuente)
 
-        # Eje X: horizontal, invertido (← X crece hacia la izquierda)
+        # Eje X: horizontal, crece a la derecha
         painter.setPen(QPen(QColor(255, 100, 100)))
         painter.drawText(
-            QPointF(self.width() - 70, self.height() - 8),
-            "← X (mm)"
+            QPointF(self.width() - 55, self.height() - 8),
+            "X (mm) →"
         )
 
-        # Eje Y: vertical (Y crece hacia abajo → Y negativo arriba)
+        # Eje Y: vertical, crece hacia arriba
         painter.setPen(QPen(QColor(100, 255, 100)))
         painter.save()
         painter.translate(12, 70)
         painter.rotate(-90)
-        painter.drawText(QPointF(0, 0), "← Y (mm)")
+        painter.drawText(QPointF(0, 0), "Y (mm) →")
         painter.restore()
 
     def _dibujar_info_validacion(self, painter: QPainter):
@@ -1003,10 +996,10 @@ class Vista2D(QWidget):
                 if marker_id > 49:
                     continue
 
-                # Coordenada normalizada — mismo mapeo que _mm_a_widget:
-                # X invertido (X grande = izquierda), Y directo (Y grande = abajo)
-                norm_x = 1.0 - (punto["x_mm"] - x_min) / rango_x
-                norm_y = (punto["y_mm"] - y_min) / rango_y
+                # Coordenada normalizada — mapeo estándar:
+                # X directo (crece a la derecha), Y invertido (crece arriba)
+                norm_x = (punto["x_mm"] - x_min) / rango_x
+                norm_y = 1.0 - (punto["y_mm"] - y_min) / rango_y
 
                 # Pixel centro del marcador en el frame
                 cx_px = int(margen_x + norm_x * area_w)
