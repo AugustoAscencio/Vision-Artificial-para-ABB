@@ -27,17 +27,17 @@ aruco:
   # Estos valores DEBEN medirse con precisión en la instalación real
   puntos_mundo:
   - id: 0
-    x_mm: 947.37
+    x_mm: 447.37
     y_mm: 250.0
   - id: 1
     x_mm: 947.37
-    y_mm: -250.0
+    y_mm: 250.0
   - id: 2
-    x_mm: 437.37
+    x_mm: 947.37
     y_mm: -250.0
   - id: 3
     x_mm: 447.37
-    y_mm: 250.0
+    y_mm: -250.0
 
 preprocesamiento:
   corregir_distorsion: true
