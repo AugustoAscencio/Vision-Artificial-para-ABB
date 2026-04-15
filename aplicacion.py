@@ -514,7 +514,8 @@ class Aplicacion(QObject):
 
         # Envio automatico al robot
         if self._envio_automatico and self._cliente_tcp.esta_conectado:
-            usar_px = self._modo_simulador_ui
+            # Solo usar px como fallback si NO hay homografía calibrada
+            usar_px = self._modo_simulador_ui and not self._calculador_homografia.esta_calibrada
             comandos = []
             for d in detecciones:
                 cmd = ComandoRobot.desde_deteccion(d, usar_pixeles=usar_px)
@@ -664,16 +665,20 @@ class Aplicacion(QObject):
         det = self._ventana.panel_deteccion.obtener_deteccion(indice)
         if det is None:
             return
-        usar_px = self._modo_simulador_ui
+        # Solo usar px como fallback si NO hay homografía
+        usar_px = self._modo_simulador_ui and not self._calculador_homografia.esta_calibrada
         if det:
             cmd = ComandoRobot.desde_deteccion(det, usar_pixeles=usar_px)
             if not cmd:
+                logger.warning(
+                    f"No se puede enviar '{det.etiqueta}' — "
+                    f"centroide_mm={det.centroide_mm}, fuera_de_rango={det.fuera_de_rango}"
+                )
                 return
 
             mensaje = ProtocoloABB.formatear_comando(cmd)
             self._cliente_tcp.enviar(mensaje)
-            prefijo = "[SIM] " if usar_px and det.centroide_mm is None else ""
-            logger.info(f"{prefijo}Enviado seleccionado: {mensaje.strip()}")
+            logger.info(f"Enviado: {mensaje.strip()}")
         else:
             logger.warning("No se puede enviar — sin coordenadas disponibles")
 
@@ -681,7 +686,8 @@ class Aplicacion(QObject):
     def _al_enviar_todos(self):
         if self._ultimo_resultado is None:
             return
-        usar_px = self._modo_simulador_ui
+        # Solo usar px como fallback si NO hay homografía
+        usar_px = self._modo_simulador_ui and not self._calculador_homografia.esta_calibrada
         detecciones = self._ultimo_resultado.detecciones
         comandos = []
         for d in detecciones:
@@ -692,8 +698,8 @@ class Aplicacion(QObject):
             for cmd in comandos:
                 mensaje = ProtocoloABB.formatear_comando(cmd)
                 self._cliente_tcp.enviar(mensaje)
-            prefijo = "[SIM] " if usar_px else ""
-            logger.info(f"{prefijo}Enviados {len(comandos)} objetos al robot")
+                logger.info(f"Enviado: {mensaje.strip()}")
+            logger.info(f"Total enviados: {len(comandos)} objetos")
         else:
             logger.warning("No hay objetos válidos para enviar")
 

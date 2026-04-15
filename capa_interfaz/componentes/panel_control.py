@@ -130,44 +130,46 @@ class PanelControl(QGroupBox):
         lbl_2d.setStyleSheet(f"color: {Colores.MORADO}; font-weight: bold; margin-top: 6px;")
         layout.addWidget(lbl_2d)
 
+        # Botón principal grande para agregar imágenes
+        self._btn_agregar_img = QPushButton("  Agregar Imagen(es)")
+        self._btn_agregar_img.setProperty("clase", "verde")
+        self._btn_agregar_img.setMinimumHeight(36)
+        self._btn_agregar_img.setCursor(Qt.CursorShape.PointingHandCursor)
+        self._btn_agregar_img.setToolTip("Seleccionar imágenes para simulación")
+        self._btn_agregar_img.clicked.connect(self._al_agregar_imagen)
+        layout.addWidget(self._btn_agregar_img)
+
         # Lista de imágenes cargadas
         self._lista_imagenes = QListWidget()
         self._lista_imagenes.setMaximumHeight(90)
         self._lista_imagenes.setToolTip("Imágenes cargadas para simulación")
         self._lista_imagenes.setStyleSheet(
             f"background:{Colores.FONDO_INPUT}; border:1px solid {Colores.BORDE};"
-            f"border-radius:4px; font-size:11px;"
+            f"border-radius:4px; font-size:11px; padding: 2px;"
         )
         self._lista_imagenes.currentRowChanged.connect(self._al_seleccionar_imagen)
         layout.addWidget(self._lista_imagenes)
 
-        # Botones de gestión de galería
+        # Botones de navegación y eliminación (texto legible)
         fila_galeria = QHBoxLayout()
-        self._btn_agregar_img = QPushButton("➕")
-        self._btn_agregar_img.setToolTip("Agregar imagen a la galería")
-        self._btn_agregar_img.setFixedWidth(34)
-        self._btn_agregar_img.clicked.connect(self._al_agregar_imagen)
 
-        self._btn_quitar_img = QPushButton("➖")
-        self._btn_quitar_img.setToolTip("Quitar imagen seleccionada")
-        self._btn_quitar_img.setFixedWidth(34)
-        self._btn_quitar_img.clicked.connect(self._al_quitar_imagen)
-
-        self._btn_anterior = QPushButton("◄")
+        self._btn_anterior = QPushButton("< Anterior")
         self._btn_anterior.setToolTip("Imagen anterior")
-        self._btn_anterior.setFixedWidth(34)
         self._btn_anterior.clicked.connect(self._al_imagen_anterior)
 
-        self._btn_siguiente = QPushButton("►")
+        self._btn_siguiente = QPushButton("Siguiente >")
         self._btn_siguiente.setToolTip("Imagen siguiente")
-        self._btn_siguiente.setFixedWidth(34)
         self._btn_siguiente.clicked.connect(self._al_imagen_siguiente)
 
-        fila_galeria.addWidget(self._btn_agregar_img)
-        fila_galeria.addWidget(self._btn_quitar_img)
-        fila_galeria.addStretch()
+        self._btn_quitar_img = QPushButton("Eliminar")
+        self._btn_quitar_img.setProperty("clase", "rojo")
+        self._btn_quitar_img.setToolTip("Quitar imagen seleccionada de la galería")
+        self._btn_quitar_img.clicked.connect(self._al_quitar_imagen)
+
         fila_galeria.addWidget(self._btn_anterior)
         fila_galeria.addWidget(self._btn_siguiente)
+        fila_galeria.addStretch()
+        fila_galeria.addWidget(self._btn_quitar_img)
         layout.addLayout(fila_galeria)
 
         self._chk_simulador = QCheckBox("Activar MODO SIMULADOR")

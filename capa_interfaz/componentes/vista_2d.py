@@ -793,8 +793,26 @@ class Vista2D(QWidget):
         # Limitar escala entre 0.1 y 10.0
         if 0.1 <= nueva_escala <= 10.0:
             self._escala_imagen = nueva_escala
+            self._limitar_offset_imagen()
             self.update()
             self._emitir_frame_virtual()
+
+    def _limitar_offset_imagen(self):
+        """
+        Aplica clamping suave al offset de paneo.
+
+        Permite movimiento libre pero evita que la imagen se pierda
+        totalmente fuera de la vista. El límite es el 80% del tamaño
+        del widget en cada eje — así siempre queda al menos un 20%
+        visible.
+        """
+        max_x = self.width() * 0.8
+        max_y = self.height() * 0.8
+
+        ox = max(-max_x, min(self._offset_imagen.x(), max_x))
+        oy = max(-max_y, min(self._offset_imagen.y(), max_y))
+        self._offset_imagen.setX(ox)
+        self._offset_imagen.setY(oy)
 
     def mousePressEvent(self, event):
         """Inicia arrastre si es clic derecho, o selección si es izquierdo."""
@@ -829,6 +847,7 @@ class Vista2D(QWidget):
             self._offset_imagen.setX(self._offset_imagen.x() + dx)
             self._offset_imagen.setY(self._offset_imagen.y() + dy)
             self._ultimo_pos_raton = pos
+            self._limitar_offset_imagen()
             self.update()
             self._emitir_frame_virtual()
             return
@@ -917,10 +936,11 @@ class Vista2D(QWidget):
 
         Posicionamiento proporcional: cada marcador se coloca en el pixel
         que corresponde a su coordenada mundo (x_mm, y_mm) escalada al
-        tamaño del frame. Esto garantiza que la homografía calculada por
+        tamaño del frame.  Esto garantiza que la homografía calculada por
         OpenCV sea correcta: pixel ↔ mm reales.
 
-        El área de trabajo se centra en el frame con un margen del 10%.
+        El área de inyección respeta el aspect ratio real del workspace
+        (rango_x / rango_y) para que la forma no se deforme.
         """
         try:
             import cv2.aruco as aruco_mod
@@ -929,19 +949,31 @@ class Vista2D(QWidget):
             if len(puntos_ord) < 4:
                 return
 
-            # Rango del espacio de trabajo en mm
+            # Rango y aspect ratio del espacio de trabajo real (mm)
             xs = [p["x_mm"] for p in puntos_ord]
             ys = [p["y_mm"] for p in puntos_ord]
             x_min, x_max = min(xs), max(xs)
             y_min, y_max = min(ys), max(ys)
             rango_x = max(x_max - x_min, 1.0)
             rango_y = max(y_max - y_min, 1.0)
+            aspect_ratio_real = rango_x / rango_y
 
-            # Área de proyección en el frame (con margen del 12%)
-            margen_x = int(w * 0.12)
-            margen_y = int(h * 0.12)
-            area_w = w - 2 * margen_x
-            area_h = h - 2 * margen_y
+            # Área disponible con márgenes del 10%
+            margen_frac = 0.10
+            area_w_max = w - 2 * int(w * margen_frac)
+            area_h_max = h - 2 * int(h * margen_frac)
+
+            # Ajustar a aspect ratio real para no deformar
+            if area_w_max / area_h_max > aspect_ratio_real:
+                area_h = area_h_max
+                area_w = int(area_h * aspect_ratio_real)
+            else:
+                area_w = area_w_max
+                area_h = int(area_w / aspect_ratio_real)
+
+            # Centrar el área en el frame
+            margen_x = (w - area_w) // 2
+            margen_y = (h - area_h) // 2
 
             tamano_marker = 70  # px
             diccionario = aruco_mod.getPredefinedDictionary(aruco_mod.DICT_4X4_50)
@@ -951,7 +983,7 @@ class Vista2D(QWidget):
                 if marker_id > 49:
                     continue
 
-                # Coordenada normalizada del marcador dentro del workspace
+                # Coordenada normalizada basada en las posiciones reales
                 norm_x = (punto["x_mm"] - x_min) / rango_x
                 # Y invertida: y_max está arriba en imagen (pixel 0 = top)
                 norm_y = 1.0 - (punto["y_mm"] - y_min) / rango_y
@@ -980,7 +1012,7 @@ class Vista2D(QWidget):
                 img_crop = img_marker_bgr[:tam_real[1], :tam_real[0]]
                 frame[y0:y1, x0:x1] = img_crop
 
-                # Etiqueta
+                # Etiqueta con ID y coordenadas reales
                 texto = f"ID:{marker_id} ({punto['x_mm']:.0f},{punto['y_mm']:.0f})"
                 cv2.putText(
                     frame, texto,
