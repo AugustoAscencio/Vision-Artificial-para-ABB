@@ -49,7 +49,6 @@ alturas_objetos:
   caja_pequena: 30.0
   caja_mediana: 50.0
   caja_grande: 80.0
-  cls_los: 80.0
   desconocido: 20.0
 
 modo_simulacion: false

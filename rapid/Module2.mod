@@ -1,14 +1,14 @@
 MODULE Module1
 
-    ! ??????????????????????????????????????????????????????????
-    ! Sistema de Visión Artificial - Módulo ABB
+    ! ══════════════════════════════════════════════════════════
+    ! Sistema de Visión Artificial — Módulo ABB
     ! Recibe coordenadas (mm) desde Python via TCP/IP
     !
     ! Formato: "X:583.4,Y:-218.7,Z:80.0,C:Blanco,T:Caja\n"
     !
-    ! ? IMPORTANTE: StrFind en RAPID busca CARACTERES del set,
+    ! ⚠ IMPORTANTE: StrFind en RAPID busca CARACTERES del set,
     !   NO subcadenas. Por eso parseamos por COMAS (char único).
-    ! ??????????????????????????????????????????????????????????
+    ! ══════════════════════════════════════════════════════════
 
     VAR socketdev serverSocket;
     VAR socketdev clientSocket;
@@ -20,7 +20,7 @@ MODULE Module1
     VAR num coord_y := 0;
     VAR num coord_z := 0;
 
-    ! ?? Posiciones de referencia ??
+    ! ── Posiciones de referencia ──
     CONST robtarget ID0 := [[419.654, 250, 144.000029246],
                             [0, 0, 1, 0],
                             [0, 0, 0, 0],
@@ -33,18 +33,18 @@ MODULE Module1
 
     CONST num ALTURA_APROX := 100;
 
-    ! ??????????????????????????????????????????????????????????
+    ! ══════════════════════════════════════════════════════════
     ! MAIN
-    ! ??????????????????????????????????????????????????????????
+    ! ══════════════════════════════════════════════════════════
     PROC main()
 
         TPWrite "=== Sistema Vision ABB Iniciado ===";
 
         SocketCreate serverSocket;
-        SocketBind serverSocket, "172.18.18.17", 8000;
+        SocketBind serverSocket, "192.168.1.13", 8000;
         SocketListen serverSocket;
 
-        TPWrite "Escuchando en 172.18.18.17:8000";
+        TPWrite "Escuchando en 192.168.1.13:8000";
 
         WHILE TRUE DO
 
@@ -57,7 +57,7 @@ MODULE Module1
                 SocketReceive clientSocket \Str:=data;
 
                 IF ParsearPorComas(data) THEN
-                    TPWrite "? X=" \Num:=coord_x;
+                    TPWrite "→ X=" \Num:=coord_x;
                     TPWrite "  Y=" \Num:=coord_y;
                     TPWrite "  Z=" \Num:=coord_z;
 
@@ -89,7 +89,7 @@ MODULE Module1
 
     ENDPROC
 
-    ! ??????????????????????????????????????????????????????????
+    ! ══════════════════════════════════════════════════════════
     ! PARSER POR COMAS
     !
     ! Formato fijo: "X:{val},Y:{val},Z:{val},C:{val},T:{val}"
@@ -100,7 +100,7 @@ MODULE Module1
     ! Campo 1 (X): desde pos 1 hasta coma1
     ! Campo 2 (Y): desde coma1+1 hasta coma2
     ! Campo 3 (Z): desde coma2+1 hasta coma3
-    ! ??????????????????????????????????????????????????????????
+    ! ══════════════════════════════════════════════════════════
     FUNC bool ParsearPorComas(string msg)
 
         VAR num coma1;
@@ -112,8 +112,8 @@ MODULE Module1
 
         largo := StrLen(msg);
 
-        ! ?? Buscar las 3 primeras comas ??
-        ! StrFind con "," busca el CARACTER coma ? correcto
+        ! ── Buscar las 3 primeras comas ──
+        ! StrFind con "," busca el CARACTER coma → correcto
         coma1 := StrFind(msg, 1, ",");
         IF coma1 > largo THEN
             TPWrite "Error: no hay coma 1";
@@ -132,8 +132,8 @@ MODULE Module1
             RETURN FALSE;
         ENDIF
 
-        ! ?? Extraer X ??
-        ! Campo 1: "X:583.4" ? desde pos 3 hasta coma1-1
+        ! ── Extraer X ──
+        ! Campo 1: "X:583.4" → desde pos 3 hasta coma1-1
         ! (saltamos "X:" que son 2 caracteres)
         IF coma1 > 3 THEN
             str_val := StrPart(msg, 3, coma1 - 3);
@@ -147,8 +147,8 @@ MODULE Module1
             RETURN FALSE;
         ENDIF
 
-        ! ?? Extraer Y ??
-        ! Campo 2: "Y:-218.7" ? desde coma1+3 hasta coma2-1
+        ! ── Extraer Y ──
+        ! Campo 2: "Y:-218.7" → desde coma1+3 hasta coma2-1
         ! (coma1+1 = inicio campo Y, +2 para saltar "Y:")
         IF coma2 - coma1 > 3 THEN
             str_val := StrPart(msg, coma1 + 3, coma2 - coma1 - 3);
@@ -162,8 +162,8 @@ MODULE Module1
             RETURN FALSE;
         ENDIF
 
-        ! ?? Extraer Z ??
-        ! Campo 3: "Z:80.0" ? desde coma2+3 hasta coma3-1
+        ! ── Extraer Z ──
+        ! Campo 3: "Z:80.0" → desde coma2+3 hasta coma3-1
         IF coma3 - coma2 > 3 THEN
             str_val := StrPart(msg, coma2 + 3, coma3 - coma2 - 3);
             IF str_val = "NULL" THEN
@@ -182,9 +182,9 @@ MODULE Module1
 
     ENDFUNC
 
-    ! ??????????????????????????????????????????????????????????
+    ! ══════════════════════════════════════════════════════════
     ! MOVIMIENTO PICK
-    ! ??????????????????????????????????????????????????????????
+    ! ══════════════════════════════════════════════════════════
     PROC EjecutarPick()
 
         VAR robtarget pos_obj;
@@ -219,7 +219,7 @@ MODULE Module1
         ! 6. HOME
         MoveJ HOME, v800, z100, tool0\WObj:=wobj0;
 
-        TPWrite "Pick OK ? (" \Num:=coord_x;
+        TPWrite "Pick OK → (" \Num:=coord_x;
         TPWrite ", " \Num:=coord_y;
         TPWrite ")";
 

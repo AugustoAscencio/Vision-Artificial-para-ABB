@@ -21,7 +21,7 @@ MODULE Module1
     VAR num coord_z := 0;
 
     ! ?? Posiciones de referencia ??
-    CONST robtarget ID0 := [[419.654, 250, 144.000029246],
+    CONST robtarget ID0 := [[419.654, 250, 230],
                             [0, 0, 1, 0],
                             [0, 0, 0, 0],
                             [9E9, 9E9, 9E9, 9E9, 9E9, 9E9]];
@@ -193,19 +193,19 @@ MODULE Module1
         pos_obj := ID0;
         pos_obj.trans.x := coord_x;
         pos_obj.trans.y := coord_y;
-
-        IF coord_z > 0 THEN
-            pos_obj.trans.z := coord_z;
-        ENDIF
+        pos_obj.trans.z := 144.000029246;
+        !IF coord_z > 0 THEN
+        !   pos_obj.trans.z := coord_z;
+        !ENDIF
 
         pos_arriba := pos_obj;
-        pos_arriba.trans.z := pos_obj.trans.z + ALTURA_APROX;
-
+        !pos_arriba.trans.z := pos_obj.trans.z + ALTURA_APROX;
+        pos_arriba.trans.z := pos_obj.trans.z;
         ! 1. HOME
-        MoveJ HOME, v800, z100, tool0\WObj:=wobj0;
+        MoveJ HOME, v100, z100, tool0\WObj:=wobj0;
 
         ! 2. Aproximación
-        MoveJ pos_arriba, v800, z50, tool0\WObj:=wobj0;
+        MoveJ pos_arriba, v100, z50, tool0\WObj:=wobj0;
 
         ! 3. Descenso al objeto
         MoveL pos_obj, v100, fine, tool0\WObj:=wobj0;
@@ -214,10 +214,10 @@ MODULE Module1
         WaitTime 0.5;
 
         ! 5. Subir
-        MoveL pos_arriba, v400, z50, tool0\WObj:=wobj0;
+        MoveL pos_arriba, v100, z50, tool0\WObj:=wobj0;
 
         ! 6. HOME
-        MoveJ HOME, v800, z100, tool0\WObj:=wobj0;
+        MoveJ HOME, v100, z100, tool0\WObj:=wobj0;
 
         TPWrite "Pick OK ? (" \Num:=coord_x;
         TPWrite ", " \Num:=coord_y;

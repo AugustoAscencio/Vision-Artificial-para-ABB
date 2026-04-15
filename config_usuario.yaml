@@ -5,7 +5,7 @@ camara:
   - 720
   fps_objetivo: 30
 robot:
-  ip: 192.168.1.13
+  ip: 172.18.18.17
   puerto: 8000
   reconexion_automatica: true
   intervalo_envio_ms: 200
@@ -23,14 +23,14 @@ aruco:
     x_mm: 447.37
     y_mm: 250.0
   - id: 1
-    x_mm: 947.37
+    x_mm: 622.69
     y_mm: 250.0
   - id: 2
-    x_mm: 947.37
-    y_mm: -250.0
+    x_mm: 622.69
+    y_mm: 11.5
   - id: 3
     x_mm: 447.37
-    y_mm: -250.0
+    y_mm: 11.5
 preprocesamiento:
   corregir_distorsion: true
   mejorar_contraste: false
