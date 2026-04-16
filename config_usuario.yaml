@@ -5,7 +5,7 @@ camara:
   - 720
   fps_objetivo: 30
 robot:
-  ip: 172.18.18.17
+  ip: 172.18.17.130
   puerto: 8000
   reconexion_automatica: true
   intervalo_envio_ms: 200

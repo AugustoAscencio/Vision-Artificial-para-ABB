@@ -2216,3 +2216,213 @@
 2026-04-16 08:36:21 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
 2026-04-16 08:37:02 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
 2026-04-16 08:37:02 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-16 09:45:37 | INFO     | vision_abb                | ============================================================
+2026-04-16 09:45:37 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-16 09:45:37 | INFO     | vision_abb                | ============================================================
+2026-04-16 09:45:37 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-16 09:45:37 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-16 09:45:37 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-16 09:45:37 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-16 09:45:37 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-16 09:45:37 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-16 09:45:37 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-16 09:45:38 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-16 09:45:38 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-16 09:45:39 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-16 09:45:45 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-16 09:45:45 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 418.1 cm², Perímetro: 827.6 mm
+2026-04-16 09:45:45 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-16 09:46:05 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/Screenshot 2026-04-14 102930.png
+2026-04-16 09:46:05 | INFO     | vision_abb.aplicacion     | Modo Simulador ACTIVADO
+2026-04-16 09:46:05 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 487x272
+2026-04-16 09:46:05 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
+2026-04-16 09:46:08 | INFO     | vision_abb.homografia     | Homografía calculada — 4 marcadores, error RMS: 0.00 px
+2026-04-16 09:46:08 | INFO     | vision_abb.aplicacion     | Calibración ArUco exitosa
+2026-04-16 09:46:24 | INFO     | vision_abb.aplicacion     | Conectando a 172.18.18.17:8000...
+2026-04-16 09:46:24 | INFO     | vision_abb.tcp            | Hilo TCP iniciado — destino: 172.18.18.17:8000
+2026-04-16 09:46:24 | INFO     | vision_abb.tcp            | Conectando a 172.18.18.17:8000...
+2026-04-16 09:46:29 | WARNING  | vision_abb.tcp            | Error de conexión: timed out
+2026-04-16 09:46:29 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: timed out
+2026-04-16 09:46:29 | INFO     | vision_abb.tcp            | Reintentando en 1s...
+2026-04-16 09:46:30 | INFO     | vision_abb.tcp            | Conectando a 172.18.18.17:8000...
+2026-04-16 09:46:35 | WARNING  | vision_abb.tcp            | Error de conexión: timed out
+2026-04-16 09:46:35 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: timed out
+2026-04-16 09:46:35 | INFO     | vision_abb.tcp            | Reintentando en 2s...
+2026-04-16 09:46:37 | INFO     | vision_abb.tcp            | Conectando a 172.18.18.17:8000...
+2026-04-16 09:46:42 | WARNING  | vision_abb.tcp            | Error de conexión: timed out
+2026-04-16 09:46:42 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: timed out
+2026-04-16 09:46:42 | INFO     | vision_abb.tcp            | Reintentando en 4s...
+2026-04-16 09:46:46 | INFO     | vision_abb.tcp            | Conectando a 172.18.18.17:8000...
+2026-04-16 09:46:51 | WARNING  | vision_abb.tcp            | Error de conexión: timed out
+2026-04-16 09:46:51 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: timed out
+2026-04-16 09:46:51 | INFO     | vision_abb.tcp            | Reintentando en 8s...
+2026-04-16 09:46:59 | INFO     | vision_abb.tcp            | Conectando a 172.18.18.17:8000...
+2026-04-16 09:47:04 | WARNING  | vision_abb.tcp            | Error de conexión: timed out
+2026-04-16 09:47:04 | INFO     | vision_abb.tcp            | Reintentando en 16s...
+2026-04-16 09:47:04 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: timed out
+2026-04-16 09:47:20 | INFO     | vision_abb.tcp            | Conectando a 172.18.18.17:8000...
+2026-04-16 09:47:25 | WARNING  | vision_abb.tcp            | Error de conexión: timed out
+2026-04-16 09:47:25 | INFO     | vision_abb.tcp            | Reintentando en 30s...
+2026-04-16 09:47:25 | WARNING  | vision_abb.aplicacion     | TCP: Error de conexión: timed out
+2026-04-16 09:47:27 | INFO     | vision_abb.aplicacion     | Conectando a 172.18.17.130:8000...
+2026-04-16 09:47:27 | WARNING  | vision_abb.tcp            | El hilo TCP ya está corriendo
+2026-04-16 09:47:41 | WARNING  | vision_abb.tcp            | No conectado — datos descartados
+2026-04-16 09:47:41 | INFO     | vision_abb.aplicacion     | Enviado: X:536.5,Y:223.1,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:47:41 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:47:55 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 09:47:57 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 09:48:08 | INFO     | vision_abb.aplicacion     | Enviado: X:536.5,Y:223.1,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:48:08 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:48:08 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:48:27 | INFO     | vision_abb.aplicacion     | Enviado: X:536.5,Y:223.1,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:48:27 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:48:27 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:49:10 | INFO     | vision_abb.aplicacion     | Enviado: X:536.5,Y:223.1,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:49:10 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:49:10 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:49:19 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-16 09:49:19 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 09:49:22 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 09:49:22 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-16 09:49:22 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 09:49:25 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 09:49:27 | INFO     | vision_abb.aplicacion     | Enviado: X:536.5,Y:223.1,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:49:27 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:49:27 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:49:56 | INFO     | vision_abb.aplicacion     | Enviado: X:533.6,Y:121.6,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:49:56 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:49:56 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:50:12 | INFO     | vision_abb.aplicacion     | Enviado: X:531.1,Y:33.4,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:50:12 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:50:12 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:50:33 | INFO     | vision_abb.aplicacion     | Enviado: X:456.9,Y:37.6,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:50:33 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:50:33 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:50:52 | INFO     | vision_abb.aplicacion     | Enviado: X:448.2,Y:46.3,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:50:52 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:50:52 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:51:56 | INFO     | vision_abb.aplicacion     | Enviado: X:417.5,Y:55.8,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:51:56 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:51:56 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:52:32 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-16 09:52:32 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 09:52:35 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 09:52:35 | INFO     | vision_abb.aplicacion     | Enviado: X:417.5,Y:55.8,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:52:35 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:52:35 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:53:05 | INFO     | vision_abb.aplicacion     | Enviado: X:447.8,Y:197.4,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:53:05 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:53:05 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:53:26 | INFO     | vision_abb.aplicacion     | Enviado: X:447.8,Y:197.4,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:53:26 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:53:26 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:54:13 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-16 09:54:13 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 09:54:15 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 09:56:44 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-16 09:56:44 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 09:56:46 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 09:56:50 | INFO     | vision_abb.aplicacion     | Enviado: X:447.8,Y:197.4,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:56:50 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:56:53 | ERROR    | vision_abb.tcp            | Error al recibir: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+2026-04-16 09:56:53 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 09:56:55 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 09:56:56 | INFO     | vision_abb.aplicacion     | Enviado: X:447.8,Y:197.4,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:56:56 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:56:56 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 09:57:20 | INFO     | vision_abb.aplicacion     | Enviado: X:447.8,Y:197.4,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 09:57:20 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 09:57:20 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 10:00:55 | INFO     | vision_abb.aplicacion     | Enviado: X:534.4,Y:207.4,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 10:00:55 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 10:00:58 | ERROR    | vision_abb.tcp            | Error al recibir: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+2026-04-16 10:00:58 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 10:01:00 | WARNING  | vision_abb.tcp            | No conectado — datos descartados
+2026-04-16 10:01:00 | INFO     | vision_abb.aplicacion     | Enviado: X:534.4,Y:207.4,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 10:01:00 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 10:01:01 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 10:01:05 | INFO     | vision_abb.aplicacion     | Enviado: X:534.4,Y:207.4,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 10:01:05 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 10:01:05 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 10:01:31 | INFO     | vision_abb.aplicacion     | Enviado: X:535.7,Y:50.4,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 10:01:31 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 10:01:31 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 10:03:33 | INFO     | vision_abb.aplicacion     | Iniciando cámara 1...
+2026-04-16 10:03:33 | INFO     | vision_abb.camara         | Iniciando cámara [índice=1, resolución=(1280, 720)]
+2026-04-16 10:03:34 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-16 10:03:44 | INFO     | vision_abb.aplicacion     | Desconectando TCP...
+2026-04-16 10:03:44 | INFO     | vision_abb.tcp            | Hilo TCP terminado
+2026-04-16 10:03:59 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-16 10:04:00 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-16 10:04:00 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-16 10:04:00 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
+2026-04-16 10:04:10 | INFO     | vision_abb                | ============================================================
+2026-04-16 10:04:10 | INFO     | vision_abb                | Sistema de Vision Artificial ABB -- Inicio de sesion
+2026-04-16 10:04:10 | INFO     | vision_abb                | ============================================================
+2026-04-16 10:04:10 | INFO     | vision_abb.aplicacion     | Inicializando sistema de visión artificial ABB...
+2026-04-16 10:04:10 | INFO     | vision_abb.calibracion    | No existe archivo de calibración — operando sin corrección de distorsión
+2026-04-16 10:04:11 | INFO     | vision_abb.aruco          | Detector ArUco inicializado: DICT_4X4_50
+2026-04-16 10:04:11 | INFO     | vision_abb.homografia     | No existe archivo de homografía guardada
+2026-04-16 10:04:11 | INFO     | vision_abb.modelos        | Directorio de modelos: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos
+2026-04-16 10:04:11 | INFO     | vision_abb.modelos        | Directorio raíz del proyecto: c:\Users\Augusto Ascencio\Downloads\Vision Artificial
+2026-04-16 10:04:11 | INFO     | vision_abb.yolo           | CUDA no disponible — usando CPU
+2026-04-16 10:04:11 | INFO     | vision_abb.yolo           | Cargando modelo YOLO: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt → dispositivo: cpu
+2026-04-16 10:04:11 | INFO     | vision_abb.yolo           | Modelo 'best.pt' cargado exitosamente
+2026-04-16 10:04:11 | INFO     | vision_abb.vista_2d       | Vista 2D inicializada
+2026-04-16 10:04:15 | INFO     | vision_abb.gestor_camaras | Cámaras disponibles: 2
+2026-04-16 10:04:15 | INFO     | vision_abb.vista_2d       | ArUco validado — Orden: antihorario, Área: 418.1 cm², Perímetro: 827.6 mm
+2026-04-16 10:04:15 | INFO     | vision_abb.aplicacion     | Sistema inicializado correctamente
+2026-04-16 10:04:20 | INFO     | vision_abb.aplicacion     | Iniciando cámara 1...
+2026-04-16 10:04:20 | INFO     | vision_abb.camara         | Iniciando cámara [índice=1, resolución=(1280, 720)]
+2026-04-16 10:04:22 | INFO     | vision_abb.camara         | Cámara abierta: 1280x720
+2026-04-16 10:07:09 | INFO     | vision_abb.aplicacion     | Modo Simulador ACTIVADO
+2026-04-16 10:07:15 | INFO     | vision_abb.aplicacion     | Cargando imagen para simulador: C:/Users/Augusto Ascencio/Downloads/Screenshot 2026-04-14 102930.png
+2026-04-16 10:07:15 | INFO     | vision_abb.vista_2d       | Imagen base establecida para simulación: 487x272
+2026-04-16 10:07:15 | INFO     | vision_abb.aplicacion     | Imagen simulada cargada: 487x272 → frame virtual 1280x720
+2026-04-16 10:07:32 | INFO     | vision_abb.homografia     | Homografía calculada — 4 marcadores, error RMS: 0.00 px
+2026-04-16 10:07:32 | INFO     | vision_abb.aplicacion     | Calibración ArUco exitosa
+2026-04-16 10:07:49 | INFO     | vision_abb.aplicacion     | Conectando a 172.18.17.130:8000...
+2026-04-16 10:07:49 | INFO     | vision_abb.tcp            | Hilo TCP iniciado — destino: 172.18.17.130:8000
+2026-04-16 10:07:49 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 10:07:51 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 10:07:55 | ERROR    | vision_abb.tcp            | Error al recibir: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+2026-04-16 10:07:55 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 10:07:57 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 10:08:49 | INFO     | vision_abb.aplicacion     | Enviado: X:447.4,Y:173.8,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 10:08:49 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 10:08:49 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 10:14:42 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-16 10:14:42 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 10:14:45 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 10:14:47 | INFO     | vision_abb.aplicacion     | Enviado: X:447.4,Y:173.8,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 10:14:47 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 10:14:47 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 10:16:50 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-16 10:16:50 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 10:16:52 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 10:16:53 | INFO     | vision_abb.aplicacion     | Enviado: X:447.4,Y:173.8,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 10:16:53 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 10:16:53 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 10:20:07 | INFO     | vision_abb.aplicacion     | Enviado: X:533.6,Y:10.7,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 10:20:07 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 10:20:13 | INFO     | vision_abb.aplicacion     | Enviado: X:533.6,Y:10.7,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 10:20:13 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 10:20:14 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 10:20:26 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'error', 'raw': 'ERR:PARSE', 'mensaje': 'PARSE'}
+2026-04-16 10:20:30 | INFO     | vision_abb.aplicacion     | Enviado: X:533.6,Y:10.7,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 10:20:30 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 10:20:30 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 10:24:00 | INFO     | vision_abb.aplicacion     | Enviado: X:545.2,Y:123.7,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 10:24:00 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 10:24:00 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 10:24:36 | WARNING  | vision_abb.tcp            | El robot cerró la conexión
+2026-04-16 10:24:36 | INFO     | vision_abb.tcp            | Conectando a 172.18.17.130:8000...
+2026-04-16 10:24:39 | INFO     | vision_abb.tcp            | Conectado exitosamente a 172.18.17.130:8000
+2026-04-16 10:24:40 | INFO     | vision_abb.aplicacion     | Enviado: X:545.2,Y:123.7,Z:80.0,C:Blanco,T:Idec Box
+2026-04-16 10:24:40 | INFO     | vision_abb.aplicacion     | Total enviados: 1 objetos
+2026-04-16 10:24:40 | INFO     | vision_abb.aplicacion     | Respuesta robot: {'tipo': 'confirmacion', 'raw': 'ACK'}
+2026-04-16 10:25:23 | INFO     | vision_abb.aplicacion     | Cerrando sistema...
+2026-04-16 10:25:23 | INFO     | vision_abb.camara         | Recurso de cámara liberado
+2026-04-16 10:25:23 | INFO     | vision_abb.camara         | Cámara detenida
+2026-04-16 10:25:23 | INFO     | vision_abb.tcp            | Hilo TCP terminado
+2026-04-16 10:25:23 | INFO     | vision_abb.aplicacion     | Sistema cerrado correctamente
