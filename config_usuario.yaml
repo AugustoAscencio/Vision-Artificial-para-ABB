@@ -11,7 +11,7 @@ robot:
   intervalo_envio_ms: 200
   timeout_conexion_s: 5
 yolo:
-  modelo: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best.pt
+  modelo: c:\Users\Augusto Ascencio\Downloads\Vision Artificial\modelos\best copy.pt
   confianza: 0.5
   iou: 0.45
   dispositivo: auto
