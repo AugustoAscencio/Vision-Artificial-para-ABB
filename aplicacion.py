@@ -26,6 +26,7 @@ from nucleo.modelos import (
     DeteccionObjeto, ResultadoFrame, MarcadorAruco,
     ComandoRobot, EstadoConexion,
 )
+from nucleo.exportador import exportar_a_csv, exportar_a_json
 
 
 logger = obtener_logger("aplicacion")
@@ -251,6 +252,7 @@ class Aplicacion(QObject):
 
         # ── Motor de overlays AR ──
         self._motor_overlays = MotorOverlays()
+        self._motor_overlays.actualizar_limites(self._ajustes.aruco_puntos_mundo)
 
         # ── Pipeline de procesamiento ──
         self._hilo_procesamiento = HiloProcesamiento(
@@ -268,6 +270,10 @@ class Aplicacion(QObject):
         self._envio_automatico = self._ajustes.envio_automatico
         self._modo_simulador_ui = False
         self._ultimo_resultado: Optional[ResultadoFrame] = None
+        
+        # ── Snapshot (Captura de Datos) ──
+        self._modo_snapshot = False
+        self._snapshot_resultado: Optional[ResultadoFrame] = None
 
         # ── Conectar señales ──
         self._conectar_seniales()
@@ -306,6 +312,7 @@ class Aplicacion(QObject):
         # Control de camara
         v.panel_control.iniciar_camara.connect(self._al_iniciar_camara)
         v.panel_control.detener_camara.connect(self._al_detener_camara)
+        v.panel_ip_webcam.iniciar_ip_webcam.connect(self._al_iniciar_ip_webcam)
         v.panel_control.confianza_cambiada.connect(self._al_cambiar_confianza)
         v.panel_control.preprocesamiento_cambiado.connect(self._al_cambiar_preprocesamiento)
         v.panel_control.envio_automatico_cambiado.connect(self._al_cambiar_envio_automatico)
@@ -328,6 +335,9 @@ class Aplicacion(QObject):
         v.panel_calibracion.cargar_calibracion.connect(self._al_cargar_calibracion)
         v.panel_calibracion.guardar_calibracion.connect(self._al_guardar_calibracion)
 
+        # Puntos mundo editables
+        v.panel_puntos_mundo.puntos_cambiados.connect(self._al_cambiar_puntos_mundo)
+
         # Modelo YOLO
         v.selector_modelo.modelo_seleccionado.connect(self._al_cambiar_modelo)
         v.selector_modelo.recargar_modelos.connect(self._al_recargar_modelos)
@@ -335,6 +345,12 @@ class Aplicacion(QObject):
         # Deteccion -> Envio
         v.panel_deteccion.enviar_seleccionado.connect(self._al_enviar_seleccionado)
         v.panel_deteccion.enviar_todos.connect(self._al_enviar_todos)
+
+        # Snapshot
+        v.panel_snapshot.tomar_snapshot.connect(self._al_tomar_snapshot)
+        v.panel_snapshot.liberar_snapshot.connect(self._al_liberar_snapshot)
+        v.panel_snapshot.exportar_csv.connect(self._al_exportar_csv)
+        v.panel_snapshot.exportar_json.connect(self._al_exportar_json)
 
         # ── Logs -> UI ──
         self._manejador_ui.log_emitido.connect(v.panel_logs.agregar_log)
@@ -370,6 +386,9 @@ class Aplicacion(QObject):
         )
         v.barra_estado.actualizar_calibracion(self._calculador_homografia.esta_calibrada)
         v.barra_estado.actualizar_modelo(self._detector_yolo.nombre_modelo)
+
+        # Puntos mundo
+        v.panel_puntos_mundo.establecer_puntos(self._ajustes.aruco_puntos_mundo)
         
         # Iniciar Vista 2D con los puntos configurados
         v.vista_2d.actualizar_puntos_mundo(self._ajustes.aruco_puntos_mundo)
@@ -382,6 +401,15 @@ class Aplicacion(QObject):
     def _al_iniciar_camara(self, indice: int):
         logger.info(f"Iniciando cámara {indice}...")
         self._servicio_camara.configurar(indice, self._ajustes.camara_resolucion)
+        self._servicio_camara.iniciar_captura()
+        self._hilo_procesamiento.iniciar()
+        self._ventana.panel_control.actualizar_estado_camara(True)
+        self._ventana.barra_estado.actualizar_camara(True)
+
+    @pyqtSlot(str)
+    def _al_iniciar_ip_webcam(self, url: str):
+        logger.info(f"Iniciando IP Webcam desde: {url}")
+        self._servicio_camara.configurar(url, self._ajustes.camara_resolucion)
         self._servicio_camara.iniciar_captura()
         self._hilo_procesamiento.iniciar()
         self._ventana.panel_control.actualizar_estado_camara(True)
@@ -422,6 +450,9 @@ class Aplicacion(QObject):
     @pyqtSlot(object)
     def _al_resultado_procesamiento(self, resultado: ResultadoFrame):
         """Resultado completo del pipeline -> actualizar UI."""
+        if self._modo_snapshot:
+            return  # Ignorar frames nuevos si el snapshot está activo
+
         self._ultimo_resultado = resultado
 
         # Actualizar estado HUD antes de enviar el frame
@@ -510,6 +541,9 @@ class Aplicacion(QObject):
     @pyqtSlot(object)
     def _al_detecciones_listas(self, detecciones: list):
         """Detecciones listas -> actualizar tabla y envio automatico."""
+        if self._modo_snapshot:
+            return
+
         self._ventana.panel_deteccion.actualizar_detecciones(detecciones)
 
         # Envio automatico al robot
@@ -604,6 +638,40 @@ class Aplicacion(QObject):
         exito = self._calculador_homografia.cargar()
         self._ventana.panel_calibracion.actualizar_estado(exito)
         self._ventana.barra_estado.actualizar_calibracion(exito)
+
+    @pyqtSlot(object)
+    def _al_cambiar_puntos_mundo(self, puntos: list):
+        """Aplica los nuevos puntos mundo inmediatamente."""
+        from capa_configuracion.ajustes import PuntoMundoAruco
+
+        # 1. Actualizar ajustes internos
+        self._ajustes.aruco_puntos_mundo = puntos
+
+        # 2. Recalcular limites para rejilla y transformador
+        xs = [p.x_mm for p in puntos]
+        ys = [p.y_mm for p in puntos]
+        if xs and ys:
+            limites = {
+                "x_min": min(xs) - 100.0,
+                "x_max": max(xs) + 100.0,
+                "y_min": min(ys) - 100.0,
+                "y_max": max(ys) + 100.0,
+            }
+            self._transformador.limites_espacio_mm = limites
+
+        # 3. Actualizar overlay limits (rejilla exacta al perímetro)
+        self._motor_overlays.actualizar_limites(puntos)
+
+        # 4. Actualizar Vista 2D
+        self._ventana.vista_2d.actualizar_puntos_mundo(puntos)
+
+        # 5. Persistir en YAML
+        guardar_ajustes(self._ajustes)
+
+        logger.info(
+            f"Puntos mundo actualizados: "
+            f"{[(p.id, p.x_mm, p.y_mm) for p in puntos]}"
+        )
 
     @pyqtSlot()
     def _al_guardar_calibracion(self):
@@ -702,6 +770,36 @@ class Aplicacion(QObject):
             logger.info(f"Total enviados: {len(comandos)} objetos")
         else:
             logger.warning("No hay objetos válidos para enviar")
+
+    # ═══════════════════════════════════════════════════════
+    # Handlers — Snapshot (Captura de Datos)
+    # ═══════════════════════════════════════════════════════
+
+    @pyqtSlot()
+    def _al_tomar_snapshot(self):
+        self._modo_snapshot = True
+        self._snapshot_resultado = self._ultimo_resultado
+        logger.info("Modo Snapshot activado. Detecciones congeladas.")
+
+    @pyqtSlot()
+    def _al_liberar_snapshot(self):
+        self._modo_snapshot = False
+        self._snapshot_resultado = None
+        logger.info("Modo Snapshot desactivado. Reanudando en vivo.")
+
+    @pyqtSlot(str)
+    def _al_exportar_csv(self, ruta: str):
+        if self._snapshot_resultado and self._snapshot_resultado.detecciones:
+            exportar_a_csv(self._snapshot_resultado.detecciones, ruta)
+        else:
+            logger.warning("No hay detecciones en el snapshot para exportar")
+
+    @pyqtSlot(str)
+    def _al_exportar_json(self, ruta: str):
+        if self._snapshot_resultado and self._snapshot_resultado.detecciones:
+            exportar_a_json(self._snapshot_resultado.detecciones, ruta)
+        else:
+            logger.warning("No hay detecciones en el snapshot para exportar")
 
     # ═══════════════════════════════════════════════════════
     # Lifecycle

@@ -35,7 +35,7 @@ class ServicioCamara(QThread):
         self._captura: cv2.VideoCapture | None = None
         self._mutex = QMutex()
         self._ejecutando = False
-        self._indice_camara = 0
+        self._fuente_camara: int | str = 0  # Índice local o URL IP Webcam
         self._resolucion = (1280, 720)
         self._reintentos_max = 5
 
@@ -48,9 +48,15 @@ class ServicioCamara(QThread):
     # Configuración
     # ───────────────────────────────────────────────────────
 
-    def configurar(self, indice: int, resolucion: tuple[int, int] = (1280, 720)):
-        """Configura la cámara antes de iniciar."""
-        self._indice_camara = indice
+    def configurar(self, fuente: int | str, resolucion: tuple[int, int] = (1280, 720)):
+        """Configura la cámara antes de iniciar.
+
+        Args:
+            fuente: Índice entero para cámara local, o URL string para IP Webcam
+                    (ej: 'http://192.168.1.11:8080/video').
+            resolucion: Resolución deseada (solo aplica a cámaras locales).
+        """
+        self._fuente_camara = fuente
         self._resolucion = resolucion
 
     # ───────────────────────────────────────────────────────
@@ -85,19 +91,65 @@ class ServicioCamara(QThread):
 
     def run(self):
         """Bucle principal de captura (ejecuta en hilo)."""
-        logger.info(f"Iniciando cámara [índice={self._indice_camara}, "
-                     f"resolución={self._resolucion}]")
-
-        # Abrir cámara
-        if not self._abrir_camara():
-            self._ejecutando = False
-            self.camara_detenida.emit()
-            return
+        es_url = isinstance(self._fuente_camara, str)
+        etiqueta = self._fuente_camara if es_url else f"índice={self._fuente_camara}"
+        logger.info(f"Iniciando cámara [{etiqueta}, resolución={self._resolucion}]")
 
         self._tiempo_inicio_fps = time.perf_counter()
         self._contador_frames = 0
-        reintentos = 0
 
+        if es_url:
+            self._capturar_stream_mjpeg(self._fuente_camara)
+        else:
+            if not self._abrir_camara():
+                self._ejecutando = False
+                self.camara_detenida.emit()
+                return
+            self._capturar_local()
+
+        self._ejecutando = False
+        self.camara_detenida.emit()
+        logger.info("Cámara detenida")
+
+    def _capturar_stream_mjpeg(self, url: str):
+        import urllib.request
+        import numpy as np
+
+        logger.info(f"Conectando a stream MJPEG nativo: {url}")
+        try:
+            req = urllib.request.Request(url)
+            stream = urllib.request.urlopen(req, timeout=5)
+            bytes_buffer = b''
+            while self._ejecutando:
+                try:
+                    chunk = stream.read(4096)
+                    if not chunk:
+                        break
+                    bytes_buffer += chunk
+                    
+                    # Buscar marcadores JPEG (Inicio: FF D8, Fin: FF D9)
+                    a = bytes_buffer.find(b'\xff\xd8')
+                    b = bytes_buffer.find(b'\xff\xd9')
+                    
+                    if a != -1 and b != -1:
+                        jpg = bytes_buffer[a:b+2]
+                        bytes_buffer = bytes_buffer[b+2:]
+                        
+                        frame = cv2.imdecode(np.frombuffer(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
+                        if frame is not None:
+                            self._contador_frames += 1
+                            self._actualizar_fps()
+                            self.frame_listo.emit(frame)
+                except Exception as e:
+                    logger.warning(f"Error leyendo frame MJPEG: {e}")
+                    break
+        except Exception as e:
+            error_msg = f"Error conectando al stream IP: {e}"
+            logger.error(error_msg)
+            self.error_camara.emit(error_msg)
+
+    def _capturar_local(self):
+        reintentos = 0
         while self._ejecutando:
             with QMutexLocker(self._mutex):
                 if self._captura is None or not self._captura.isOpened():
@@ -110,48 +162,48 @@ class ServicioCamara(QThread):
                 if reintentos >= self._reintentos_max:
                     self.error_camara.emit("Cámara desconectada — demasiados frames fallidos")
                     break
+                import time
                 time.sleep(0.1)
                 continue
 
             reintentos = 0
             self._contador_frames += 1
             self._actualizar_fps()
-
-            # Emitir frame
             self.frame_listo.emit(frame)
 
-        # Limpiar
         self._cerrar_camara()
-        self._ejecutando = False
-        self.camara_detenida.emit()
-        logger.info("Cámara detenida")
 
     # ───────────────────────────────────────────────────────
     # Métodos internos
     # ───────────────────────────────────────────────────────
 
     def _abrir_camara(self) -> bool:
-        """Abre la cámara y configura resolución."""
+        """Abre la cámara local y configura resolución."""
         try:
-            self._captura = cv2.VideoCapture(self._indice_camara, cv2.CAP_DSHOW)
+            fuente = self._fuente_camara
+
+            # Cámara local — intentar DirectShow primero
+            self._captura = cv2.VideoCapture(fuente, cv2.CAP_DSHOW)
             if not self._captura.isOpened():
                 # Reintentar sin DirectShow
-                self._captura = cv2.VideoCapture(self._indice_camara)
+                self._captura = cv2.VideoCapture(fuente)
 
             if not self._captura.isOpened():
-                error = f"No se pudo abrir la cámara {self._indice_camara}"
+                error = f"No se pudo abrir la cámara {fuente}"
                 logger.error(error)
                 self.error_camara.emit(error)
                 return False
 
-            # Configurar resolución
+            # Buffer mínimo para reducir latencia en local
+            self._captura.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+            
+            # Configurar resolución para cámara local
             self._captura.set(cv2.CAP_PROP_FRAME_WIDTH, self._resolucion[0])
             self._captura.set(cv2.CAP_PROP_FRAME_HEIGHT, self._resolucion[1])
-            self._captura.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-
             ancho_real = int(self._captura.get(cv2.CAP_PROP_FRAME_WIDTH))
             alto_real = int(self._captura.get(cv2.CAP_PROP_FRAME_HEIGHT))
-            logger.info(f"Cámara abierta: {ancho_real}x{alto_real}")
+            logger.info(f"Cámara local abierta: {ancho_real}x{alto_real}")
+
             return True
 
         except Exception as e:

@@ -18,6 +18,30 @@ from nucleo.modelos import MarcadorAruco
 logger = obtener_logger("overlays")
 
 
+def calcular_limites_desde_puntos(puntos_mundo) -> dict:
+    """
+    Calcula los límites min/max en mm a partir de los puntos mundo ArUco.
+    Los límites cubren exactamente el perímetro sin margen extra.
+
+    Args:
+        puntos_mundo: Lista de PuntoMundoAruco (con x_mm, y_mm).
+
+    Returns:
+        Dict con x_min, x_max, y_min, y_max.
+    """
+    if not puntos_mundo:
+        return {"x_min": 0.0, "x_max": 500.0, "y_min": 0.0, "y_max": 300.0}
+
+    xs = [p.x_mm for p in puntos_mundo]
+    ys = [p.y_mm for p in puntos_mundo]
+    return {
+        "x_min": min(xs),
+        "x_max": max(xs),
+        "y_min": min(ys),
+        "y_max": max(ys),
+    }
+
+
 class MotorOverlays:
     """
     Dibuja overlays visuales sobre frames de cámara.
@@ -32,6 +56,12 @@ class MotorOverlays:
         self._color_rejilla = (60, 60, 60)        # Gris tenue
         self._color_ejes = (100, 200, 255)        # Azul claro
         self._espaciado_mm = 50.0                  # mm entre líneas de rejilla
+        self._limites_mm: Optional[dict] = None    # Límites dinámicos del perímetro ArUco
+
+    def actualizar_limites(self, puntos_mundo) -> None:
+        """Actualiza los límites de la rejilla desde los puntos mundo ArUco."""
+        self._limites_mm = calcular_limites_desde_puntos(puntos_mundo)
+        logger.debug(f"Límites rejilla actualizados: {self._limites_mm}")
 
     @property
     def espaciado_mm(self) -> float:
@@ -137,6 +167,11 @@ class MotorOverlays:
         Dibuja una rejilla AR sobre el frame usando la homografia inversa.
         Convierte puntos de rejilla en mm -> pixeles y dibuja lineas.
 
+        Los límites se determinan en este orden de prioridad:
+        1. Parámetro `limites_mm` explícito.
+        2. Límites almacenados internamente (desde `actualizar_limites()`).
+        3. Fallback por defecto.
+
         Args:
             frame: Imagen BGR.
             homografia: Instancia de CalculadorHomografia (con mundo_a_pixel()).
@@ -145,10 +180,13 @@ class MotorOverlays:
         if not homografia.esta_calibrada:
             return frame
 
+        # Prioridad: parámetro > almacenado > fallback
+        if limites_mm is None:
+            limites_mm = self._limites_mm
         if limites_mm is None:
             limites_mm = {
                 "x_min": 0.0, "x_max": 500.0,
-                "y_min": -300.0, "y_max": 300.0,
+                "y_min": 0.0, "y_max": 300.0,
             }
 
         paso = self._espaciado_mm
@@ -159,17 +197,18 @@ class MotorOverlays:
 
         # ── Lineas verticales (X constante) ──
         x = x_min
-        while x <= x_max:
+        while x <= x_max + 0.01:  # +epsilon para incluir borde
             p1 = homografia.mundo_a_pixel(x, y_min)
             p2 = homografia.mundo_a_pixel(x, y_max)
             if p1 is not None and p2 is not None:
-                es_eje = abs(x) < 0.01
-                color = self._color_ejes if es_eje else self._color_rejilla
-                grosor = 2 if es_eje else 1
+                es_borde = abs(x - x_min) < 0.01 or abs(x - x_max) < 0.01
+                color = self._color_ejes if es_borde else self._color_rejilla
+                grosor = 2 if es_borde else 1
                 cv2.line(frame, p1, p2, color, grosor, cv2.LINE_AA)
 
-                # Etiqueta cada 2 pasos
-                if int(x) % int(paso * 2) == 0 or es_eje:
+                # Etiqueta cada 2 pasos o en los bordes
+                paso_etiqueta = max(paso * 2, 1.0)
+                if es_borde or (paso_etiqueta > 0 and abs(round(x / paso_etiqueta) * paso_etiqueta - x) < 0.01):
                     cv2.putText(frame, f"{x:.0f}", (p2[0] + 3, p2[1]),
                                  cv2.FONT_HERSHEY_SIMPLEX, 0.3,
                                  (150, 150, 150), 1, cv2.LINE_AA)
@@ -177,27 +216,21 @@ class MotorOverlays:
 
         # ── Lineas horizontales (Y constante) ──
         y = y_min
-        while y <= y_max:
+        while y <= y_max + 0.01:  # +epsilon para incluir borde
             p1 = homografia.mundo_a_pixel(x_min, y)
             p2 = homografia.mundo_a_pixel(x_max, y)
             if p1 is not None and p2 is not None:
-                es_eje = abs(y) < 0.01
-                color = self._color_ejes if es_eje else self._color_rejilla
-                grosor = 2 if es_eje else 1
+                es_borde = abs(y - y_min) < 0.01 or abs(y - y_max) < 0.01
+                color = self._color_ejes if es_borde else self._color_rejilla
+                grosor = 2 if es_borde else 1
                 cv2.line(frame, p1, p2, color, grosor, cv2.LINE_AA)
 
-                if int(y) % int(paso * 2) == 0 or es_eje:
-                    cv2.putText(frame, f"{y:.0f}", (p1[0] - 30, p1[1] - 3),
+                paso_etiqueta = max(paso * 2, 1.0)
+                if es_borde or (paso_etiqueta > 0 and abs(round(y / paso_etiqueta) * paso_etiqueta - y) < 0.01):
+                    cv2.putText(frame, f"{y:.0f}", (p1[0] - 40, p1[1] - 3),
                                  cv2.FONT_HERSHEY_SIMPLEX, 0.3,
                                  (150, 150, 150), 1, cv2.LINE_AA)
             y += paso
-
-        # ── Etiqueta de ejes ──
-        origen = homografia.mundo_a_pixel(0, 0)
-        if origen is not None:
-            cv2.circle(frame, origen, 6, (0, 200, 255), -1, cv2.LINE_AA)
-            cv2.putText(frame, "ORIGEN (0,0)", (origen[0] + 10, origen[1] - 5),
-                         cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 200, 255), 1, cv2.LINE_AA)
 
         return frame
 

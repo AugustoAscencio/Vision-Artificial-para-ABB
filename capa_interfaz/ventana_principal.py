@@ -13,10 +13,13 @@ from capa_interfaz.tema import Colores
 from capa_interfaz.componentes.vista_camara import VistaCamara
 from capa_interfaz.componentes.vista_2d import Vista2D
 from capa_interfaz.componentes.panel_conexion import PanelConexion
+from capa_interfaz.componentes.panel_ip_webcam import PanelIPWebcam
 from capa_interfaz.componentes.panel_control import PanelControl
 from capa_interfaz.componentes.panel_calibracion import PanelCalibracion
+from capa_interfaz.componentes.panel_puntos_mundo import PanelPuntosMundo
 from capa_interfaz.componentes.panel_deteccion import PanelDeteccion
 from capa_interfaz.componentes.selector_modelo import SelectorModelo
+from capa_interfaz.componentes.panel_snapshot import PanelSnapshot
 from capa_interfaz.componentes.panel_logs import PanelLogs
 from capa_interfaz.componentes.panel_debug import PanelDebug
 from capa_interfaz.componentes.barra_estado import BarraEstado
@@ -50,8 +53,11 @@ class VentanaPrincipal(QMainWindow):
         self.vista_camara = VistaCamara()
         self.vista_2d = Vista2D()
         self.panel_conexion = PanelConexion()
+        self.panel_ip_webcam = PanelIPWebcam()
         self.panel_control = PanelControl()
         self.panel_calibracion = PanelCalibracion()
+        self.panel_puntos_mundo = PanelPuntosMundo()
+        self.panel_snapshot = PanelSnapshot()
         self.panel_deteccion = PanelDeteccion()
         self.selector_modelo = SelectorModelo()
         self.panel_logs = PanelLogs()
@@ -87,13 +93,16 @@ class VentanaPrincipal(QMainWindow):
         layout_contenido_izq.setContentsMargins(0, 0, 4, 0)
         layout_contenido_izq.setSpacing(6)
         layout_contenido_izq.addWidget(self.panel_conexion)
+        layout_contenido_izq.addWidget(self.panel_ip_webcam)
         layout_contenido_izq.addWidget(self.panel_calibracion)
+        layout_contenido_izq.addWidget(self.panel_puntos_mundo)
         layout_contenido_izq.addWidget(self.panel_control)
         layout_contenido_izq.addStretch()
 
         scroll_izq.setWidget(contenido_izq)
         layout_izq.addWidget(scroll_izq)
-        col_izq.setFixedWidth(300)
+        col_izq.setMinimumWidth(300)
+        col_izq.setMaximumWidth(380)
 
         # =============================================
         # Columna Central: Cámara + Vista 2D + Logs
@@ -148,7 +157,8 @@ class VentanaPrincipal(QMainWindow):
         layout_contenido_der.setContentsMargins(4, 0, 0, 0)
         layout_contenido_der.setSpacing(6)
 
-        # Panel de detección ocupa la mayor parte
+        # Panel de captura arriba, detección ocupa la mayor parte
+        layout_contenido_der.addWidget(self.panel_snapshot, stretch=0)
         layout_contenido_der.addWidget(self.panel_deteccion, stretch=3)
         layout_contenido_der.addWidget(self.selector_modelo, stretch=0)
 
